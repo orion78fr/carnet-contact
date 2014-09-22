@@ -14,4 +14,44 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NewContact</display-name>
+    <servlet-name>NewContact</servlet-name>
+    <servlet-class>domain.NewContact</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewContact</servlet-name>
+    <url-pattern>/NewContact</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteContact</display-name>
+    <servlet-name>DeleteContact</servlet-name>
+    <servlet-class>domain.DeleteContact</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteContact</servlet-name>
+    <url-pattern>/DeleteContact</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ModifyContact</display-name>
+    <servlet-name>ModifyContact</servlet-name>
+    <servlet-class>domain.ModifyContact</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifyContact</servlet-name>
+    <url-pattern>/ModifyContact</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FindContact</display-name>
+    <servlet-name>FindContact</servlet-name>
+    <servlet-class>domain.FindContact</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FindContact</servlet-name>
+    <url-pattern>/FindContact</url-pattern>
+  </servlet-mapping>
 </web-app>

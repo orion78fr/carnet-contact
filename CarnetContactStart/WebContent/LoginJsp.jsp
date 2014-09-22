@@ -8,7 +8,7 @@
 </head>
 <body>
     <% if(request.getParameter("name").equals(request.getParameter("password"))){ %>
-        <jsp:forward page="hello.jsp"/>
+        <jsp:forward page="accueil.jsp"/>
     <% } else {
         response.sendRedirect("");
     } %>

@@ -2,22 +2,21 @@ package domain;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ConnectServlet
+ * Servlet implementation class ModifyContact
  */
-public class LoginServlet extends HttpServlet {
+public class ModifyContact extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public ModifyContact() {
         super();
     }
 
@@ -31,12 +30,15 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter("name").equals(request.getParameter("password"))){
-			RequestDispatcher dispatcher = request.getRequestDispatcher("accueil.jsp");
-			dispatcher.forward(request, response);
-		} else {
-			response.sendRedirect("index.html");
-		}
+		Long id = Long.parseLong(request.getParameter("id"));
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
+		String email = request.getParameter("email");
+		
+		IDAOContact dao = new DAOContact();
+		dao.modifyContact(id, firstName, lastName, email);
+		
+		response.sendRedirect("accueil.jsp");
 	}
 
 }
