@@ -43,6 +43,46 @@
                 </form>
             </td>
         </tr>
+        <tr>
+            <td>
+                <form method="post" action="FindContact">
+                    <i>Par Numéro de téléphone: <input type="text" name="phoneNumber" size="25"></i>
+                    <input class="button" type="submit" value="Submit" /><input class="button" type="reset" value="Reset">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form method="post" action="FindContact">
+                    <i>Par Rue: <input type="text" name="street" size="25"></i>
+                    <input class="button" type="submit" value="Submit" /><input class="button" type="reset" value="Reset">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form method="post" action="FindContact">
+                    <i>Par Code Postal: <input type="text" name="zip" size="25"></i>
+                    <input class="button" type="submit" value="Submit" /><input class="button" type="reset" value="Reset">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form method="post" action="FindContact">
+                    <i>Par Ville: <input type="text" name="street" size="25"></i>
+                    <input class="button" type="submit" value="Submit" /><input class="button" type="reset" value="Reset">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form method="post" action="FindContact">
+                    <i>Par Pays: <input type="text" name="country" size="25"></i>
+                    <input class="button" type="submit" value="Submit" /><input class="button" type="reset" value="Reset">
+                </form>
+            </td>
+        </tr>
     </table>
 </body>
 </html>

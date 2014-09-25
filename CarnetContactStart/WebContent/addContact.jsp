@@ -13,9 +13,6 @@
                 <th><h2>Ajouter un contact</h2></th>
             </tr>
             <tr>
-                <td><i>Id: <input type="text" name="id" size="25"></i></td>
-            </tr>
-            <tr>
                 <td><i>FistName: <input type="text" name="firstName" size="25"></i></td>
             </tr>
             <tr>
@@ -23,6 +20,27 @@
             </tr>
             <tr>
                 <td><i>Email: <input type="text" name="email" size="25"></i></td>
+            </tr>
+            <tr>
+                <td><i>Street: <input type="text" name="street" size="25"></i></td>
+            </tr>
+            <tr>
+                <td><i>City: <input type="text" name="city" size="25"></i></td>
+            </tr>
+            <tr>
+                <td><i>Zip: <input type="text" name="zip" size="25"></i></td>
+            </tr>
+            <tr>
+                <td><i>Country: <input type="text" name="country" size="25"></i></td>
+            </tr>
+            <tr>
+                <td><i>Mobile phone: <input type="text" name="mobile_phone" size="25"></i></td>
+            </tr>
+            <tr>
+                <td><i>Office phone: <input type="text" name="office_phone" size="25"></i></td>
+            </tr>
+            <tr>
+                <td><i>Home phone: <input type="text" name="home_phone" size="25"></i></td>
             </tr>
             <tr>
                 <td><input class="button" type="submit" value="Submit" /><input class="button" type="reset" value="Reset"></td>

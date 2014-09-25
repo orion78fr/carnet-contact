@@ -2,106 +2,56 @@ package domain;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.mapping.Constraint;
+
+import utils.HibernateUtil;
 
 public class DAOContact implements IDAOContact{
-
-	/**
-	 * Rajoute un contact dans la base de donnees.
-	 * @param firstname
-	 * @param lastname
-	 * @param email
-	 * @return renvoit le nouveau contact
-	 */
-	public Contact addContact(long idContact, String firstname, String lastname, String email){
-
-		Contact contact = new Contact();
-		contact.setFirstName(firstname);
-		contact.setLastName(lastname);
-		contact.setEmail(email);
-
-		Connection con = null;
-		try{
-			Class.forName(Messages.getString("driver")); 
-			con = DriverManager.getConnection(Messages.getString("database"), Messages.getString("username"), Messages.getString("password")); 
-			Statement stmt = con.createStatement();
-			String request = "INSERT INTO contacts(id, firstname,lastname,email) VALUES("+idContact +", '"+firstname+"','"+lastname+"','"+email+"')";
-			stmt.executeUpdate(request);
-			stmt.close();   	
-			con.close();
-		} catch( Exception e ){
-			e.printStackTrace();
-		}
-
-		return contact;
+	public void addContact(Contact c){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.persist(c);
+		session.getTransaction().commit();
 	}
 
-	/**
-	 * Suppresion d'un contact a partir de son identifiant
-	 * @param id
-	 * @return vrai si la suppression a bien ete effectuee
-	 */
-	public int deleteContact(long id){
-		int success=0;
-		Connection con = null;
-		try{
-			Class.forName(Messages.getString("driver")); 
-			con = DriverManager.getConnection(Messages.getString("database"), Messages.getString("username"), Messages.getString("password")); 
-			Statement stmt = con.createStatement();
-			String request = "DELETE FROM contacts WHERE id = "+id; 
-			success = stmt.executeUpdate(request);
-			stmt.close();
-			con.close();
-			
-		} catch( Exception e ){
-			e.printStackTrace();
+	public boolean deleteContact(long id){
+		Contact contact;
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		contact = (Contact) session.load(Contact.class, id);
+		if(contact == null){
+			return false;
+		} else {
+			session.delete(contact);
+			session.getTransaction().commit();
+			return true;
 		}
-
-		return success;
+	}
+	
+	public List<Contact> getAllContacts(){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		List<Contact> l = session.createQuery("from Contact").list();
+		session.getTransaction().commit();
+		return l;
 	}
 
-	/**
-	 * Recuperation d'un contact a partir de son identifiant
-	 * @param id
-	 * @return
-	 */
 	public Contact getContact(long id){
-		ResultSet rec = null;
-		Contact contact = new Contact();
-		Connection con = null;
-		try{
-			Class.forName(Messages.getString("driver")); 
-			con = DriverManager.getConnection(Messages.getString("database"), Messages.getString("username"), Messages.getString("password")); 
-			Statement stmt = con.createStatement();
-			rec = stmt.executeQuery("SELECT * FROM contacts WHERE id = "+id); 
-
-			while (rec.next()) {
-				contact.setId(Long.parseLong(rec.getString("id"))); 
-				contact.setFirstName(rec.getString("firstname")); 
-				contact.setLastName(rec.getString("lastname")); 
-				contact.setEmail(rec.getString("email")); 
-			}
-
-			stmt.close();
-			rec.close();
-			con.close();
-
-		} catch( Exception e ){
-			e.printStackTrace();
-		}
-		return contact;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		Contact c = (Contact) session.createCriteria(Contact.class).add(Restrictions.eq("id", id)).uniqueResult();
+		session.getTransaction().commit();
+		return c;
 	}
 
-	/**
-	 * Methode qui modifie les coordonees d'un contact
-	 * @param id
-	 * @param firstname
-	 * @param alstname
-	 * @param email
-	 * @return
-	 */
 	public boolean modifyContact(long id, String firstname, String lastname, String email){
 		boolean success = false;
 		Connection con = null;
@@ -127,115 +77,68 @@ public class DAOContact implements IDAOContact{
 		return success;
 	}
 
-	/**
-	 * Renvoit la liste des contacts correspondant au prenom firrstname
-	 * @param firstname
-	 * @return
-	 */
-	public ArrayList<Contact> getContactByFirstName(String firstname){
-
-		ArrayList<Contact> contacts = new ArrayList<Contact>();
-
-		ResultSet rec = null;
-		Connection con = null;
-		try{
-			Class.forName(Messages.getString("driver")); 
-			con = DriverManager.getConnection(Messages.getString("database"), Messages.getString("username"), Messages.getString("password")); 
-			Statement stmt = con.createStatement();
-			rec = stmt.executeQuery("SELECT * FROM contacts WHERE firstname = "+"'"+firstname+"'"); 
-
-			while (rec.next()) {
-				Contact contact = new Contact();
-				contact.setId(Long.parseLong(rec.getString("id"))); 
-				contact.setFirstName(rec.getString("firstname"));
-				contact.setLastName(rec.getString("lastname"));
-				contact.setEmail(rec.getString("email")); 
-				
-				contacts.add(contact);
-			}
-
-			stmt.close();
-			rec.close();
-			con.close();
-
-		} catch( Exception e ){
-			e.printStackTrace();
-		}
-		return contacts;
+	public List<Contact> getContactByFirstName(String firstname){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		List<Contact> l = session.createCriteria(Contact.class).add(Restrictions.eq("firstName", firstname)).list();
+		session.getTransaction().commit();
+		return l;
 	}
 
-
-	/**
-	 * Renvoit la liste des contacts correspondant au nom lastname
-	 * @param lastname
-	 * @return
-	 */
-	public ArrayList<Contact> getContactByLastName(String lastname){
-
-		ArrayList<Contact> contacts = new ArrayList<Contact>();
-
-		ResultSet rec = null;
-		Connection con = null;
-		try{
-			Class.forName(Messages.getString("driver")); 
-			con = DriverManager.getConnection(Messages.getString("database"), Messages.getString("username"), Messages.getString("password")); 
-			Statement stmt = con.createStatement();
-			rec = stmt.executeQuery("SELECT * FROM contacts WHERE lastname = "+"'"+lastname+"'"); 
-
-			while (rec.next()) {
-				Contact contact = new Contact();
-				contact.setId(Long.parseLong(rec.getString("id"))); 
-				contact.setFirstName(rec.getString("firstname")); 
-				contact.setLastName(rec.getString("lastname")); 
-				contact.setEmail(rec.getString("email")); 
-				contacts.add(contact);
-			}
-
-			stmt.close();
-			rec.close();
-			con.close();
-
-		} catch( Exception e ){
-			e.printStackTrace();
-		}
-		return contacts;
+	public List<Contact> getContactByLastName(String lastname){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		List<Contact> l = session.createCriteria(Contact.class).add(Restrictions.eq("lastName", lastname)).list();
+		session.getTransaction().commit();
+		return l;
 	}
 
-	/**
-	 * Renvoit la liste des contacts correspondant a l'email email
-	 * @param email
-	 * @return
-	 */
-	public ArrayList<Contact> getContactByEmail(String email){
-		ArrayList<Contact> contacts = new ArrayList<Contact>();
-
-		ResultSet rec = null;
-		Connection con = null;
-		try{
-			Class.forName(Messages.getString("driver")); 
-			con = DriverManager.getConnection(Messages.getString("database"), Messages.getString("username"), Messages.getString("password")); 
-			Statement stmt = con.createStatement();
-			rec = stmt.executeQuery("SELECT * FROM contacts WHERE email = "+"'"+email+"'"); 
-
-			while (rec.next()) {
-				Contact contact = new Contact();
-				contact.setId(Long.parseLong(rec.getString("id")));
-				contact.setFirstName(rec.getString("firstname"));
-				contact.setLastName(rec.getString("lastname")); 
-				contact.setEmail(rec.getString("email"));
-				contacts.add(contact);
-			}
-
-			stmt.close();
-			rec.close();
-			con.close();
-
-		} catch( Exception e ){
-			e.printStackTrace();
-		}
-		return contacts;
+	public List<Contact> getContactByEmail(String email){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		List<Contact> l = session.createCriteria(Contact.class).add(Restrictions.eq("email", email)).list();
+		session.getTransaction().commit();
+		return l;
 	}
-	
 
+	public List<Contact> getContactByPhoneNumber(String phoneNumber) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		List<Contact> l = session.createQuery("from Contact c where :tel in (select p.phoneNumber from PhoneNumber p where p.contact = c.id)")
+									.setParameter("tel", phoneNumber).list();
+		session.getTransaction().commit();
+		return l;
+	}
 
+	public List<Contact> getContactByStreet(String street) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		List<Contact> l = session.createQuery("select c from Contact c where c.add.street = :street").setParameter("street", street).list();
+		session.getTransaction().commit();
+		return l;
+	}
+
+	public List<Contact> getContactByCity(String city) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		List<Contact> l = session.createQuery("select c from Contact c where c.add.city = :city").setParameter("city", city).list();
+		session.getTransaction().commit();
+		return l;
+	}
+
+	public List<Contact> getContactByCountry(String country) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		List<Contact> l = session.createQuery("select c from Contact c where c.add.country = :country").setParameter("country", country).list();
+		session.getTransaction().commit();
+		return l;
+	}
+
+	public List<Contact> getContactByZip(String zip) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		List<Contact> l = session.createQuery("select c from Contact c where c.add.zip = :zip").setParameter("zip", zip).list();
+		session.getTransaction().commit();
+		return l;
+	}
 }

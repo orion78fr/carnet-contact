@@ -1,22 +1,23 @@
 package domain;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface IDAOContact {
-
+	public void addContact(Contact c);
 	
-	public Contact addContact(long idContact, String firstname, String lastname, String email);
-	
-	public int deleteContact(long id);
+	public boolean deleteContact(long id);
 	
 	public Contact getContact(long id);
+	public List<Contact> getAllContacts();
+	
+	public List<Contact> getContactByFirstName(String firstname);
+	public List<Contact> getContactByLastName(String lastname);
+	public List<Contact> getContactByEmail(String email);
+	public List<Contact> getContactByPhoneNumber(String phoneNumber);
+	public List<Contact> getContactByStreet(String street);
+	public List<Contact> getContactByCity(String city);
+	public List<Contact> getContactByCountry(String country);
+	public List<Contact> getContactByZip(String zip);
 	
 	public boolean modifyContact(long id, String firstname, String lastname, String email);
-	
-	public ArrayList<Contact> getContactByFirstName(String firstname);
-	
-	public ArrayList<Contact> getContactByLastName(String lastname);
-	
-	public ArrayList<Contact> getContactByEmail(String email);
-	
 }

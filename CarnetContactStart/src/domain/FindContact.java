@@ -20,7 +20,6 @@ public class FindContact extends HttpServlet {
      */
     public FindContact() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -38,6 +37,11 @@ public class FindContact extends HttpServlet {
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String email = request.getParameter("email");
+		String street = request.getParameter("street");
+		String city = request.getParameter("city");
+		String zip = request.getParameter("zip");
+		String country = request.getParameter("country");
+		String phoneNumber = request.getParameter("phoneNumber");
 		
 		IDAOContact dao = new DAOContact();
 		
@@ -49,8 +53,20 @@ public class FindContact extends HttpServlet {
 			al.addAll(dao.getContactByFirstName(firstName));
 		} else if(lastName != null){
 			al.addAll(dao.getContactByLastName(lastName));
-		} else {
+		} else if(email != null){
 			al.addAll(dao.getContactByEmail(email));
+		} else if(street != null){
+			al.addAll(dao.getContactByStreet(street));
+		} else if(city != null){
+			al.addAll(dao.getContactByCity(city));
+		} else if(zip != null){
+			al.addAll(dao.getContactByZip(zip));
+		} else if(country != null){
+			al.addAll(dao.getContactByCountry(country));
+		} else if(phoneNumber != null){
+			al.addAll(dao.getContactByPhoneNumber(phoneNumber));
+		} else {
+			// ?
 		}
 		
 		request.setAttribute("liste", al);

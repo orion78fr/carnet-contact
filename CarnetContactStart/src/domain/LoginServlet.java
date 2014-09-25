@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter("name").equals(request.getParameter("password"))){
+		if(request.getParameter("user").equals(request.getParameter("password"))){
 			RequestDispatcher dispatcher = request.getRequestDispatcher("accueil.jsp");
 			dispatcher.forward(request, response);
 		} else {
