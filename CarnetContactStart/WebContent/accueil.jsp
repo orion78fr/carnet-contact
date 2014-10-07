@@ -9,18 +9,32 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Bonjour</title>
+<style type="text/css">
+    table{
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    td, th{
+        border: 1px solid black;
+        padding: 10px;
+        vertical-align: middle;
+    }
+    th{
+        text-align: center;
+    }
+</style>
 </head>
 <body>
     Hello <% if(request.getParameter("user") != null){ %>Mr. <%= request.getParameter("user") %><%} %>!<br />
     <br />
     <a href="addContact.jsp">Créer un contact</a> <br />
-    <a href="removeContact.jsp">Supprimer un contact</a> <br />
-    <a href="updateContact.jsp">Modifier un contact</a> <br />
-    <a href="searchContact.jsp">Rechercher un contact</a>
+    <a href="searchContact.jsp">Rechercher un contact</a> <br />
+    <br />
+    <br />
     
     <table>
         <tr>
-            <th colspan="5"><h2>Liste des contacts</h2></th>
+            <th colspan="6"><h2>Liste des contacts</h2></th>
         </tr>
         <tr>
             <th><h3>First Name</h3></th>
@@ -28,6 +42,7 @@
             <th><h3>Email</h3></th>
             <th><h3>Address</h3></th>
             <th><h3>Phones</h3></th>
+            <th><h3>Options</h3></th>
         </tr>
         <%
         List<Contact> l = ServiceContact.getAllContacts();
@@ -46,6 +61,16 @@
         	       }
         	       %>
         	       </ul>
+        	   </td>
+        	   <td>
+        	       <form action="updateContact.jsp" method="post">
+        	           <input type="hidden" name="id" value ="<%= c.getId() %>"/>
+        	           <input class="button" type="submit" value="Modifier"/>
+        	       </form>
+        	       <form action="DeleteContact" method="post">
+                       <input type="hidden" name="id" value ="<%= c.getId() %>"/>
+                       <input class="button" type="submit" value="Supprimer"/>
+                   </form>
         	   </td>
         	</tr>
         	<%

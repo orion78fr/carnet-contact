@@ -11,7 +11,7 @@
      <property name="lastName" type="string"/>
      <property name="email" type="string"/>
      
-     <many-to-one name="add" column="addressId" unique="true" not-null="true" cascade="all-delete-orphan" class="Address"  lazy="false"/>
+     <many-to-one name="add" column="addressId" unique="true" cascade="all-delete-orphan" class="Address"  lazy="false"/>
      
      <set name="profiles" inverse="true" cascade="all-delete-orphan"  lazy="false">
         <key column="contactId"/>

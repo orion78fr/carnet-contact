@@ -34,9 +34,15 @@ public class ModifyContact extends HttpServlet {
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String email = request.getParameter("email");
+		String street = request.getParameter("street");
+		String city = request.getParameter("city");
+		String zip = request.getParameter("zip");
+		String country = request.getParameter("country");
+		String mobile_phone = request.getParameter("mobile_phone");
+		String office_phone = request.getParameter("office_phone");
+		String home_phone = request.getParameter("home_phone");
 		
-		IDAOContact dao = new DAOContact();
-		dao.modifyContact(id, firstName, lastName, email);
+		ServiceContact.modifyContact(id, firstName, lastName, email, street, city, zip, country, mobile_phone, office_phone, home_phone);
 		
 		response.sendRedirect("accueil.jsp");
 	}
