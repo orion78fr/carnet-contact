@@ -2,12 +2,17 @@ package domain;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+
+import utils.HibernateUtil;
+
 public class ServiceContact {
 	private static IDAOContact getDAO(){
 		return new DAOContact();
 	}
 	
-	public static void createContact(String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone){
+	public static void createContact(String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone, String[] groups){
 		IDAOContact dao = getDAO();
 		
 		Contact contact = new Contact();
@@ -25,8 +30,15 @@ public class ServiceContact {
 		if(!home_phone.equals("")){
 			contact.addProfile(new PhoneNumber("home", home_phone));
 		}
-
+		
 		dao.addContact(contact);
+		
+		for (String g : groups){
+			if (g != null){
+				ServiceGroup.addContactToGroup(contact.getId(), g);
+			}
+		}
+		
 	}
 	
 	public static List<Contact> getAllContacts(){

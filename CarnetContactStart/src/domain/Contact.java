@@ -52,6 +52,7 @@ public class Contact {
 	public Contact(){
 		super();
 		this.profiles = new HashSet<PhoneNumber>();
+		this.books = new HashSet<ContactGroup>();
 	}
 
 	public String getEmail(){

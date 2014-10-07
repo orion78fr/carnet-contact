@@ -9,7 +9,7 @@
      </id>
      <property name="groupName" type="string"/>
      
-     <set name="contacts" table="appartenanceGroupe" inverse="true">
+     <set name="contacts" table="appartenanceGroupe" inverse="true" cascade="all">
         <key column="groupId"/>
         <many-to-many class="Contact" column="contactId"/>
      </set>

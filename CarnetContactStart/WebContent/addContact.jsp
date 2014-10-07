@@ -1,3 +1,6 @@
+<%@page import="domain.ServiceGroup"%>
+<%@page import="domain.ContactGroup"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -42,6 +45,16 @@
             <tr>
                 <td><i>Home phone: <input type="text" name="home_phone" size="25"></i></td>
             </tr>
+            <%
+		        List<ContactGroup> l = ServiceGroup.getAllContactGroups();
+		        for(ContactGroup cg : l){
+		        	%>
+		        	<tr>
+		        	   <td><input type="checkbox" name="groups" value="<%=cg.getGroupName()%>"> <%=cg.getGroupName()%></td>
+		        	</tr>
+		        	<%
+		        }
+	        %>
             <tr>
                 <td><input class="button" type="submit" value="Submit" /><input class="button" type="reset" value="Reset"></td>
             </tr>
