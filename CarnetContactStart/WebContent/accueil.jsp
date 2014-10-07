@@ -28,6 +28,7 @@
     Hello <% if(request.getParameter("user") != null){ %>Mr. <%= request.getParameter("user") %><%} %>!<br />
     <br />
     <a href="addContact.jsp">Créer un contact</a> <br />
+    <a href="addGroup.jsp">Créer un group de contact</a><br />
     <a href="searchContact.jsp">Rechercher un contact</a> <br />
     <br />
     <br />

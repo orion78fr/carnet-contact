@@ -8,41 +8,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class newContact
+ * Servlet implementation class NewGroup
  */
-public class NewContact extends HttpServlet {
+public class NewGroup extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NewContact() {
+    public NewGroup() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String firstName = request.getParameter("firstName");
-		String lastName = request.getParameter("lastName");
-		String email = request.getParameter("email");
-		String street = request.getParameter("street");
-		String city = request.getParameter("city");
-		String zip = request.getParameter("zip");
-		String country = request.getParameter("country");
-		String mobile_phone = request.getParameter("mobile_phone");
-		String office_phone = request.getParameter("office_phone");
-		String home_phone = request.getParameter("home_phone");
-		String[] groups = request.getParameterValues("groups");
+		String groupName = request.getParameter("groupName");
 		
-		ServiceContact.createContact(firstName, lastName, email, street, city, zip, country, mobile_phone, office_phone, home_phone, groups);
+		ServiceGroup.createGroup(groupName);
 		
 		response.sendRedirect("accueil.jsp");
 	}

@@ -54,4 +54,14 @@
     <servlet-name>FindContact</servlet-name>
     <url-pattern>/FindContact</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NewGroup</display-name>
+    <servlet-name>NewGroup</servlet-name>
+    <servlet-class>domain.NewGroup</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewGroup</servlet-name>
+    <url-pattern>/NewGroup</url-pattern>
+  </servlet-mapping>
 </web-app>
