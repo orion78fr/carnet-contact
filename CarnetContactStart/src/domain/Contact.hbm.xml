@@ -18,7 +18,7 @@
         <one-to-many class="PhoneNumber"/>
      </set>
      
-     <set name="books" cascade="all" table="appartenanceGroupe">
+     <set name="books" cascade="save-update" table="appartenanceGroupe">
         <key column="contactId"/>
         <many-to-many class="ContactGroup" column="groupId"/>
      </set>
