@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 /**
  * Servlet implementation class ModifyContact
  */
@@ -42,7 +45,9 @@ public class ModifyContact extends HttpServlet {
 		String office_phone = request.getParameter("office_phone");
 		String home_phone = request.getParameter("home_phone");
 		
-		ServiceContact.modifyContact(id, firstName, lastName, email, street, city, zip, country, mobile_phone, office_phone, home_phone);
+		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+		
+		ServiceContact.modifyContact(context, id, firstName, lastName, email, street, city, zip, country, mobile_phone, office_phone, home_phone);
 		
 		response.sendRedirect("accueil.jsp");
 	}

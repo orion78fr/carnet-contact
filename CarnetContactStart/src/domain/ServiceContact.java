@@ -3,12 +3,9 @@ package domain;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ServiceContact {
-	private static IDAOContact getDAO(){
-		return new DAOContact();
-	}
-	
 	public static void createContact(ApplicationContext context, String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone, String[] groups){
 		IDAOContact dao = (IDAOContact) context.getBean("DAOC");
 		
@@ -39,8 +36,8 @@ public class ServiceContact {
 		}
 		
 	}
-	public static void modifyContact(Long id, String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone){
-		IDAOContact dao = getDAO();
+	public static void modifyContact(ApplicationContext context, Long id, String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone){
+		IDAOContact dao = (IDAOContact) context.getBean("DAOC");
 		
 		Contact contact = dao.getContact(id);
 		
@@ -65,49 +62,71 @@ public class ServiceContact {
 	}
 	
 	public static Contact getContact(Long id){
-		IDAOContact dao = getDAO();
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml"});
+		IDAOContact dao = (IDAOContact) context.getBean("DAOC");
+		context.close();
 		return dao.getContact(id);
 	}
 	
 	public static List<Contact> getAllContacts(){
-		IDAOContact dao = getDAO();
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml"});
+		IDAOContact dao = (IDAOContact) context.getBean("DAOC");
+		context.close();
 		return dao.getAllContacts();
 	}
 	
 	public static List<Contact> getContactByFirstName(String firstname){
-		IDAOContact dao = getDAO();
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml"});
+		IDAOContact dao = (IDAOContact) context.getBean("DAOC");
+		context.close();
 		return dao.getContactByFirstName(firstname);
 	}
 	public static List<Contact> getContactByLastName(String lastname){
-		IDAOContact dao = getDAO();
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml"});
+		IDAOContact dao = (IDAOContact) context.getBean("DAOC");
+		context.close();
 		return dao.getContactByLastName(lastname);
 	}
 	public static List<Contact> getContactByEmail(String email){
-		IDAOContact dao = getDAO();
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml"});
+		IDAOContact dao = (IDAOContact) context.getBean("DAOC");
+		context.close();
 		return dao.getContactByEmail(email);
 	}
 	public static List<Contact> getContactByPhoneNumber(String phoneNumber){
-		IDAOContact dao = getDAO();
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml"});
+		IDAOContact dao = (IDAOContact) context.getBean("DAOC");
+		context.close();
 		return dao.getContactByPhoneNumber(phoneNumber);
 	}
 	public static List<Contact> getContactByStreet(String street){
-		IDAOContact dao = getDAO();
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml"});
+		IDAOContact dao = (IDAOContact) context.getBean("DAOC");
+		context.close();
 		return dao.getContactByStreet(street);
 	}
 	public static List<Contact> getContactByCity(String city){
-		IDAOContact dao = getDAO();
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml"});
+		IDAOContact dao = (IDAOContact) context.getBean("DAOC");
+		context.close();
 		return dao.getContactByCity(city);
 	}
 	public static List<Contact> getContactByCountry(String country){
-		IDAOContact dao = getDAO();
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml"});
+		IDAOContact dao = (IDAOContact) context.getBean("DAOC");
+		context.close();
 		return dao.getContactByCountry(country);
 	}
 	public static List<Contact> getContactByZip(String zip){
-		IDAOContact dao = getDAO();
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml"});
+		IDAOContact dao = (IDAOContact) context.getBean("DAOC");
+		context.close();
 		return dao.getContactByZip(zip);
 	}
 	public static List<Contact> getContactByCriterias(String firstName, String lastName, String email, String street, String city, String zip, String country, String phone){
-		IDAOContact dao = getDAO();
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml"});
+		IDAOContact dao = (IDAOContact) context.getBean("DAOC");
+		context.close();
 		Contact c = new Contact();
 		c.setFirstName(firstName);
 		c.setLastName(lastName);
