@@ -19,5 +19,7 @@ public interface IDAOContact {
 	public List<Contact> getContactByCountry(String country);
 	public List<Contact> getContactByZip(String zip);
 	
-	public boolean modifyContact(long id, String firstname, String lastname, String email);
+	public List<Contact> getContactUsingExample(Contact c);
+	
+	public boolean modifyContact(Contact c);
 }

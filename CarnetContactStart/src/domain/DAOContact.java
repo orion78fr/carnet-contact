@@ -1,17 +1,15 @@
 package domain;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
 import java.util.List;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.mapping.Constraint;
 
 import utils.HibernateUtil;
 
+@SuppressWarnings("unchecked")
 public class DAOContact implements IDAOContact{
 	public void addContact(Contact c){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -38,7 +36,6 @@ public class DAOContact implements IDAOContact{
 	public List<Contact> getAllContacts(){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		@SuppressWarnings("unchecked")
 		List<Contact> l = session.createQuery("from Contact").list();
 		session.getTransaction().commit();
 		return l;
@@ -52,29 +49,12 @@ public class DAOContact implements IDAOContact{
 		return c;
 	}
 
-	public boolean modifyContact(long id, String firstname, String lastname, String email){
-		boolean success = false;
-		Connection con = null;
-		try{
-			Class.forName(Messages.getString("driver")); 
-			con = DriverManager.getConnection(Messages.getString("database"), Messages.getString("username"), Messages.getString("password")); 
-			Statement stmt = con.createStatement();
-			String sqlFirstName = "UPDATE contacts SET firstname = "+"'"+firstname+"'"+" WHERE id = "+id ; 
-			String sqlLastName = "UPDATE contacts SET lastname = "+"'"+lastname+"'"+" WHERE id = "+id ; 
-			String sqlEmail = "UPDATE contacts SET email = "+"'"+email+"'"+" WHERE id = "+id ; 
-
-			if(firstname != "")stmt.executeUpdate(sqlFirstName); 
-			if(lastname != "")stmt.executeUpdate(sqlLastName); 
-			if(email != "")stmt.executeUpdate(sqlEmail); 
-
-			success = true;
-			stmt.close();
-			con.close();
-
-		} catch( Exception e ){
-			e.printStackTrace();
-		}
-		return success;
+	public boolean modifyContact(Contact c){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.update(c);
+		session.getTransaction().commit();
+		return true;
 	}
 
 	public List<Contact> getContactByFirstName(String firstname){
@@ -138,6 +118,19 @@ public class DAOContact implements IDAOContact{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		List<Contact> l = session.createQuery("select c from Contact c where c.add.zip = :zip").setParameter("zip", zip).list();
+		session.getTransaction().commit();
+		return l;
+	}
+	
+	public List<Contact> getContactUsingExample(Contact c){
+		Example exContact = Example.create(c).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
+		Example exAdd = Example.create(c.getAdd()).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
+		Example exProfiles = Example.create(c.getProfiles().iterator().next()).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		List<Contact> l = session.createCriteria(Contact.class).add(exContact)
+									/*.createCriteria("add").add(exAdd)*/
+									.createCriteria("profiles").add(exProfiles).list();
 		session.getTransaction().commit();
 		return l;
 	}
