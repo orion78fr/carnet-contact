@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 /**
  * Servlet implementation class newContact
  */
@@ -42,7 +45,9 @@ public class NewContact extends HttpServlet {
 		String home_phone = request.getParameter("home_phone");
 		String[] groups = request.getParameterValues("groups");
 		
-		ServiceContact.createContact(firstName, lastName, email, street, city, zip, country, mobile_phone, office_phone, home_phone, groups);
+		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+		
+		ServiceContact.createContact(context, firstName, lastName, email, street, city, zip, country, mobile_phone, office_phone, home_phone, groups);
 		
 		response.sendRedirect("accueil.jsp");
 	}

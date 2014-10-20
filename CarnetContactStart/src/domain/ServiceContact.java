@@ -2,18 +2,15 @@ package domain;
 
 import java.util.List;
 
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-
-import utils.HibernateUtil;
+import org.springframework.context.ApplicationContext;
 
 public class ServiceContact {
 	private static IDAOContact getDAO(){
 		return new DAOContact();
 	}
 	
-	public static void createContact(String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone, String[] groups){
-		IDAOContact dao = getDAO();
+	public static void createContact(ApplicationContext context, String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone, String[] groups){
+		IDAOContact dao = (IDAOContact) context.getBean("DAOC");
 		
 		Contact contact = new Contact();
 		contact.setFirstName(firstName);
@@ -33,9 +30,11 @@ public class ServiceContact {
 		
 		dao.addContact(contact);
 		
-		for (String g : groups){
-			if (g != null){
-				ServiceGroup.addContactToGroup(contact.getId(), g);
+		if(groups != null){
+			for (String g : groups){
+				if (g != null){
+					ServiceGroup.addContactToGroup(contact.getId(), g);
+				}
 			}
 		}
 		
