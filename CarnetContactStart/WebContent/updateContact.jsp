@@ -1,6 +1,9 @@
 <%@page import="domain.PhoneNumber"%>
 <%@page import="domain.Contact"%>
+<%@page import="domain.ContactGroup"%>
 <%@page import="domain.ServiceContact"%>
+<%@page import="domain.ServiceGroup"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% Contact c = ServiceContact.getContact(Long.parseLong(request.getParameter("id"))); %>
@@ -18,22 +21,22 @@
                 <th><h2>Modifier un contact</h2></th>
             </tr>
             <tr>
-                <td><i>FistName: <input type="text" name="firstName" size="25" value="<%= c.getFirstName()%>"></i></td>
+                <td><i>FistName: <input type="text" name="firstName" size="25" value="<%= c.getFirstName()%>"/></i></td>
             </tr>
             <tr>
-                <td><i>LastName: <input type="text" name="lastName" size="25" value="<%= c.getLastName()%>"></i></td>
+                <td><i>LastName: <input type="text" name="lastName" size="25" value="<%= c.getLastName()%>"/></i></td>
             </tr>
             <tr>
-                <td><i>Email: <input type="text" name="email" size="25" value="<%= c.getEmail()%>"></i></td>
+                <td><i>Email: <input type="text" name="email" size="25" value="<%= c.getEmail()%>"/></i></td>
             </tr>
             <tr>
-                <td><i>Street: <input type="text" name="street" size="25" value="<%= c.getAdd().getStreet()%>"></i></td>
+                <td><i>Street: <input type="text" name="street" size="25" value="<%= c.getAdd().getStreet()%>"/></i></td>
             </tr>
             <tr>
-                <td><i>City: <input type="text" name="city" size="25" value="<%= c.getAdd().getCity()%>"></i></td>
+                <td><i>City: <input type="text" name="city" size="25" value="<%= c.getAdd().getCity()%>"/></i></td>
             </tr>
             <tr>
-                <td><i>Zip: <input type="text" name="zip" size="25" value="<%= c.getAdd().getZip()%>"></i></td>
+                <td><i>Zip: <input type="text" name="zip" size="25" value="<%= c.getAdd().getZip()%>"/></i></td>
             </tr>
             <tr>
                 <td><i>Country:</i>
@@ -57,14 +60,24 @@
                }
             %>
             <tr>
-                <td><i>Mobile phone: <input type="text" name="mobile_phone" size="25" value="<%=mobile%>"></i></td>
+                <td><i>Mobile phone: <input type="text" name="mobile_phone" size="25" value="<%=mobile%>"/></i></td>
             </tr>
             <tr>
-                <td><i>Office phone: <input type="text" name="office_phone" size="25" value="<%=office%>"></i></td>
+                <td><i>Office phone: <input type="text" name="office_phone" size="25" value="<%=office%>"/></i></td>
             </tr>
             <tr>
-                <td><i>Home phone: <input type="text" name="home_phone" size="25" value="<%=home%>"></i></td>
+                <td><i>Home phone: <input type="text" name="home_phone" size="25" value="<%=home%>"/></i></td>
             </tr>
+            <%
+		        List<ContactGroup> l = ServiceGroup.getAllGroupsAndContacts();
+		        for(ContactGroup cg : l){
+		        	%>
+		        	<tr>
+		        	   <td><input type="checkbox" name="groups" value="<%=cg.getGroupName()%>" <% if(cg.isInGroup(c.getId())){ %> checked="checked" <%} %> /> <%=cg.getGroupName()%></td>
+		        	</tr>
+		        	<%
+		        }
+	        %>
             <tr>
                 <td><input class="button" type="submit" value="Submit" /><input class="button" type="reset" value="Reset"></td>
             </tr>

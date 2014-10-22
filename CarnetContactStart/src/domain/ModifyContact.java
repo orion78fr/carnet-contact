@@ -44,10 +44,11 @@ public class ModifyContact extends HttpServlet {
 		String mobile_phone = request.getParameter("mobile_phone");
 		String office_phone = request.getParameter("office_phone");
 		String home_phone = request.getParameter("home_phone");
+		String[] groups = request.getParameterValues("groups");
 		
 		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 		
-		ServiceContact.modifyContact(context, id, firstName, lastName, email, street, city, zip, country, mobile_phone, office_phone, home_phone);
+		ServiceContact.modifyContact(context, id, firstName, lastName, email, street, city, zip, country, mobile_phone, office_phone, home_phone, groups);
 		
 		response.sendRedirect("accueil.jsp");
 	}
