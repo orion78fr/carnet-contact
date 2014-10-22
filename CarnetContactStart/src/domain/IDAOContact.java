@@ -9,6 +9,7 @@ public interface IDAOContact {
 	
 	public Contact getContact(long id);
 	public List<Contact> getAllContacts();
+	public List<Contact> getAllContactsAndGroups();
 	
 	public List<Contact> getContactByFirstName(String firstname);
 	public List<Contact> getContactByLastName(String lastname);

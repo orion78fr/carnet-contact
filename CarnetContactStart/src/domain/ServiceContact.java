@@ -36,7 +36,7 @@ public class ServiceContact {
 		}
 		
 	}
-	public static void modifyContact(ApplicationContext context, Long id, String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone){
+	public static void modifyContact(ApplicationContext context, Long id, String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone, String[] groups){
 		IDAOContact dao = (IDAOContact) context.getBean("DAOC");
 		
 		Contact contact = dao.getContact(id);
@@ -59,6 +59,27 @@ public class ServiceContact {
 		}
 
 		dao.modifyContact(contact);
+		
+		if(groups != null){
+			for (String g : groups){
+				if (g != null){
+					ServiceGroup.addContactToGroup(contact.getId(), g);
+				}
+			}
+		}
+		for (ContactGroup cg : contact.getBooks()){
+			boolean groupFound = false;
+			if (groups != null){
+				for (String g : groups){
+					if (g != null && cg.getGroupName().equals(g)){
+						groupFound = true;
+					}
+					
+				}
+			}
+			if (groupFound == false)
+				ServiceGroup.delContactFromGroup(contact.getId(), cg.getGroupName());
+		}
 	}
 	
 	public static Contact getContact(Long id){
@@ -73,6 +94,13 @@ public class ServiceContact {
 		IDAOContact dao = (IDAOContact) context.getBean("DAOC");
 		context.close();
 		return dao.getAllContacts();
+	}
+	
+	public static List<Contact> getAllContactsAndGroups(){
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml"});
+		IDAOContact dao = (IDAOContact) context.getBean("DAOC");
+		context.close();
+		return dao.getAllContactsAndGroups();
 	}
 	
 	public static List<Contact> getContactByFirstName(String firstname){

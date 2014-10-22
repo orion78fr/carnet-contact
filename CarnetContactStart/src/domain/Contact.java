@@ -3,6 +3,8 @@ package domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hibernate.Hibernate;
+
 public class Contact {
 
 	private String firstName;
@@ -35,7 +37,7 @@ public class Contact {
 	}
 
 	public Set<ContactGroup> getBooks() {
-		return books;
+		return this.books;
 	}
 
 	public void setBooks(Set<ContactGroup> books) {
@@ -48,6 +50,13 @@ public class Contact {
 			g.addContact(this);
 		}
 	}
+	
+	public void delBook(ContactGroup g){
+		this.books.remove(g);
+		if(g.getContacts().contains(this)){
+			g.delContact(this);
+		}
+	}
 
 	public Contact(){
 		super();
@@ -56,7 +65,7 @@ public class Contact {
 	}
 
 	public String getEmail(){
-		return email;
+		return this.email;
 	}
 	
 	public void setEmail(String email){

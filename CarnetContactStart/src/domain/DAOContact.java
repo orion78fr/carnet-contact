@@ -2,6 +2,7 @@ package domain;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.MatchMode;
@@ -40,11 +41,23 @@ public class DAOContact implements IDAOContact{
 		session.getTransaction().commit();
 		return l;
 	}
+	
+	public List<Contact> getAllContactsAndGroups(){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		List<Contact> l = session.createQuery("from Contact").list();
+		for (Contact c : l){
+			Hibernate.initialize(c.getBooks());
+		}
+		session.getTransaction().commit();
+		return l;
+	}
 
 	public Contact getContact(long id){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		Contact c = (Contact) session.createCriteria(Contact.class).add(Restrictions.eq("id", id)).uniqueResult();
+		Hibernate.initialize(c.getBooks());
 		session.getTransaction().commit();
 		return c;
 	}

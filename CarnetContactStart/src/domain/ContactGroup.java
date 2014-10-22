@@ -2,6 +2,8 @@ package domain;
 
 import java.util.Set;
 
+import org.hibernate.Hibernate;
+
 public class ContactGroup {
 	private long id;
 	private String groupName;
@@ -19,6 +21,12 @@ public class ContactGroup {
 			c.addBook(this);
 		}
 	}
+	public void delContact(Contact c){
+		this.contacts.remove(c);
+		if(c.getBooks().contains(this)){
+			c.delBook(this);
+		}
+	}
 	public ContactGroup() {
 		super();
 	}
@@ -33,5 +41,12 @@ public class ContactGroup {
 	}
 	public void setGroupName(String groupName) {
 		this.groupName = groupName;
+	}
+	
+	public boolean isInGroup(long id){
+		for (Contact c : this.contacts){
+			if (c.getId() == id) return true;
+		}
+		return false;
 	}
 }

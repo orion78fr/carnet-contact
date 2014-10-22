@@ -14,13 +14,20 @@ public class ServiceGroup {
 		cg.setGroupName(groupName);
 		
 		dao.addContactGroup(cg);
-	}
+	} 
 	
 	public static List<ContactGroup> getAllContactGroups(){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml"});
 		IDAOContactGroup dao = (IDAOContactGroup) context.getBean("DAOCG");
 		context.close();
 		return dao.getAllContactGroups();
+	}
+	
+	public static List<ContactGroup> getAllGroupsAndContacts(){
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml"});
+		IDAOContactGroup dao = (IDAOContactGroup) context.getBean("DAOCG");
+		context.close();
+		return dao.getAllGroupsAndContacts();
 	}
 	
 	public static ContactGroup getContactGroupByName(String groupName){
@@ -35,5 +42,12 @@ public class ServiceGroup {
 		IDAOContactGroup dao = (IDAOContactGroup) context.getBean("DAOCG");
 		context.close();
 		dao.addContactToGroup(cid, groupName);
+	}
+	
+	public static void delContactFromGroup(long cid, String groupName){
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml"});
+		IDAOContactGroup dao = (IDAOContactGroup) context.getBean("DAOCG");
+		context.close();
+		dao.delContactFromGroup(cid, groupName);
 	}
 }

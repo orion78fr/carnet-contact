@@ -1,6 +1,8 @@
 <%@page import="domain.PhoneNumber"%>
 <%@page import="domain.ServiceContact"%>
+<%@page import="domain.ServiceGroup"%>
 <%@page import="domain.Contact"%>
+<%@page import="domain.ContactGroup"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -35,7 +37,45 @@
     
     <table>
         <tr>
-            <th colspan="6"><h2>Liste des contacts</h2></th>
+            <th colspan="3"><h2>Groupes de contacts</h2></th>
+        </tr>
+        <tr>
+            <th><h3>Nom du groupe</h3></th>
+            <th><h3>Contacts</h3></th>
+        </tr>
+        <%
+        List<ContactGroup> lg = ServiceGroup.getAllGroupsAndContacts();
+        for(ContactGroup cg : lg){
+        	%>
+        	<tr>
+        	   <td><%= cg.getGroupName()%></td>
+        	   <td>
+        	       <ul>
+        	       <%
+        	       for(Contact c : cg.getContacts()){
+        	    	   %><li><%=c.getFirstName() %> <%=c.getLastName() %></li><%
+        	       }
+        	       %>
+        	       </ul>
+        	   </td>
+        	   <td>
+        	       <form action="DeleteGroup" method="post">
+                       <input type="hidden" name="id" value ="<%= cg.getId() %>"/>
+                       <input class="button" type="submit" value="Supprimer"/>
+                   </form>
+        	   </td>
+        	</tr>
+        	<%
+        }
+        %>
+    </table>
+    
+    <br />
+    <br />
+    
+    <table>
+        <tr>
+            <th colspan="7"><h2>Liste des contacts</h2></th>
         </tr>
         <tr>
             <th><h3>First Name</h3></th>
@@ -43,10 +83,11 @@
             <th><h3>Email</h3></th>
             <th><h3>Address</h3></th>
             <th><h3>Phones</h3></th>
+            <th><h3>Groups</h3></th>
             <th><h3>Options</h3></th>
         </tr>
         <%
-        List<Contact> l = ServiceContact.getAllContacts();
+        List<Contact> l = ServiceContact.getAllContactsAndGroups();
         for(Contact c : l){
         	%>
         	<tr>
@@ -59,6 +100,15 @@
         	       <%
         	       for(PhoneNumber num : c.getProfiles()){
         	    	   %><li><%= num.getPhoneKind()%> : <%=num.getPhoneNumber() %></li><%
+        	       }
+        	       %>
+        	       </ul>
+        	   </td>
+        	   <td>
+        	       <ul>
+        	       <%
+        	       for(ContactGroup cg : c.getBooks()){
+        	    	   %><li><%=cg.getGroupName() %></li><%
         	       }
         	       %>
         	       </ul>
