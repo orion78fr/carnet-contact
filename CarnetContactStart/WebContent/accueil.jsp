@@ -31,6 +31,8 @@
     <a href="addGroup.jsp">Créer un group de contact</a><br />
     <a href="searchContact.jsp">Rechercher un contact</a> <br />
     <br />
+    <a href="ContactGenerator?nb=50">Ajouter 50 contacts</a> <br />
+    <br />
     <br />
     
     <table>

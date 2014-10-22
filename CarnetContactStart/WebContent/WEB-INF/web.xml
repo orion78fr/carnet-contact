@@ -64,6 +64,18 @@
     <servlet-name>NewGroup</servlet-name>
     <url-pattern>/NewGroup</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>ContactGenerator</display-name>
+    <servlet-name>ContactGenerator</servlet-name>
+    <servlet-class>domain.ContactGenerator</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ContactGenerator</servlet-name>
+    <url-pattern>/ContactGenerator</url-pattern>
+  </servlet-mapping>
+  
   <listener>
     <listener-class>
         org.springframework.web.context.ContextLoaderListener
