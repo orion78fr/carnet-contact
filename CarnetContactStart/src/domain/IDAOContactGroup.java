@@ -5,6 +5,8 @@ import java.util.List;
 public interface IDAOContactGroup {
 	public void addContactGroup(ContactGroup cg);
 	public boolean deleteContactGroup(long id);
+	public boolean modifyGroup(ContactGroup cg);
+	public ContactGroup getGroup(long id);
 	public List<ContactGroup> getAllContactGroups();
 	public ContactGroup getContactGroupByName(String groupName);
 	public void addContactToGroup(long cid, String groupName);

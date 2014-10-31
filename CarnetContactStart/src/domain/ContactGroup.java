@@ -2,8 +2,6 @@ package domain;
 
 import java.util.Set;
 
-import org.hibernate.Hibernate;
-
 public class ContactGroup {
 	private long id;
 	private String groupName;

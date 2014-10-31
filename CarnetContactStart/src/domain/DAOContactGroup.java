@@ -38,6 +38,23 @@ public class DAOContactGroup implements IDAOContactGroup {
 		}
 	}
 	
+	public boolean modifyGroup(ContactGroup cg){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.update(cg);
+		session.getTransaction().commit();
+		return true;
+	}
+	
+	public ContactGroup getGroup(long id){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		ContactGroup cg = (ContactGroup) session.createCriteria(ContactGroup.class).add(Restrictions.eq("id", id)).uniqueResult();
+		Hibernate.initialize(cg.getContacts());
+		session.getTransaction().commit();
+		return cg;
+	}
+	
 	public List<ContactGroup> getAllContactGroups(){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();

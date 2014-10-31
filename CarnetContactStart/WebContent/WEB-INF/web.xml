@@ -64,6 +64,16 @@
     <servlet-name>NewGroup</servlet-name>
     <url-pattern>/NewGroup</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <description></description>
+    <display-name>ModifyGroup</display-name>
+    <servlet-name>ModifyGroup</servlet-name>
+    <servlet-class>domain.ModifyGroup</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifyGroup</servlet-name>
+    <url-pattern>/ModifyGroup</url-pattern>
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>ContactGenerator</display-name>

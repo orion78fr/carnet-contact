@@ -61,6 +61,10 @@
         	       </ul>
         	   </td>
         	   <td>
+        	   	   <form action="updateGroup.jsp" method="post">
+        	           <input type="hidden" name="id" value ="<%= cg.getId() %>"/>
+        	           <input class="button" type="submit" value="Modifier"/>
+        	       </form>
         	       <form action="DeleteGroup" method="post">
                        <input type="hidden" name="id" value ="<%= cg.getId() %>"/>
                        <input class="button" type="submit" value="Supprimer"/>
