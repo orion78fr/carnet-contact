@@ -1,35 +1,37 @@
 ### JSP/Servlet:
-- Recherche à finir
-- Formulaire entreprise avec siret
+- Recherche à finir [Guillaume]
+- Formulaire entreprise avec siret [Après JSF]
 
 
 ### Hibernate:
-- DAO entreprise
-- Versionning
-- Cache de 2ème niveau
+- DAO entreprise [Après JSF]
+- Versionning [Olivier]
+- Cache de 2ème niveau [Nous 2]
    + Console Hibernate
-- Vérifier les différents types de requetes
+- Vérifier les différents types de requetes [Nous 2]
    + HQL
    + Simple
    + Paramètrée
    + Criteria
    + Example
-- Unicité des noms de groupes
+- Unicité des noms de groupes [Olivier]
+   + Le placer en clé primaire
 
 
 ### Spring
-- Aspect (par exemple du log avant une action)
-- Données de tests (via constructeur ou via setter)
+- Aspect (par exemple du log avant une action) [Guillaume]
+- Données de tests (via constructeur ou via setter) [Guillaume]
 
 
 ### JSF
-- Tout
-- Validation des formulaires
+- Tout [Nous 2]
+- Validation des formulaires [Olivier]
 
 
 ### Divers
 - Login/Password
 - Batch Processing
 - CSS
-- Java DOC
+- Java DOC [Eclipse]
 - Hibernate Validator (& Hibernate Search)
+- Pagination et Order BY [Guillaume]
