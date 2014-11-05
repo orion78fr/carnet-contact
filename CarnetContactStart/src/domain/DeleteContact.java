@@ -32,8 +32,7 @@ public class DeleteContact extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Long id = Long.parseLong(request.getParameter("id"));
 		
-		IDAOContact dao = new DAOContact();
-		dao.deleteContact(id);
+		ServiceContact.delContact(id);
 		
 		response.sendRedirect("accueil.jsp");
 	}

@@ -32,8 +32,7 @@ public class DeleteGroup extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Long id = Long.parseLong(request.getParameter("id"));
 		
-		IDAOContactGroup dao = new DAOContactGroup();
-		dao.deleteContactGroup(id);
+		ServiceGroup.delContactGroup(id);
 		
 		response.sendRedirect("accueil.jsp");
 	}

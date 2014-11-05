@@ -21,7 +21,9 @@
             <th><h3>Email</h3></th>
             <th><h3>Phones</h3></th>
         </tr>
-	    <% List<Contact> al = (List<Contact>) request.getAttribute("liste");
+	    <%
+	    @SuppressWarnings("unchecked")
+	    List<Contact> al = (List<Contact>) request.getAttribute("liste");
 	    for(Contact c : al){%>
 	    	<tr>
 	    	    <td><%= c.getFirstName() %></td>

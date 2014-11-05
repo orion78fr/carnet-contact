@@ -18,7 +18,7 @@ public class ContactGenerator extends HttpServlet {
 	private String groupes[] = {"Indie Dyke","Symptom Plumber","Satiated Reaper","Decently Tribute","Blonde Conglomerate","Social Painter","Headache Scenario","Minor Hedgehog","Religious Leash","Armed Pickle","Swift Quartet","Shocking Screw","Flogging Hip","Explosive Gyro","Sixteen Of The Neutron Revenge","Anatomy Of Impotent","Viper Kiwi","Liberal Randy And The Burden","Open Pardon","Coyote Of Blank","Simple Syndicate Of The Confined Minion","Official Trilogy And The Orifice","Ailing Galore","Battered Dweeb And The Step-dad","Regular Mumbles","Swinger Insect","Fogotten Sex","Latin Cool","Pink Kiss","Striker Of The Washer","Uncanny War","Finally Provider","Wanted Torpedo And The Game Kickoff","More Of The Cycle","Balance Of The Compressed Lullaby","Lazy Condition And The Idiotic Cheap","Hand For Bacon","Driving Hyphen And The Enraged Health","Lead Twister","Letting Anything"};
 	
 	public void generateContacts(long num){
-		IDAOContact dao = new DAOContact();
+		IDAOContact dao = (IDAOContact) AppContextSingleton.getContext().getBean("DAOC");
 		Random r = new Random();
 		
 		generateGroups(num/10);
@@ -52,7 +52,7 @@ public class ContactGenerator extends HttpServlet {
 	}
 
 	private void generateAssocGroupContacts(long id, long num) {
-		IDAOContactGroup dao = new DAOContactGroup();
+		IDAOContactGroup dao = (IDAOContactGroup) AppContextSingleton.getContext().getBean("DAOCG");
 		Random r = new Random();
 		List<ContactGroup> list = dao.getAllContactGroups();
 		for(int i=0; i<num; i++){
@@ -61,7 +61,7 @@ public class ContactGenerator extends HttpServlet {
 	}
 
 	private void generateGroups(long num) {
-		IDAOContactGroup dao = new DAOContactGroup();
+		IDAOContactGroup dao = (IDAOContactGroup) AppContextSingleton.getContext().getBean("DAOCG");
 		Random r = new Random();
 		for(int i=0; i<num; i++){
 			ContactGroup cg = new ContactGroup();

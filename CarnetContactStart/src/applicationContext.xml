@@ -1,1 +1,51 @@
-../WebContent/WEB-INF/applicationContext.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
+	>
+	
+	<bean id="DAOC" class="domain.DAOContact">
+	   <property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	<bean id="DAOCG" class="domain.DAOContactGroup">
+	   <property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+
+	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost/odv_codel" />
+		<property name="username" value="root" />
+		<property name="password" value="" />
+	</bean>
+
+	<bean id="mySessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="myDataSource" />
+		<property name="mappingResources">
+			<list>
+				<value>domain/Contact.hbm.xml</value>
+				<value>domain/Address.hbm.xml</value>
+				<value>domain/ContactGroup.hbm.xml</value>
+				<value>domain/PhoneNumber.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop>-->
+				<prop key="hibernate.current_session_context_class">thread</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="mySessionFactory" />
+		<property name="dataSource" ref="myDataSource"/>
+	</bean>
+
+	<!-- Enable Annotation based Declarative Transaction Management -->
+    <tx:annotation-driven proxy-target-class="true"
+        transaction-manager="transactionManager" />
+</beans>

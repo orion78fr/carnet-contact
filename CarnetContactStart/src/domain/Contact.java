@@ -3,8 +3,6 @@ package domain;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.hibernate.Hibernate;
-
 public class Contact {
 
 	private String firstName;

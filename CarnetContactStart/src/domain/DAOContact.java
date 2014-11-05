@@ -7,144 +7,62 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
-import utils.HibernateUtil;
-
-@SuppressWarnings("unchecked")
-public class DAOContact implements IDAOContact{
+@SuppressWarnings({ "unchecked", "unused" })
+public class DAOContact extends HibernateDaoSupport implements IDAOContact{
 	public void addContact(Contact c){
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		session.persist(c);
-		session.getTransaction().commit();
+		this.getHibernateTemplate().persist(c);
 	}
-
+	
+	@Transactional
 	public boolean deleteContact(long id){
-		Contact contact;
-		
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		contact = (Contact) session.load(Contact.class, id);
-		if(contact == null){
+		Contact c = (Contact) this.getHibernateTemplate().get(Contact.class, id);
+		if(c == null){
 			return false;
 		} else {
-			session.delete(contact);
-			session.getTransaction().commit();
+			this.getHibernateTemplate().delete(c);
 			return true;
 		}
 	}
 	
 	public List<Contact> getAllContacts(){
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		List<Contact> l = session.createQuery("from Contact").list();
-		session.getTransaction().commit();
-		return l;
+		return (List<Contact>) this.getHibernateTemplate().find("from Contact");
 	}
 	
+	@Transactional
 	public List<Contact> getAllContactsAndGroups(){
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		List<Contact> l = session.createQuery("from Contact").list();
+		List<Contact> l = (List<Contact>) this.getHibernateTemplate().find("from Contact");
 		for (Contact c : l){
-			Hibernate.initialize(c.getBooks());
+			this.getHibernateTemplate().initialize(c.getBooks());
 		}
-		session.getTransaction().commit();
 		return l;
 	}
 
+	@Transactional
 	public Contact getContact(long id){
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		Contact c = (Contact) session.createCriteria(Contact.class).add(Restrictions.eq("id", id)).uniqueResult();
-		Hibernate.initialize(c.getBooks());
-		session.getTransaction().commit();
+		Contact c = (Contact) this.getHibernateTemplate().get(Contact.class, id);
+		this.getHibernateTemplate().initialize(c.getBooks());
 		return c;
 	}
 
 	public boolean modifyContact(Contact c){
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		session.update(c);
-		session.getTransaction().commit();
+		this.getHibernateTemplate().update(c);
 		return true;
 	}
 
-	public List<Contact> getContactByFirstName(String firstname){
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		List<Contact> l = session.createCriteria(Contact.class).add(Restrictions.eq("firstName", firstname)).list();
-		session.getTransaction().commit();
-		return l;
-	}
-
-	public List<Contact> getContactByLastName(String lastname){
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		List<Contact> l = session.createCriteria(Contact.class).add(Restrictions.eq("lastName", lastname)).list();
-		session.getTransaction().commit();
-		return l;
-	}
-
-	public List<Contact> getContactByEmail(String email){
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		List<Contact> l = session.createCriteria(Contact.class).add(Restrictions.eq("email", email)).list();
-		session.getTransaction().commit();
-		return l;
-	}
-
-	public List<Contact> getContactByPhoneNumber(String phoneNumber) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		List<Contact> l = session.createQuery("from Contact c where :tel in (select p.phoneNumber from PhoneNumber p where p.contact = c.id)")
-									.setParameter("tel", phoneNumber).list();
-		session.getTransaction().commit();
-		return l;
-	}
-
-	public List<Contact> getContactByStreet(String street) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		List<Contact> l = session.createQuery("select c from Contact c where c.add.street = :street").setParameter("street", street).list();
-		session.getTransaction().commit();
-		return l;
-	}
-
-	public List<Contact> getContactByCity(String city) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		List<Contact> l = session.createQuery("select c from Contact c where c.add.city = :city").setParameter("city", city).list();
-		session.getTransaction().commit();
-		return l;
-	}
-
-	public List<Contact> getContactByCountry(String country) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		List<Contact> l = session.createQuery("select c from Contact c where c.add.country = :country").setParameter("country", country).list();
-		session.getTransaction().commit();
-		return l;
-	}
-
-	public List<Contact> getContactByZip(String zip) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		List<Contact> l = session.createQuery("select c from Contact c where c.add.zip = :zip").setParameter("zip", zip).list();
-		session.getTransaction().commit();
-		return l;
-	}
-	
 	public List<Contact> getContactUsingExample(Contact c){
-		Example exContact = Example.create(c).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
+		/*Example exContact = Example.create(c).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
 		Example exAdd = Example.create(c.getAdd()).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
 		Example exProfiles = Example.create(c.getProfiles().iterator().next()).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		List<Contact> l = session.createCriteria(Contact.class).add(exContact)
 									/*.createCriteria("add").add(exAdd)*/
-									.createCriteria("profiles").add(exProfiles).list();
+									/*.createCriteria("profiles").add(exProfiles).list();
 		session.getTransaction().commit();
-		return l;
+		return l;*/
+		return null;
 	}
 }

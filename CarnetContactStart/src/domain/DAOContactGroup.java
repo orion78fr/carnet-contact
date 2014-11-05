@@ -2,84 +2,72 @@ package domain;
 
 import java.util.List;
 
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
-import utils.HibernateUtil;
-
-public class DAOContactGroup implements IDAOContactGroup {
-	
-	public DAOContactGroup(){
-	}
-	
+@SuppressWarnings("unchecked")
+public class DAOContactGroup extends HibernateDaoSupport implements IDAOContactGroup {
 	public void addContactGroup(ContactGroup cg){
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		session.persist(cg);
-		session.getTransaction().commit();
+		this.getHibernateTemplate().persist(cg);
 	}
 	
+	@Transactional
 	public boolean deleteContactGroup(long id){
 		ContactGroup cg;
 		
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		cg = (ContactGroup) session.load(ContactGroup.class, id);
+		cg = (ContactGroup) this.getHibernateTemplate().get(ContactGroup.class, id);
+		
 		if(cg == null){
 			return false;
 		} else {
 			for (Contact c : cg.getContacts()){
 				c.getBooks().remove(cg);
 			}
-			session.delete(cg);
-			session.getTransaction().commit();
+			this.getHibernateTemplate().delete(cg);
 			return true;
 		}
 	}
 	
-	public List<ContactGroup> getAllContactGroups(){
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		List<ContactGroup> l = session.createQuery("from ContactGroup").list();
-		session.getTransaction().commit();
-		return l;
+	public boolean modifyGroup(ContactGroup cg){
+		this.getHibernateTemplate().update(cg);
+		return true;
 	}
 	
+	@Transactional
+	public ContactGroup getGroup(long id){
+		ContactGroup cg = (ContactGroup) this.getHibernateTemplate().get(ContactGroup.class, id);
+		this.getHibernateTemplate().initialize(cg.getContacts());
+		return cg;
+	}
+	
+	public List<ContactGroup> getAllContactGroups(){
+		return (List<ContactGroup>) this.getHibernateTemplate().find("from ContactGroup");
+	}
+	
+	@Transactional
 	public List<ContactGroup> getAllGroupsAndContacts() {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		List<ContactGroup> l = session.createQuery("from ContactGroup").list();
+		List<ContactGroup> l = (List<ContactGroup>) this.getHibernateTemplate().find("from ContactGroup");
 		for (ContactGroup cg : l){
-			Hibernate.initialize(cg.getContacts());
+			this.getHibernateTemplate().initialize(cg.getContacts());
 		}
-		session.getTransaction().commit();
 		return l;
 	}
 	
 	public ContactGroup getContactGroupByName(String groupName){
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		ContactGroup cg = (ContactGroup)session.createCriteria(ContactGroup.class).add(Restrictions.eq("groupName", groupName)).uniqueResult();
-		session.getTransaction().commit();
-		return cg;
+		return (ContactGroup) this.getHibernateTemplate().find("from ContactGroup where groupName=?", groupName).get(0);
 	}
 
+	@Transactional
 	public void addContactToGroup(long cid, String groupName) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		Contact c = (Contact)session.load(Contact.class, cid);
-		ContactGroup cg = (ContactGroup)session.createCriteria(ContactGroup.class).add(Restrictions.eq("groupName", groupName)).uniqueResult();
-		cg.addContact(c);
-		session.getTransaction().commit();
+		ContactGroup cg = (ContactGroup)this.getHibernateTemplate().find("from ContactGroup where groupName=?", groupName).get(0);
+		this.getHibernateTemplate().initialize(cg.getContacts());
+		cg.addContact((Contact)this.getHibernateTemplate().get(Contact.class, cid));
 	}
 	
+	@Transactional
 	public void delContactFromGroup(long cid, String groupName) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		Contact c = (Contact)session.load(Contact.class, cid);
-		ContactGroup cg = (ContactGroup)session.createCriteria(ContactGroup.class).add(Restrictions.eq("groupName", groupName)).uniqueResult();
-		cg.delContact(c);
-		session.getTransaction().commit();
+		ContactGroup cg = (ContactGroup)this.getHibernateTemplate().find("from ContactGroup where groupName=?", groupName).get(0);
+		this.getHibernateTemplate().initialize(cg.getContacts());
+		cg.delContact((Contact)this.getHibernateTemplate().get(Contact.class, cid));
 	}
 }
