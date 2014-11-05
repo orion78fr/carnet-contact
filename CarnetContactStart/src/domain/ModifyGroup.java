@@ -7,9 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
-
 /**
  * Servlet implementation class ModifyContact
  */
@@ -37,9 +34,7 @@ public class ModifyGroup extends HttpServlet {
 		String groupName = request.getParameter("groupName");
 		String[] contacts = request.getParameterValues("contacts");
 		
-		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-		
-		ServiceGroup.modifyGroup(context, id, groupName, contacts);
+		ServiceGroup.modifyGroup(id, groupName, contacts);
 		
 		response.sendRedirect("accueil.jsp");
 	}

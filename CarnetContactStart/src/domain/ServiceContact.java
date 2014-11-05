@@ -2,10 +2,8 @@ package domain;
 
 import java.util.List;
 
-import org.springframework.context.ApplicationContext;
-
 public class ServiceContact {
-	public static void createContact(ApplicationContext context, String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone, String[] groups){
+	public static void createContact(String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone, String[] groups){
 		IDAOContact dao = (IDAOContact) AppContextSingleton.getContext().getBean("DAOC");
 		
 		Contact contact = new Contact();
@@ -35,7 +33,7 @@ public class ServiceContact {
 		}
 		
 	}
-	public static void modifyContact(ApplicationContext context, Long id, String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone, String[] groups){
+	public static void modifyContact(Long id, String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone, String[] groups){
 		IDAOContact dao = (IDAOContact) AppContextSingleton.getContext().getBean("DAOC");
 		
 		Contact contact = dao.getContact(id);

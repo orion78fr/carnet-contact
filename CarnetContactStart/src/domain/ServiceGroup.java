@@ -2,8 +2,6 @@ package domain;
 
 import java.util.List;
 
-import org.springframework.context.ApplicationContext;
-
 public class ServiceGroup {
 	public static void createGroup(String groupName){
 		IDAOContactGroup dao = (IDAOContactGroup) AppContextSingleton.getContext().getBean("DAOCG");
@@ -14,7 +12,7 @@ public class ServiceGroup {
 		dao.addContactGroup(cg);
 	}
 	
-	public static void modifyGroup(ApplicationContext contextold, Long id, String groupName, String[] contacts){
+	public static void modifyGroup(Long id, String groupName, String[] contacts){
 		IDAOContactGroup dao = (IDAOContactGroup) AppContextSingleton.getContext().getBean("DAOCG");
 		
 		ContactGroup cg = dao.getGroup(id);
