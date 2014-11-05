@@ -31,6 +31,7 @@ public class ModifyContact extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Long id = Long.parseLong(request.getParameter("id"));
+		Integer version = Integer.parseInt(request.getParameter("version"));
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String email = request.getParameter("email");
@@ -43,7 +44,7 @@ public class ModifyContact extends HttpServlet {
 		String home_phone = request.getParameter("home_phone");
 		String[] groups = request.getParameterValues("groups");
 		
-		ServiceContact.modifyContact(id, firstName, lastName, email, street, city, zip, country, mobile_phone, office_phone, home_phone, groups);
+		ServiceContact.modifyContact(id, version, firstName, lastName, email, street, city, zip, country, mobile_phone, office_phone, home_phone, groups);
 		
 		response.sendRedirect("accueil.jsp");
 	}

@@ -122,6 +122,7 @@
         	   <td>
         	       <form action="updateContact.jsp" method="post">
         	           <input type="hidden" name="id" value ="<%= c.getId() %>"/>
+        	           <input type="hidden" name="version" value ="<%= c.getVersion() %>"/>
         	           <input class="button" type="submit" value="Modifier"/>
         	       </form>
         	       <form action="DeleteContact" method="post">

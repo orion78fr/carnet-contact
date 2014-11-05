@@ -33,10 +33,13 @@ public class ServiceContact {
 		}
 		
 	}
-	public static void modifyContact(Long id, String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone, String[] groups){
+	public static void modifyContact(Long id, Integer version, String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone, String[] groups){
 		IDAOContact dao = (IDAOContact) AppContextSingleton.getContext().getBean("DAOC");
 		
-		Contact contact = dao.getContact(id);
+		Contact contact = new Contact();
+		
+		contact.setId(id);
+		contact.setVersion(version);
 		
 		contact.setFirstName(firstName);
 		contact.setLastName(lastName);

@@ -2,31 +2,35 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="domain">
-  <class name="Contact" table="Contact_Table" discriminator-value="C">
-  	 <id name="id" type="long" column="ID_CONTACT" >
-   		<generator class="increment"/>
-  	 </id>
-  	 
-  	 <discriminator column="sousclasse" type="character"/>
-  	 
-     <property name="firstName" type="string"/>
-     <property name="lastName" type="string"/>
-     <property name="email" type="string"/>
-     
-     <many-to-one name="add" column="addressId" unique="true" cascade="all-delete-orphan" class="Address"  lazy="false"/>
-     
-     <set name="profiles" inverse="true" cascade="all-delete-orphan"  lazy="false">
-        <key column="contactId"/>
-        <one-to-many class="PhoneNumber"/>
-     </set>
-     
-     <set name="books" cascade="save-update" table="appartenanceGroupe">
-        <key column="contactId"/>
-        <many-to-many class="ContactGroup" column="groupId"/>
-     </set>
-     
-     <subclass name="Entreprise" discriminator-value="E">
-        <property name="numSiret" type="string"/>
-     </subclass>
-  </class>
+	<class name="Contact" table="Contact_Table" discriminator-value="C">
+		<id name="id" type="long" column="ID_CONTACT">
+			<generator class="increment" />
+		</id>
+
+		<discriminator column="sousclasse" type="character" />
+		
+		<version name="version"/>
+
+		<property name="firstName" type="string" />
+		<property name="lastName" type="string" />
+		<property name="email" type="string" />
+
+		<many-to-one name="add" column="addressId" unique="true"
+			cascade="all-delete-orphan" class="Address" lazy="false" />
+
+		<set name="profiles" inverse="true" cascade="all-delete-orphan"
+			lazy="false">
+			<key column="contactId" />
+			<one-to-many class="PhoneNumber" />
+		</set>
+
+		<set name="books" cascade="save-update" table="appartenanceGroupe">
+			<key column="contactId" />
+			<many-to-many class="ContactGroup" column="groupId" />
+		</set>
+
+		<subclass name="Entreprise" discriminator-value="E">
+			<property name="numSiret" type="string" />
+		</subclass>
+	</class>
 </hibernate-mapping>

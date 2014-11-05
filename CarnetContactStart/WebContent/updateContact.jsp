@@ -16,6 +16,7 @@
 <body>
         <form method="post" action="ModifyContact">
         <input type="hidden" name="id" value="<%= request.getParameter("id")%>"/>
+        <input type="hidden" name="version" value="<%= request.getParameter("version")%>"/>
         <table>
             <tr>
                 <th><h2>Modifier un contact</h2></th>

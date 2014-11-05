@@ -2,15 +2,10 @@ package domain;
 
 import java.util.List;
 
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import org.hibernate.criterion.Example;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
-@SuppressWarnings({ "unchecked", "unused" })
+@SuppressWarnings("unchecked")
 public class DAOContact extends HibernateDaoSupport implements IDAOContact{
 	public void addContact(Contact c){
 		this.getHibernateTemplate().persist(c);
@@ -48,7 +43,7 @@ public class DAOContact extends HibernateDaoSupport implements IDAOContact{
 	}
 
 	public boolean modifyContact(Contact c){
-		this.getHibernateTemplate().update(c);
+		this.getHibernateTemplate().saveOrUpdate(c);
 		return true;
 	}
 

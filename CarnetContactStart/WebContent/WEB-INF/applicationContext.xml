@@ -34,7 +34,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop>-->
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
 				<prop key="hibernate.current_session_context_class">thread</prop>
 			</props>
 		</property>
@@ -44,12 +44,6 @@
 		<property name="sessionFactory" ref="mySessionFactory" />
 		<property name="dataSource" ref="myDataSource"/>
 	</bean>
-	
-	<!-- <mvc:interceptors>
-	    <bean class="org.springframework.orm.hibernate3.support.OpenSessionInViewInterceptor">
-	        <property name="sessionFactory" ref="mySessionFactory"/>
-	    </bean>
-	</mvc:interceptors>-->
 	
 	<!-- Enable Annotation based Declarative Transaction Management -->
     <tx:annotation-driven proxy-target-class="true"

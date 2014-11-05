@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Contact {
-
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -12,7 +11,16 @@ public class Contact {
 	private Address add;
 	private Set<PhoneNumber> profiles;
 	private Set<ContactGroup> books;
+	private int version;
 	
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
 	public Address getAdd() {
 		return add;
 	}
