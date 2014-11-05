@@ -1,0 +1,35 @@
+### JSP/Servlet:
+- Recherche à finir
+- Formulaire entreprise avec siret
+
+
+### Hibernate:
+- DAO entreprise
+- Versionning
+- Cache de 2ème niveau
+   + Console Hibernate
+- Vérifier les différents types de requetes
+   + HQL
+   + Simple
+   + Paramètrée
+   + Criteria
+   + Example
+- Unicité des noms de groupes
+
+
+### Spring
+- Aspect (par exemple du log avant une action)
+- Données de tests (via constructeur ou via setter)
+
+
+### JSF
+- Tout
+- Validation des formulaires
+
+
+### Divers
+- Login/Password
+- Batch Processing
+- CSS
+- Java DOC
+- Hibernate Validator (& Hibernate Search)
