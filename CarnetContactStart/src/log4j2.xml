@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+	<Appenders>
+		<File name="File1" fileName="output.log" append="false">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</File>
+		<Console name="STDOUT" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+		<Console name="STDERR" target="SYSTEM_ERR">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="File1" />
+		</Root>
+		<Root level="warn">
+			<AppenderRef ref="STDOUT" />
+		</Root>
+		<Root level="error">
+			<AppenderRef ref="STDERR" />
+		</Root>
+	</Loggers>
+</Configuration>

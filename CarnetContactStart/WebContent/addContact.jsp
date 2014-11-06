@@ -1,5 +1,5 @@
-<%@page import="domain.ServiceGroup"%>
-<%@page import="domain.ContactGroup"%>
+<%@page import="service.ServiceGroup"%>
+<%@page import="codel.ContactGroup"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

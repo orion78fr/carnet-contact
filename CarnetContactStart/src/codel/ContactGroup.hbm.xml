@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="codel">
+  <class name="ContactGroup" table="Contact_Group_Table">
+  	 <cache usage="read-write" />
+     <id name="id" type="long" column="ID_GROUP" >
+        <generator class="increment"/>
+     </id>
+     <property name="groupName" type="string" unique="true"/>
+     
+     <set name="contacts" table="appartenanceGroupe" inverse="true">
+        <key column="groupId"/>
+        <many-to-many class="Contact" column="contactId"/>
+     </set>
+  </class>
+</hibernate-mapping>

@@ -1,8 +1,8 @@
-<%@page import="domain.PhoneNumber"%>
-<%@page import="domain.Contact"%>
-<%@page import="domain.ContactGroup"%>
-<%@page import="domain.ServiceContact"%>
-<%@page import="domain.ServiceGroup"%>
+<%@page import="codel.PhoneNumber"%>
+<%@page import="codel.Contact"%>
+<%@page import="codel.ContactGroup"%>
+<%@page import="service.ServiceContact"%>
+<%@page import="service.ServiceGroup"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

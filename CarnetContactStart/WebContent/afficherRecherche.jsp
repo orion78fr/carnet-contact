@@ -1,5 +1,5 @@
-<%@page import="domain.Contact"%>
-<%@page import="domain.PhoneNumber"%>
+<%@page import="codel.Contact"%>
+<%@page import="codel.PhoneNumber"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

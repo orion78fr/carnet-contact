@@ -9,6 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import utils.AppContextSingleton;
+import codel.Address;
+import codel.Contact;
+import codel.ContactGroup;
+import codel.PhoneNumber;
+import dao.IDAOContact;
+import dao.IDAOContactGroup;
+
 public class ContactGenerator extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -66,7 +74,9 @@ public class ContactGenerator extends HttpServlet {
 		for(int i=0; i<num; i++){
 			ContactGroup cg = new ContactGroup();
 			cg.setGroupName(groupes[r.nextInt(groupes.length)]);
-			dao.addContactGroup(cg);
+			if(dao.getContactGroupByName(cg.getGroupName()) == null){
+				dao.addContactGroup(cg);
+			}
 		}
 	}
 
@@ -74,8 +84,14 @@ public class ContactGenerator extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nb = request.getParameter("nb");
-		generateContacts(Integer.parseInt(nb));
+		Integer nb = Integer.parseInt(request.getParameter("nb"));
+		if(nb == -1){
+			String bean = request.getParameter("bean");
+			IDAOContact dao = (IDAOContact) AppContextSingleton.getContext().getBean("DAOC");
+			dao.addContact((Contact)AppContextSingleton.getContext().getBean(bean));
+		} else {
+			generateContacts(nb);
+		}
 		response.sendRedirect("accueil.jsp");
 	}
 }

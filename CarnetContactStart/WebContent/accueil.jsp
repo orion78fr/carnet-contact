@@ -1,8 +1,12 @@
-<%@page import="domain.PhoneNumber"%>
-<%@page import="domain.ServiceContact"%>
-<%@page import="domain.ServiceGroup"%>
-<%@page import="domain.Contact"%>
-<%@page import="domain.ContactGroup"%>
+<%@page import="org.hibernate.stat.Statistics"%>
+<%@page import="dao.DAOContact"%>
+<%@page import="utils.AppContextSingleton"%>
+<%@page import="java.io.File"%>
+<%@page import="codel.PhoneNumber"%>
+<%@page import="service.ServiceContact"%>
+<%@page import="service.ServiceGroup"%>
+<%@page import="codel.Contact"%>
+<%@page import="codel.ContactGroup"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -31,9 +35,17 @@
     <br />
     <a href="addContact.jsp">Créer un contact</a> <br />
     <a href="addGroup.jsp">Créer un group de contact</a><br />
-    <a href="searchContact.jsp">Rechercher un contact</a> <br />
+    <a href="searchContact.jsp">Rechercher un contact</a><br />
     <br />
-    <a href="ContactGenerator?nb=50">Ajouter 50 contacts</a> <br />
+    <a href="ContactGenerator?nb=50">Ajouter 50 contacts générés aléatoirement</a><br />
+    <br />
+    <a href="ContactGenerator?nb=-1&bean=Donnee_test_1">Ajouter contact (bean initialisé par getter/setter)</a><br />
+    <a href="ContactGenerator?nb=-1&bean=Donnee_test_2">Ajouter contact (bean initialisé par constructeur)</a><br />
+    <br />
+    <% Statistics stat = ((DAOContact)AppContextSingleton.getContext().getBean("DAOC")).getStatistics();
+    Float ratio = (float)stat.getSecondLevelCacheHitCount() / (stat.getSecondLevelCacheHitCount() + stat.getSecondLevelCacheMissCount());%>
+    Statistiques du cache : Hit = <%=stat.getSecondLevelCacheHitCount() %>; Miss = <%=stat.getSecondLevelCacheMissCount() %>; Hit Ratio : <%= ratio %> <br />
+    
     <br />
     <br />
     
@@ -44,6 +56,7 @@
         <tr>
             <th><h3>Nom du groupe</h3></th>
             <th><h3>Contacts</h3></th>
+            <th><h3>Options</h3></th>
         </tr>
         <%
         List<ContactGroup> lg = ServiceGroup.getAllGroupsAndContacts();
