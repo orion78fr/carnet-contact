@@ -26,12 +26,12 @@ public class DAOContact extends HibernateDaoSupport implements IDAOContact{
 	}
 	
 	public List<Contact> getAllContacts(){
-		return (List<Contact>) this.getHibernateTemplate().find("from Contact");
+		return (List<Contact>) this.getHibernateTemplate().find("from Contact order by c.lastName, c.firstName");
 	}
 	
 	@Transactional
 	public List<Contact> getAllContactsAndGroups(){
-		List<Contact> l = (List<Contact>) this.getHibernateTemplate().find("from Contact");
+		List<Contact> l = (List<Contact>) this.getHibernateTemplate().find("from Contact c order by c.lastName, c.firstName");
 		for (Contact c : l){
 			this.getHibernateTemplate().initialize(c.getBooks());
 		}

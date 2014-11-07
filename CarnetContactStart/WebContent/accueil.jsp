@@ -97,8 +97,8 @@
             <th colspan="7"><h2>Liste des contacts</h2></th>
         </tr>
         <tr>
+        	<th><h3>Last Name</h3></th>
             <th><h3>First Name</h3></th>
-            <th><h3>Last Name</h3></th>
             <th><h3>Email</h3></th>
             <th><h3>Address</h3></th>
             <th><h3>Phones</h3></th>
@@ -110,8 +110,8 @@
         for(Contact c : l){
         	%>
         	<tr>
-        	   <td><%= c.getFirstName()%></td>
         	   <td><%= c.getLastName()%></td>
+        	   <td><%= c.getFirstName()%></td>
         	   <td><%= c.getEmail()%></td>
         	   <td><%= c.getAdd().toString() %></td>
         	   <td>

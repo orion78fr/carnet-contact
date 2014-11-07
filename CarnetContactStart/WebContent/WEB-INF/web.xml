@@ -98,7 +98,7 @@
     <servlet-name>DeleteGroup</servlet-name>
     <url-pattern>/DeleteGroup</url-pattern>
   </servlet-mapping>
-  <!-- <listener>
+  <listener>
     <listener-class>
         org.springframework.web.context.ContextLoaderListener
     </listener-class>
@@ -107,5 +107,5 @@
     <listener-class>
         org.springframework.web.context.request.RequestContextListener
     </listener-class>
-  </listener>-->
+  </listener>
 </web-app>

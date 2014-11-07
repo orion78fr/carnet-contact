@@ -1,14 +1,18 @@
 package utils;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
-public class AppContextSingleton {
-	private static ClassPathXmlApplicationContext context = null;
+public class AppContextSingleton implements ApplicationContextAware {
+	private static ApplicationContext context = null;
 	
-	public static ClassPathXmlApplicationContext getContext(){
-		if(context == null){
-			context = new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml"});
-		}
+	public static ApplicationContext getContext(){
 		return context;
+	}
+
+	public void setApplicationContext(ApplicationContext newContext)
+			throws BeansException {
+		context = newContext;
 	}
 }

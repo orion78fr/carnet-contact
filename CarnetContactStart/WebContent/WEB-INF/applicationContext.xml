@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<bean id="DAOC" class="dao.DAOContact">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="DAOCG" class="dao.DAOContactGroup">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+
+	<bean id="Donnee_test_1" class="codel.Contact">
+		<property name="firstName" value="Guillaume" />
+		<property name="lastName" value="Turchini" />
+		<property name="email" value="orion78fr@gmail.com" />
+		<property name="add" ref="Donnee_test_1_add" />
+		<property name="profiles">
+			<set>
+				<ref bean="Donnee_test_1_phone_1" />
+				<ref bean="Donnee_test_1_phone_2" />
+			</set>
+		</property>
+		<property name="books">
+			<set>
+				<ref bean="Donnee_test_1_group" />
+			</set>
+		</property>
+	</bean>
+	<bean id="Donnee_test_1_add" class="codel.Address">
+		<property name="street" value="2 avenue du Nulle Part" />
+		<property name="city" value="Quelque Part" />
+		<property name="zip" value="69690" />
+		<property name="country" value="FR" />
+	</bean>
+	<bean id="Donnee_test_1_phone_1" class="codel.PhoneNumber">
+		<property name="phoneKind" value="home" />
+		<property name="phoneNumber" value="0123456789" />
+		<property name="contact" ref="Donnee_test_1" />
+	</bean>
+	<bean id="Donnee_test_1_phone_2" class="codel.PhoneNumber">
+		<property name="phoneKind" value="mobile" />
+		<property name="phoneNumber" value="0666777888" />
+		<property name="contact" ref="Donnee_test_1" />
+	</bean>
+	<bean id="Donnee_test_1_group" class="codel.ContactGroup">
+		<property name="groupName" value="Orion" />
+		<property name="contacts">
+			<set>
+				<ref bean="Donnee_test_1" />
+			</set>
+		</property>
+	</bean>
+
+	<bean id="Donnee_test_2" class="codel.Contact">
+		<constructor-arg index="0" value="Olivier" />
+		<constructor-arg index="1" value="Devoisin" />
+		<constructor-arg index="2" value="devoisin.olivier@gmail.com" />
+		<constructor-arg index="3" type="codel.Address">
+			<bean class="codel.Address">
+				<constructor-arg index="0" value="10 rue d'Ailleurs" />
+				<constructor-arg index="1" value="Montcuq" />
+				<constructor-arg index="2" value="12340" />
+				<constructor-arg index="3" value="FR" />
+			</bean>
+		</constructor-arg>
+		<property name="profiles">
+			<set>
+				<ref bean="Donnee_test_2_phone_1"/>
+				<ref bean="Donnee_test_2_phone_2"/>
+			</set>
+		</property>
+		<property name="books">
+			<set>
+				<ref bean="Donnee_test_2_group"/>
+			</set>
+		</property>
+	</bean>
+	<bean class="codel.PhoneNumber" id="Donnee_test_2_phone_1">
+		<constructor-arg index="0" value="office" />
+		<constructor-arg index="1" value="0101010101" />
+		<property name="contact" ref="Donnee_test_2" />
+	</bean>
+	<bean class="codel.PhoneNumber" id="Donnee_test_2_phone_2">
+		<constructor-arg index="0" value="mobile" />
+		<constructor-arg index="1" value="0696969696" />
+		<property name="contact" ref="Donnee_test_2" />
+	</bean>
+	<bean class="codel.ContactGroup" id="Donnee_test_2_group">
+		<constructor-arg index="0" value="Paté en croute" />
+		<property name="contacts">
+			<set>
+				<ref bean="Donnee_test_2" />
+			</set>
+		</property>
+	</bean>
+
+	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost/odv_codel" />
+		<property name="username" value="root" />
+		<property name="password" value="" />
+	</bean>
+
+	<bean id="mySessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="myDataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="hibernate.current_session_context_class">thread</prop>
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.generate_statistics">true</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>codel/Contact.hbm.xml</value>
+				<value>codel/Address.hbm.xml</value>
+				<value>codel/ContactGroup.hbm.xml</value>
+				<value>codel/PhoneNumber.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="mySessionFactory" />
+		<property name="dataSource" ref="myDataSource" />
+	</bean>
+	
+	<bean class="utils.AppContextSingleton"/>
+
+	<!-- Enable Annotation based Declarative Transaction Management -->
+	<tx:annotation-driven proxy-target-class="true"
+		transaction-manager="transactionManager" />
+</beans>

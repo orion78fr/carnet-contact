@@ -44,12 +44,12 @@ public class DAOContactGroup extends HibernateDaoSupport implements IDAOContactG
 	}
 	
 	public List<ContactGroup> getAllContactGroups(){
-		return (List<ContactGroup>) this.getHibernateTemplate().find("from ContactGroup");
+		return (List<ContactGroup>) this.getHibernateTemplate().find("from ContactGroup g order by g.groupName");
 	}
 	
 	@Transactional
 	public List<ContactGroup> getAllGroupsAndContacts() {
-		List<ContactGroup> l = (List<ContactGroup>) this.getHibernateTemplate().find("from ContactGroup");
+		List<ContactGroup> l = (List<ContactGroup>) this.getHibernateTemplate().find("from ContactGroup g order by g.groupName");
 		for (ContactGroup cg : l){
 			this.getHibernateTemplate().initialize(cg.getContacts());
 		}

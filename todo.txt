@@ -4,23 +4,21 @@
 
 
 ### Hibernate:
-- DAO entreprise [Après JSF]
-- Versionning [Olivier]
-- Cache de 2ème niveau [Nous 2]
-   + Console Hibernate
+#FAIT - Versionning [Olivier]
+#FAIT - Cache de 2ème niveau [Nous 2]
+?   + Console Hibernate
 - Vérifier les différents types de requetes [Nous 2]
    + HQL
    + Simple
    + Paramètrée
    + Criteria
    + Example
-- Unicité des noms de groupes [Olivier]
-   + Le placer en clé primaire
+#FAIT - Unicité des noms de groupes [Olivier]
 
 
 ### Spring
 - Aspect (par exemple du log avant une action) [Guillaume]
-- Données de tests (via constructeur ou via setter) [Guillaume]
+#FAIT - Données de tests (via constructeur ou via setter) [Guillaume]
 
 
 ### JSF
