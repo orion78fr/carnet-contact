@@ -1,7 +1,6 @@
 package service;
 
 import java.util.List;
-
 import utils.AppContextSingleton;
 import codel.Address;
 import codel.Contact;

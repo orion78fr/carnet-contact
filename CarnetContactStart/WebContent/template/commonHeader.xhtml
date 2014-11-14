@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">   
+    <h:head>
+        <title>BootsFaces Basic Page</title>
+        <h:outputStylesheet library="css" name="style.css" />
+    </h:head>
+    <h:body>
+  		<ui:composition>
+	        <b:navBar brand="CarnetContact" inverse="true" static="true">
+			    <b:navbarLinks>
+			        <b:navLink value="Accueil" outcome="accueil"></b:navLink>
+			        <b:dropMenu value="Gérer les contacts">
+			            <b:navLink value="Ajouter un contact" outcome="addContact"></b:navLink>
+			            <b:navLink value="Rechercher un contact" href="#"></b:navLink>
+			        </b:dropMenu>
+			        <b:dropMenu value="Gérer les groupes">
+			            <b:navLink value="Créer un groupe" href="#"></b:navLink>
+			            <b:navLink value="Supprimer un groupe" href="#"></b:navLink>
+			        </b:dropMenu>
+			        <b:navLink value="Statistiques" href="#"></b:navLink>
+			    </b:navbarLinks>
+			</b:navBar>
+			<br />
+		</ui:composition>
+    </h:body>
+</html>

@@ -26,7 +26,7 @@ public class DAOContact extends HibernateDaoSupport implements IDAOContact{
 	}
 	
 	public List<Contact> getAllContacts(){
-		return (List<Contact>) this.getHibernateTemplate().find("from Contact order by c.lastName, c.firstName");
+		return (List<Contact>) this.getHibernateTemplate().find("from Contact c order by c.lastName, c.firstName");
 	}
 	
 	@Transactional

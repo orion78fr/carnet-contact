@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">   
+    <h:head>
+        <title>BootsFaces Basic Page</title>
+        <h:outputStylesheet library="css" name="style.css" />
+    </h:head>
+    <h:body>
+    	<b:container>
+			<ui:insert name="header">
+				<ui:include src="/template/commonHeader.xhtml" />
+			</ui:insert>
+			<b:jumbotron>
+				<h2>Ajout d'un contact</h2>
+				<h:form>
+				    <h:panelGrid columns="2" cellpadding="5px">
+				    	<h:outputText value="Prénom"/>
+				        <b:inputText value="#{addContact.firstName}" />
+				        <h:outputText value="Nom"/>
+				        <b:inputText value="#{addContact.lastName}" />
+				        <h:outputText value="e-mail"/>
+				        <b:inputText value="#{addContact.email}">
+				            <f:facet name="prepend">
+				                <h:outputText value="@" />
+				            </f:facet>
+				        </b:inputText>
+				        <b:commandButton value="Ajouter" action="#{addContact.addContact}" />
+				    </h:panelGrid>
+				</h:form>
+			</b:jumbotron>
+		</b:container>
+    </h:body>
+</html>
