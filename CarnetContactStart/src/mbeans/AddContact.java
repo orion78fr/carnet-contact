@@ -10,6 +10,13 @@ public class AddContact {
 	private String firstName;
 	private String lastName;
 	private String email;
+	private String street;
+	private String city;
+	private String zip;
+	private String country;
+	private String mobilePhone;
+	private String officePhone;
+	private String homePhone;
 
 	@ManagedProperty(value="#{ServiceContact}")
 	private ServiceContact sc;	
@@ -37,10 +44,52 @@ public class AddContact {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}	
+	public String getStreet() {
+		return street;
+	}
+	public void setStreet(String street) {
+		this.street = street;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getZip() {
+		return zip;
+	}
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	public String getMobilePhone() {
+		return mobilePhone;
+	}
+	public void setMobilePhone(String mobilePhone) {
+		this.mobilePhone = mobilePhone;
+	}
+	public String getOfficePhone() {
+		return officePhone;
+	}
+	public void setOfficePhone(String officePhone) {
+		this.officePhone = officePhone;
+	}
+	public String getHomePhone() {
+		return homePhone;
+	}
+	public void setHomePhone(String homePhone) {
+		this.homePhone = homePhone;
 	}
 	
 	public String addContact(){
-		this.getSc().createContact(firstName, lastName, email, "", "", "", "", "", "", "", null);
+		this.getSc().createContact(firstName, lastName, email, street, city, zip, country, mobilePhone, officePhone, homePhone, null);
 		return "accueil";
 	}
 }

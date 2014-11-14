@@ -28,6 +28,20 @@
 				                <h:outputText value="@" />
 				            </f:facet>
 				        </b:inputText>
+				        <h:outputText value="Rue"/>
+				        <b:inputText value="#{addContact.street}" />
+				        <h:outputText value="Ville"/>
+				        <b:inputText value="#{addContact.city}" />
+				        <h:outputText value="Code postal"/>
+				        <b:inputText value="#{addContact.zip}" />
+				        <h:outputText value="Pays"/>
+				        <b:inputText value="#{addContact.country}" />
+				        <h:outputText value="Téléphone portable"/>
+				        <b:inputText value="#{addContact.mobilePhone}" />
+				        <h:outputText value="Téléphone bureau"/>
+				        <b:inputText value="#{addContact.officePhone}" />
+				        <h:outputText value="Téléphone maison"/>
+				        <b:inputText value="#{addContact.homePhone}" />
 				        <b:commandButton value="Ajouter" action="#{addContact.addContact}" />
 				    </h:panelGrid>
 				</h:form>
