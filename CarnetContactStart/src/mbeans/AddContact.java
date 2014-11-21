@@ -21,15 +21,6 @@ public class AddContact {
 	private String homePhone;
 	private List<String> groups;
 
-	@ManagedProperty(value="#{ServiceContact}")
-	private ServiceContact sc;	
-	
-	public ServiceContact getSc() {
-		return sc;
-	}
-	public void setSc(ServiceContact sc) {
-		this.sc = sc;
-	}
 	public String getFirstName() {
 		return firstName;
 	}
@@ -98,7 +89,7 @@ public class AddContact {
 	}
 	
 	public String addContact(){
-		this.getSc().createContact(firstName, lastName, email, street, city, zip, country, mobilePhone, officePhone, homePhone, groups);
+		ServiceContact.createContact(firstName, lastName, email, street, city, zip, country, mobilePhone, officePhone, homePhone, groups);
 		return "accueil";
 	}
 }

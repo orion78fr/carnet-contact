@@ -12,15 +12,6 @@ import service.ServiceGroup;
 public class AddGroup {
 	private String groupName;
 
-	@ManagedProperty(value="#{ServiceGroup}")
-	private ServiceGroup sp;	
-	
-	public ServiceGroup getSp() {
-		return sp;
-	}
-	public void setSp(ServiceGroup sp) {
-		this.sp = sp;
-	}
 	public String getGroupName() {
 		return groupName;
 	}
@@ -29,7 +20,7 @@ public class AddGroup {
 	}
 	
 	public String addGroup(){
-		this.getSp().createGroup(groupName);
+		ServiceGroup.createGroup(groupName);
 		return "accueil";
 	}
 }
