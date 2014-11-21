@@ -42,8 +42,13 @@
 				        <b:inputText value="#{addContact.officePhone}" />
 				        <h:outputText value="Téléphone maison"/>
 				        <b:inputText value="#{addContact.homePhone}" />
-				        <b:commandButton value="Ajouter" action="#{addContact.addContact}" />
-				    </h:panelGrid>
+					</h:panelGrid>
+			        <h:panelGroup layout="block">
+				        <h:selectManyCheckbox value="#{addContact.groups}" layout="pageDirection">
+        					<f:selectItems value="#{listContacts.getListGroups()}" />
+    					</h:selectManyCheckbox>
+    				</h:panelGroup>
+				    <b:commandButton value="Ajouter" action="#{addContact.addContact}" />
 				</h:form>
 			</b:jumbotron>
 		</b:container>

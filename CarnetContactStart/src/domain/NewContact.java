@@ -44,7 +44,7 @@ public class NewContact extends HttpServlet {
 		String home_phone = request.getParameter("home_phone");
 		String[] groups = request.getParameterValues("groups");
 		
-		ServiceContact.createContact(firstName, lastName, email, street, city, zip, country, mobile_phone, office_phone, home_phone, groups);
+		//ServiceContact.createContact(firstName, lastName, email, street, city, zip, country, mobile_phone, office_phone, home_phone, groups);
 		
 		response.sendRedirect("accueil.jsp");
 	}
