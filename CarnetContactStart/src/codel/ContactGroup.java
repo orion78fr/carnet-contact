@@ -51,4 +51,8 @@ public class ContactGroup {
 		}
 		return false;
 	}
+	
+	public String toString(){
+		return this.groupName;
+	}
 }

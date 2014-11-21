@@ -33,3 +33,7 @@
 - Java DOC [Eclipse]
 - Hibernate Validator (& Hibernate Search)
 - Pagination et Order BY [Guillaume]
+
+##
+- Passer les generators en mbeans
+- 

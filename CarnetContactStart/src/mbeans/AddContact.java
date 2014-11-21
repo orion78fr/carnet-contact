@@ -1,5 +1,7 @@
 package mbeans;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
@@ -17,6 +19,7 @@ public class AddContact {
 	private String mobilePhone;
 	private String officePhone;
 	private String homePhone;
+	private List<String> groups;
 
 	@ManagedProperty(value="#{ServiceContact}")
 	private ServiceContact sc;	
@@ -86,10 +89,16 @@ public class AddContact {
 	}
 	public void setHomePhone(String homePhone) {
 		this.homePhone = homePhone;
+	}	
+	public List<String> getGroups() {
+		return groups;
+	}
+	public void setGroups(List<String> groups) {
+		this.groups = groups;
 	}
 	
 	public String addContact(){
-		this.getSc().createContact(firstName, lastName, email, street, city, zip, country, mobilePhone, officePhone, homePhone, null);
+		this.getSc().createContact(firstName, lastName, email, street, city, zip, country, mobilePhone, officePhone, homePhone, groups);
 		return "accueil";
 	}
 }

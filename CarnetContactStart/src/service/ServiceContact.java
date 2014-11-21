@@ -9,7 +9,7 @@ import codel.PhoneNumber;
 import dao.IDAOContact;
 
 public class ServiceContact {
-	public static void createContact(String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone, String[] groups){
+	public static void createContact(String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone, List<String> groups){
 		IDAOContact dao = (IDAOContact) AppContextSingleton.getContext().getBean("DAOC");
 		
 		Contact contact = new Contact();
@@ -30,11 +30,9 @@ public class ServiceContact {
 		
 		dao.addContact(contact);
 		
-		if(groups != null){
-			for (String g : groups){
-				if (g != null){
-					ServiceGroup.addContactToGroup(contact.getId(), g);
-				}
+		if(!groups.isEmpty()){
+			for (int i=0; i<groups.size(); i++){
+				ServiceGroup.addContactToGroup(contact.getId(), groups.get(i));
 			}
 		}
 		
