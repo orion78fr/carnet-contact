@@ -35,7 +35,8 @@
 - Pagination et Order BY [Guillaume]
 
 ##
-- Passer les generators en mbeans
+#FAIT - Passer les generators en mbeans
 - Gestion des erreurs (unicité des groupes / versionning) 
 - Ajouter Throws Exception jusqu'au main
 - internationalisation
+- erreur quand on génerer des contacts par constructeur 2 fois d'affilé

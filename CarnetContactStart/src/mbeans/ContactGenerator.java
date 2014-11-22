@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,19 +28,41 @@ public class ContactGenerator {
 	private String groupes[] = {"Indie Dyke","Symptom Plumber","Satiated Reaper","Decently Tribute","Blonde Conglomerate","Social Painter","Headache Scenario","Minor Hedgehog","Religious Leash","Armed Pickle","Swift Quartet","Shocking Screw","Flogging Hip","Explosive Gyro","Sixteen Of The Neutron Revenge","Anatomy Of Impotent","Viper Kiwi","Liberal Randy And The Burden","Open Pardon","Coyote Of Blank","Simple Syndicate Of The Confined Minion","Official Trilogy And The Orifice","Ailing Galore","Battered Dweeb And The Step-dad","Regular Mumbles","Swinger Insect","Fogotten Sex","Latin Cool","Pink Kiss","Striker Of The Washer","Uncanny War","Finally Provider","Wanted Torpedo And The Game Kickoff","More Of The Cycle","Balance Of The Compressed Lullaby","Lazy Condition And The Idiotic Cheap","Hand For Bacon","Driving Hyphen And The Enraged Health","Lead Twister","Letting Anything"};
 	
 	public String gen50Contacts(){
-		this.generateContacts(50);
+		try {
+			this.generateContacts(50);
+			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "50 contacts générés aléatoirement ajoutés avec succes!", null);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		} catch (Exception e){
+			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur lors de la génération des contacts.", null);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		}
+		
 		return "contactGenerator";
 	}
 	
 	public String genWithGetterAndSetter(){
-		IDAOContact dao = (IDAOContact) AppContextSingleton.getContext().getBean("DAOC");
-		dao.addContact((Contact)AppContextSingleton.getContext().getBean("Donnee_test_1"));
+		try {
+			IDAOContact dao = (IDAOContact) AppContextSingleton.getContext().getBean("DAOC");
+			dao.addContact((Contact)AppContextSingleton.getContext().getBean("Donnee_test_1"));
+			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Contact généré par getter/setter ajouté avec succes!", null);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		} catch (Exception e){
+			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur lors de la génération du contact.", null);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		}
 		return "contactGenerator";
 	}
 	
 	public String genWithConstructor(){
-		IDAOContact dao = (IDAOContact) AppContextSingleton.getContext().getBean("DAOC");
-		dao.addContact((Contact)AppContextSingleton.getContext().getBean("Donnee_test_2"));
+		try {
+			IDAOContact dao = (IDAOContact) AppContextSingleton.getContext().getBean("DAOC");
+			dao.addContact((Contact)AppContextSingleton.getContext().getBean("Donnee_test_2"));
+			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Contact généré par constructeur ajouté avec succes!", null);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		} catch (Exception e){
+			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur lors de la génération du contact.", null);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		}
 		return "contactGenerator";
 	}
 	
