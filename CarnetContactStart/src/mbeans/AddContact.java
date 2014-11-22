@@ -1,14 +1,15 @@
 package mbeans;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 
 import service.ServiceContact;
 
 @ManagedBean(name="addContact")
-public class AddContact {
+public class AddContact implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String firstName;
 	private String lastName;
 	private String email;
