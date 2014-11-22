@@ -2,11 +2,6 @@ package dao;
 
 import java.util.List;
 
-
-
-
-import org.hibernate.OptimisticLockException;
-import org.hibernate.StaleObjectStateException;
 import org.hibernate.stat.Statistics;
 import org.springframework.orm.hibernate3.HibernateOptimisticLockingFailureException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;

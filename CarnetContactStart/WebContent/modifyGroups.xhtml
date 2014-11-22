@@ -28,9 +28,9 @@
 		    				<b:button value="Détails" outcome="showGroupDetails" look="info" size="xs">
 		    					<f:param name="id" value="#{cg.id}"/>
 		    				</b:button>
-		    				<b:button value="X" outcome="delGroup" look="danger" size="xs">
-		    					<f:param name="id" value="#{cg.id}"/>
-		    				</b:button>
+		    				<h:form id="form_#{cg.id}" style="display: inline;">
+		    					<b:commandButton value="X" action="#{delGroup.delGroup(cg.id)}" look="danger" size="xs" />
+		    				</h:form>
 	    				</b:buttonGroup>
 	    			</h:column>
     			</h:dataTable>
