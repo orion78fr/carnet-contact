@@ -19,7 +19,7 @@
 				<h:outputText value="Le carnet de contact est vide!" rendered="#{empty listContacts.getListContacts()}" />
     			<h:dataTable value="#{listContacts.getListContacts()}" var="contact" rendered="#{not empty listContacts.getListContacts()}" width="100%">
 	    			<h:column>
-	    				<f:facet name="header">Name</f:facet>
+	    				<f:facet name="header">Nom</f:facet>
 	    				<h:outputText value="#{contact.lastName} #{contact.firstName}" />
 	    			</h:column>
 	    			<h:column>
@@ -29,10 +29,13 @@
 	    			<h:column>
 	    				<f:facet name="header">Commandes</f:facet>
 	    				<b:buttonGroup>
-		    				<b:button value="Détails" outcome="showDetails" look="info">
+		    				<b:button value="Détails" outcome="showDetails" look="info" size="xs">
 		    					<f:param name="id" value="#{contact.id}"/>
 		    				</b:button>
-		    				<b:button value="Supprimer" outcome="delContact" look="danger">
+		    				<b:button value="Modifier" outcome="updateContact" look="info" size="xs">
+		    					<f:param name="idContact" value="#{contact.id}"/>
+		    				</b:button>
+		    				<b:button value="X" outcome="delContact" look="danger" size="xs">
 		    					<f:param name="id" value="#{contact.id}"/>
 		    				</b:button>
 	    				</b:buttonGroup>

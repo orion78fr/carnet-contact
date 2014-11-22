@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">   
+    <h:head>
+        <title>Modifier les groupes</title>
+        <h:outputStylesheet library="css" name="style.css" />
+    </h:head>
+    <h:body>
+    	<b:container>
+	        <ui:insert name="header">
+				<ui:include src="/template/commonHeader.xhtml" />
+			</ui:insert>
+			<b:jumbotron>
+				<h2>Modifier les groupes</h2>
+				<h:outputText value="Il n'a aucun groupe!" rendered="#{empty listContacts.getListGroups()}" />
+    			<h:dataTable value="#{listContacts.getListGroups()}" var="cg" rendered="#{not empty listContacts.getListGroups()}" width="100%">
+	    			<h:column>
+	    				<f:facet name="header">Nom du groupe</f:facet>
+	    				<h:outputText value="#{cg.groupName}" />
+	    			</h:column>
+	    			<h:column>
+	    				<f:facet name="header">Commandes</f:facet>
+	    				<b:buttonGroup>
+		    				<b:button value="Détails" outcome="showGroupDetails" look="info" size="xs">
+		    					<f:param name="id" value="#{cg.id}"/>
+		    				</b:button>
+		    				<b:button value="X" outcome="delGroup" look="danger" size="xs">
+		    					<f:param name="id" value="#{cg.id}"/>
+		    				</b:button>
+	    				</b:buttonGroup>
+	    			</h:column>
+    			</h:dataTable>
+			</b:jumbotron>
+		</b:container>
+    </h:body>
+</html>

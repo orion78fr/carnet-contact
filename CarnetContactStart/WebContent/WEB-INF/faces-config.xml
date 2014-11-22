@@ -4,16 +4,51 @@
    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
       http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
    version="2.0">
-   <application>
+   	<application>
     	<el-resolver>
     		org.springframework.web.jsf.el.SpringBeanFacesELResolver
     	</el-resolver>
-   </application>
+   	</application>
+   	<navigation-rule>
+		<from-view-id>/accueil.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>showDetails</from-outcome>
+			<to-view-id>/showContactDetails.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/accueil.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>delContact</from-outcome>
+			<to-view-id>/accueil.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/modifyGroups.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>showGroupDetails</from-outcome>
+			<to-view-id>/showGroupDetails.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/modifyGroups.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>delGroup</from-outcome>
+			<to-view-id>/modifyGroups.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
   	<navigation-rule>
 		<from-view-id>/addContact.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>accueil</from-outcome>
 			<to-view-id>/accueil.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/addGroup.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>modifyGroups</from-outcome>
+			<to-view-id>/modifyGroups.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>

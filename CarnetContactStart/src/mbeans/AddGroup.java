@@ -21,6 +21,6 @@ public class AddGroup {
 	
 	public String addGroup(){
 		ServiceGroup.createGroup(groupName);
-		return "accueil";
+		return "modifyGroups";
 	}
 }

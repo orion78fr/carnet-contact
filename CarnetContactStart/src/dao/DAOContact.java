@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import org.hibernate.StaleObjectStateException;
 import org.hibernate.stat.Statistics;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +47,11 @@ public class DAOContact extends HibernateDaoSupport implements IDAOContact{
 	}
 
 	public boolean modifyContact(Contact c){
-		this.getHibernateTemplate().saveOrUpdate(c);
+		try {
+			this.getHibernateTemplate().saveOrUpdate(c);
+		} catch (StaleObjectStateException e){
+			return false;
+		}
 		return true;
 	}
 
