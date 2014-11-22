@@ -58,4 +58,11 @@
 			<to-view-id>/contactGenerator.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/updateContact.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>accueil</from-outcome>
+			<to-view-id>/accueil.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>

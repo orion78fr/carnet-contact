@@ -2,8 +2,13 @@ package dao;
 
 import java.util.List;
 
+
+
+
+import org.hibernate.OptimisticLockException;
 import org.hibernate.StaleObjectStateException;
 import org.hibernate.stat.Statistics;
+import org.springframework.orm.hibernate3.HibernateOptimisticLockingFailureException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,9 +52,13 @@ public class DAOContact extends HibernateDaoSupport implements IDAOContact{
 	}
 
 	public boolean modifyContact(Contact c){
+		// TODO: renvoie:
+		// ERROR org.hibernate.event.def.AbstractFlushingEventListener - Could not synchronize database state with session org.hibernate.StaleObjectStateException
+		// Trouver un moyen de traiter ce truc
 		try {
 			this.getHibernateTemplate().saveOrUpdate(c);
-		} catch (StaleObjectStateException e){
+		} catch (HibernateOptimisticLockingFailureException e){
+			//e.printStackTrace();
 			return false;
 		}
 		return true;

@@ -1,11 +1,14 @@
 package mbeans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import codel.Contact;
@@ -14,8 +17,9 @@ import codel.PhoneNumber;
 import service.ServiceContact;
 
 @ManagedBean(name="updateContact")
-@RequestScoped
-public class UpdateContact {
+@ViewScoped
+public class UpdateContact implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -34,6 +38,7 @@ public class UpdateContact {
 	public UpdateContact(){
 		// TODO: ajouter une vérification sur l'id
 		String idc = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idContact");
+		if (idc == null) return;
 		this.idContact = Long.parseLong(idc);
 		Contact c = ServiceContact.getContact(idContact);
 		if (c == null) return;
@@ -57,6 +62,7 @@ public class UpdateContact {
 		for (ContactGroup cg : c.getBooks()){
 			this.checkedGroups.add(cg.getGroupName());
 		}
+		this.version = c.getVersion();
 	}
 
 	public String getFirstName() {
@@ -144,8 +150,12 @@ public class UpdateContact {
 		this.checkedGroups = checkedGroups;
 	}
 
-	public String addContact(){
-		ServiceContact.createContact(firstName, lastName, email, street, city, zip, country, mobilePhone, officePhone, homePhone, groups);
+	public String updateContact(){
+		boolean r = ServiceContact.modifyContact(idContact, version, firstName, lastName, email, street, city, zip, country, mobilePhone, officePhone, homePhone, checkedGroups);
+		if (!r){
+			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur lors de la mise à jour du contact.", null);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		}
 		return "accueil";
 	}
 }
