@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">   
+    <h:head>
+        <title>Modifier un groupe</title>
+        <h:outputStylesheet library="css" name="style.css" />
+    </h:head>
+    <h:body>
+    	<b:container>
+			<ui:insert name="header">
+				<ui:include src="/template/commonHeader.xhtml" />
+			</ui:insert>
+			<b:jumbotron>
+				<h2>Modifier un groupe</h2>
+				<h:form>
+					<h:inputHidden value="#{updateGroup.idGroup}" id="idContact" />
+					<!-- <h:inputHidden value="#{updateContact.version}" id="version" /> -->
+				    <h:panelGrid columns="2" cellpadding="5">
+				    	<h:outputText value="Nom du groupe"/>
+				        <b:inputText value="#{updateGroup.groupName}" />
+					</h:panelGrid>
+			        <h:panelGroup layout="block">
+				        <h:selectManyCheckbox value="#{updateGroup.checkedContacts}" layout="pageDirection">
+        					<f:selectItems value="#{listContacts.getListContacts()}" var="contact"
+        							itemValue="#{contact.id}" itemLabel="#{contact.firstName} #{contact.lastName}" />
+    					</h:selectManyCheckbox>
+    				</h:panelGroup>
+				    <b:commandButton value="Mettre à jour" action="#{updateGroup.updateGroup}" />
+				</h:form>
+			</b:jumbotron>
+		</b:container>
+    </h:body>
+</html>

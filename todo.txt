@@ -40,3 +40,4 @@
 - Ajouter Throws Exception jusqu'au main
 - internationalisation
 - erreur quand on génerer des contacts par constructeur 2 fois d'affilé
+- unicité des groupes dans le updateGroup
