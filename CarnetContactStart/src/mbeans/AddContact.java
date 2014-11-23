@@ -3,11 +3,10 @@ package mbeans;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 
 import service.ServiceContact;
 
-@ManagedBean(name="addContact")
+@ManagedBean
 public class AddContact {
 	private String firstName;
 	private String lastName;

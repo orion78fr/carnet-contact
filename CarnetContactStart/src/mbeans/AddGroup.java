@@ -1,14 +1,10 @@
 package mbeans;
 
-import java.util.List;
-
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 
-import service.ServiceContact;
 import service.ServiceGroup;
 
-@ManagedBean(name="addGroup")
+@ManagedBean
 public class AddGroup {
 	private String groupName;
 
