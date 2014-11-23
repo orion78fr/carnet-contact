@@ -37,7 +37,7 @@ public class ServiceContact {
 		}
 		
 	}
-	public static void modifyContact(Long id, Integer version, String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone, String[] groups){
+	public static boolean modifyContact(Long id, Integer version, String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone, List<String> groups){
 		IDAOContact dao = (IDAOContact) AppContextSingleton.getContext().getBean("DAOC");
 		
 		Contact contact = new Contact();
@@ -62,28 +62,29 @@ public class ServiceContact {
 			contact.addProfile(new PhoneNumber("home", home_phone));
 		}
 
-		dao.modifyContact(contact);
+		if (!dao.modifyContact(contact)){
+			return false;
+		}
 		
-		if(groups != null){
-			for (String g : groups){
-				if (g != null){
-					ServiceGroup.addContactToGroup(contact.getId(), g);
-				}
+		if(!groups.isEmpty()){
+			for (int i=0; i<groups.size(); i++){
+				ServiceGroup.addContactToGroup(contact.getId(), groups.get(i));
 			}
 		}
 		for (ContactGroup cg : contact.getBooks()){
 			boolean groupFound = false;
-			if (groups != null){
-				for (String g : groups){
-					if (g != null && cg.getGroupName().equals(g)){
+			if(!groups.isEmpty()){
+				for (int i=0; i<groups.size(); i++){
+					if (cg.getGroupName().equals(groups.get(i))){
 						groupFound = true;
 					}
-					
 				}
 			}
 			if (groupFound == false)
 				ServiceGroup.delContactFromGroup(contact.getId(), cg.getGroupName());
 		}
+		
+		return true;
 	}
 	
 	public static Contact getContact(Long id){

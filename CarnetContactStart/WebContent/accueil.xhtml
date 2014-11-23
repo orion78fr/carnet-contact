@@ -16,28 +16,35 @@
 			</ui:insert>
 			<b:jumbotron>
 				<h2>Liste des contacts</h2>
-				<h:outputText value="Le carnet de contact est vide!" rendered="#{empty listContacts.getListContacts()}" />
-    			<h:dataTable value="#{listContacts.getListContacts()}" var="contact" rendered="#{not empty listContacts.getListContacts()}" width="100%">
-	    			<h:column>
-	    				<f:facet name="header">Name</f:facet>
-	    				<h:outputText value="#{contact.lastName} #{contact.firstName}" />
-	    			</h:column>
-	    			<h:column>
-	    				<f:facet name="header">Email</f:facet>
-	    				<h:outputText value="#{contact.email}" />
-	    			</h:column>
-	    			<h:column>
-	    				<f:facet name="header">Commandes</f:facet>
-	    				<b:buttonGroup>
-		    				<b:button value="Détails" outcome="showDetails" look="info">
-		    					<f:param name="id" value="#{contact.id}"/>
-		    				</b:button>
-		    				<b:button value="Supprimer" outcome="delContact" look="danger">
-		    					<f:param name="id" value="#{contact.id}"/>
-		    				</b:button>
-	    				</b:buttonGroup>
-	    			</h:column>
-    			</h:dataTable>
+				<h:messages globalOnly="true" infoStyle="color:darkgreen" errorStyle="color:red" layout="table"/>
+				<br />
+				<h:form>
+					<h:outputText value="Le carnet de contact est vide!" rendered="#{empty listContacts.getListContacts()}" />
+	    			<h:dataTable value="#{listContacts.getListContacts()}" var="contact" rendered="#{not empty listContacts.getListContacts()}" width="100%">
+		    			<h:column>
+		    				<f:facet name="header">Nom</f:facet>
+		    				<h:outputText value="#{contact.lastName} #{contact.firstName}" />
+		    			</h:column>
+		    			<h:column>
+		    				<f:facet name="header">Email</f:facet>
+		    				<h:outputText value="#{contact.email}" />
+		    			</h:column>
+		    			<h:column>
+		    				<f:facet name="header">Commandes</f:facet>
+		    				<b:buttonGroup>
+			    				<b:button value="Détails" outcome="showDetails" look="info" size="xs">
+			    					<f:param name="id" value="#{contact.id}"/>
+			    				</b:button>
+			    				<b:button value="Modifier" outcome="updateContact" look="info" size="xs">
+			    					<f:param name="idContact" value="#{contact.id}"/>
+			    				</b:button>
+			    				<h:form id="form_#{contact.id}" style="display: inline;">
+			    					<b:commandButton value="X" action="#{delContact.delContact(contact.id)}" look="danger" size="xs" />
+			    				</h:form>
+		    				</b:buttonGroup>
+		    			</h:column>
+	    			</h:dataTable>
+    			</h:form>
 			</b:jumbotron>
 		</b:container>
     </h:body>

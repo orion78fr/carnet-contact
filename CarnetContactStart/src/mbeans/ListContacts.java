@@ -14,7 +14,6 @@ import service.ServiceGroup;
 @ManagedBean
 public class ListContacts implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
 	private List<Contact> listContacts;
 	private List<ContactGroup> listGroups;
 	

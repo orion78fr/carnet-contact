@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">   
+    <h:head>
+        <title>Modifier un contact</title>
+        <h:outputStylesheet library="css" name="style.css" />
+    </h:head>
+    <h:body>
+    	<b:container>
+			<ui:insert name="header">
+				<ui:include src="/template/commonHeader.xhtml" />
+			</ui:insert>
+			<b:jumbotron>
+				<h2>Modifier un contact</h2>
+				<h:form>
+					<h:inputHidden value="#{updateContact.idContact}" id="idContact" />
+					<h:inputHidden value="#{updateContact.version}" id="version" />
+				    <h:panelGrid columns="2" cellpadding="5">
+				    	<h:outputText value="Prénom"/>
+				        <b:inputText value="#{updateContact.firstName}" />
+				        <h:outputText value="Nom"/>
+				        <b:inputText value="#{updateContact.lastName}" />
+				        <h:outputText value="e-mail"/>
+				        <b:inputText value="#{updateContact.email}">
+				            <f:facet name="prepend">
+				                <h:outputText value="@" />
+				            </f:facet>
+				        </b:inputText>
+				        <h:outputText value="Rue"/>
+				        <b:inputText value="#{updateContact.street}" />
+				        <h:outputText value="Ville"/>
+				        <b:inputText value="#{updateContact.city}" />
+				        <h:outputText value="Code postal"/>
+				        <b:inputText value="#{updateContact.zip}" />
+				        <h:outputText value="Pays"/>
+				        <b:inputText value="#{updateContact.country}" />
+				        <h:outputText value="Téléphone portable"/>
+				        <b:inputText value="#{updateContact.mobilePhone}" />
+				        <h:outputText value="Téléphone bureau"/>
+				        <b:inputText value="#{updateContact.officePhone}" />
+				        <h:outputText value="Téléphone maison"/>
+				        <b:inputText value="#{updateContact.homePhone}" />
+					</h:panelGrid>
+			        <h:panelGroup layout="block">
+				        <h:selectManyCheckbox value="#{updateContact.checkedGroups}" layout="pageDirection">
+        					<f:selectItems value="#{listContacts.getListGroups()}" />
+    					</h:selectManyCheckbox>
+    				</h:panelGroup>
+				    <b:commandButton value="Mettre à jour" action="#{updateContact.updateContact}" />
+				</h:form>
+			</b:jumbotron>
+		</b:container>
+    </h:body>
+</html>

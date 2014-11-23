@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">   
+    <h:head>
+        <title>Générateur de contacts</title>
+        <h:outputStylesheet library="css" name="style.css" />
+    </h:head>
+    <h:body>
+    	<b:container>
+	        <ui:insert name="header">
+				<ui:include src="/template/commonHeader.xhtml" />
+			</ui:insert>
+			<b:jumbotron>
+				<h2>Générer des contacts</h2>
+				<h:form>
+					<b:commandButton value="Générer 50 contacts aléatoirement" look="info" size="lg" action="#{contactGenerator.gen50Contacts}" />
+					<br /><br />
+					<b:commandButton value="Générer un contact avec constructeur" look="info" size="lg" action="#{contactGenerator.genWithConstructor}" />
+					<br /><br />
+					<b:commandButton value="Générer un contact avec getter/setter" look="info" size="lg" action="#{contactGenerator.genWithGetterAndSetter}" />
+					<br /><br />
+					<h:messages globalOnly="true" infoStyle="color:darkgreen" errorStyle="color:red" layout="table"/>
+				</h:form>
+			</b:jumbotron>
+		</b:container>
+    </h:body>
+</html>
