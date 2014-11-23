@@ -108,13 +108,12 @@ public class DAOContact extends HibernateDaoSupport implements IDAOContact{
 				al.add(tmpc);
 			}
 		}
-		System.out.println("---------- BY EXAMPLE " + tmp.size());
 		
 		/* Request using HQL */
 		tmp = (List<Contact>) this.getHibernateTemplate().execute(new HibernateCallback<List<Contact>>() {
 					public List<Contact> doInHibernate(Session session) throws HibernateException,
 							SQLException {
-						return session.createQuery("from Contact c where (select count(*) from PhoneNumber p where p.contact = c and lower(p.phoneNumber) like lower(:str))>0").setParameter("str", str).list();
+						return session.createQuery("from Contact c where (select count(*) from PhoneNumber p where p.contact = c and lower(p.phoneNumber) like lower('%" + str + "%'))>0").list();
 					}
 				});
 		for(Contact tmpc : tmp){
@@ -122,16 +121,16 @@ public class DAOContact extends HibernateDaoSupport implements IDAOContact{
 				al.add(tmpc);
 			}
 		}
-		System.out.println("---------- BY HQL " + tmp.size());
 		
 		/* Request using Criterions */
 		tmp = (List<Contact>) this.getHibernateTemplate().execute(new HibernateCallback<List<Contact>>() {
 			public List<Contact> doInHibernate(Session session) throws HibernateException,
 					SQLException {
+				String strbis = '%' + str + '%';
 				return session.createCriteria(Contact.class).createCriteria("add")
-					.add(Restrictions.or(Restrictions.like("street", str).ignoreCase(),
-							Restrictions.or(Restrictions.like("city", str).ignoreCase(), 
-									Restrictions.or(Restrictions.like("zip", str).ignoreCase(), Restrictions.like("country", str).ignoreCase())))).list();
+					.add(Restrictions.or(Restrictions.like("street", strbis).ignoreCase(),
+							Restrictions.or(Restrictions.like("city", strbis).ignoreCase(), 
+									Restrictions.or(Restrictions.like("zip", strbis).ignoreCase(), Restrictions.like("country", strbis).ignoreCase())))).list();
 			}
 		});
 		for(Contact tmpc : tmp){
@@ -139,7 +138,6 @@ public class DAOContact extends HibernateDaoSupport implements IDAOContact{
 				al.add(tmpc);
 			}
 		}
-		System.out.println("---------- BY CRITERIA " + tmp.size());
 		
 		Collections.sort(al);
 		return al;
