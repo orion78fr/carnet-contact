@@ -102,15 +102,10 @@ public class ServiceContact {
 		return dao.getAllContactsAndGroups();
 	}
 	
-	public static List<Contact> getContactByCriterias(String firstName, String lastName, String email, String street, String city, String zip, String country, String phone){
+	public static List<Contact> getContactByCriterias(String str){
 		IDAOContact dao = (IDAOContact) AppContextSingleton.getContext().getBean("DAOC");
-		Contact c = new Contact();
-		c.setFirstName(firstName);
-		c.setLastName(lastName);
-		c.setEmail(email);
-		c.setAdd(new Address(street, city, zip, country));
-		c.addProfile(new PhoneNumber("", phone));
-		return dao.getContactUsingExample(c);
+		
+		return dao.findContact(str);
 	}
 	
 	public static boolean delContact(long id){

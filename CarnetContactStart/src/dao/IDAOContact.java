@@ -13,7 +13,7 @@ public interface IDAOContact {
 	public List<Contact> getAllContacts();
 	public List<Contact> getAllContactsAndGroups();
 	
-	public List<Contact> getContactUsingExample(Contact c);
+	public List<Contact> findContact(String str);
 	
 	public boolean modifyContact(Contact c);
 }

@@ -1,8 +1,20 @@
 package dao;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.TreeSet;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.stat.CollectionStatistics;
 import org.hibernate.stat.Statistics;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateOptimisticLockingFailureException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,7 +71,48 @@ public class DAOContact extends HibernateDaoSupport implements IDAOContact{
 		return true;
 	}
 
-	public List<Contact> getContactUsingExample(Contact c){
+	@Transactional
+	public List<Contact> findContact(String str){
+		HashSet<Long> ids = new HashSet<Long>();
+		ArrayList<Contact> al = new ArrayList<Contact>();
+		List<Contact> tmp;
+		
+		/* Request using Example */
+		Contact c = new Contact();
+		c.setFirstName(str);
+		c.setLastName(str);
+		c.setEmail(str);
+		Example exContact = Example.create(c).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
+		tmp = (List <Contact>)this.getHibernateTemplate().getSessionFactory().getCurrentSession().createCriteria(Contact.class).add(exContact).list();	
+		for(Contact tmpc : tmp){
+			if(ids.add(tmpc.getId())){
+				al.add(tmpc);
+			}
+		}
+		
+		/* Request using HQL */
+		tmp = (List<Contact>) this.getHibernateTemplate().find("from Contact c where ? in elements(c.profiles).phoneNumber", str);	
+		for(Contact tmpc : tmp){
+			if(ids.add(tmpc.getId())){
+				al.add(tmpc);
+			}
+		}
+		
+		/* Request using Criterions */
+		tmp = (List<Contact>) this.getHibernateTemplate().getSessionFactory().getCurrentSession().createCriteria(Contact.class).createCriteria("add")
+				.add(Restrictions.or(Restrictions.like("street", str).ignoreCase(),
+						Restrictions.or(Restrictions.like("city", str).ignoreCase(), 
+								Restrictions.or(Restrictions.like("zip", str).ignoreCase(), Restrictions.like("country", str).ignoreCase())))).list();
+		for(Contact tmpc : tmp){
+			if(ids.add(tmpc.getId())){
+				al.add(tmpc);
+			}
+		}
+		
+		Collections.sort(al);
+		return al;
+		
+		
 		/*Example exContact = Example.create(c).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
 		Example exAdd = Example.create(c.getAdd()).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
 		Example exProfiles = Example.create(c.getProfiles().iterator().next()).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
@@ -70,7 +123,6 @@ public class DAOContact extends HibernateDaoSupport implements IDAOContact{
 									/*.createCriteria("profiles").add(exProfiles).list();
 		session.getTransaction().commit();
 		return l;*/
-		return null;
 	}
 	
 	public Statistics getStatistics(){

@@ -44,6 +44,7 @@ public class ContactGenerator implements Serializable {
 			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Contact généré par getter/setter ajouté avec succès!", null);
 			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		} catch (Exception e){
+			e.printStackTrace();
 			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur lors de la génération du contact.", null);
 			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		}
@@ -57,6 +58,7 @@ public class ContactGenerator implements Serializable {
 			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Contact généré par constructeur ajouté avec succès!", null);
 			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		} catch (Exception e){
+			e.printStackTrace();
 			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur lors de la génération du contact.", null);
 			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		}

@@ -3,7 +3,7 @@ package codel;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Contact {
+public class Contact implements Comparable<Contact> {
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -111,5 +111,13 @@ public class Contact {
 		this.id = id;
 	}
 	
+	public String getFullName(){
+		return new StringBuffer().append(this.getLastName()).append(" ").append(this.getFirstName()).toString();
+	}
+
+	@Override
+	public int compareTo(Contact c) {
+		return this.getFullName().compareTo(c.getFullName());
+	}
 	
 }
