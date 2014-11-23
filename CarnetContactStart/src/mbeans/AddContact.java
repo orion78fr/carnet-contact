@@ -21,6 +21,7 @@ public class AddContact implements Serializable {
 	private String mobilePhone;
 	private String officePhone;
 	private String homePhone;
+	private String siret;
 	private List<String> groups;
 
 	public String getFirstName() {
@@ -89,9 +90,15 @@ public class AddContact implements Serializable {
 	public void setGroups(List<String> groups) {
 		this.groups = groups;
 	}
+	public String getSiret() {
+		return siret;
+	}
+	public void setSiret(String siret) {
+		this.siret = siret;
+	}
 	
 	public String addContact(){
-		ServiceContact.createContact(firstName, lastName, email, street, city, zip, country, mobilePhone, officePhone, homePhone, groups);
+		ServiceContact.createContact(firstName, lastName, email, street, city, zip, country, mobilePhone, officePhone, homePhone, groups, siret);
 		return "accueil";
 	}
 }

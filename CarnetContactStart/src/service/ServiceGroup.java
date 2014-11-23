@@ -17,7 +17,7 @@ public class ServiceGroup {
 		dao.addContactGroup(cg);
 	}
 	
-	public static void modifyGroup(Long id, String groupName, String[] contacts){
+	public static boolean modifyGroup(Long id, String groupName, List<String> contacts){
 		IDAOContactGroup dao = (IDAOContactGroup) AppContextSingleton.getContext().getBean("DAOCG");
 		
 		ContactGroup cg = dao.getGroup(id);
@@ -26,26 +26,26 @@ public class ServiceGroup {
 
 		dao.modifyGroup(cg);
 		
-		if(contacts != null){
-			for (String c : contacts){
-				if (c != null){
-					ServiceGroup.addContactToGroup(ServiceContact.getContact(Long.parseLong(c)).getId(), cg.getGroupName());
-				}
+		if(!contacts.isEmpty()){
+			for (int i=0; i<contacts.size(); i++){
+				ServiceGroup.addContactToGroup(Long.parseLong(contacts.get(i)), cg.getGroupName());
 			}
 		}
 		for (Contact c : cg.getContacts()){
 			boolean contactFound = false;
-			if (contacts != null){
-				for (String co : contacts){
-					if (co != null && c.getId() == Long.parseLong(co)){
+			if(!contacts.isEmpty()){
+				for (int i=0; i<contacts.size(); i++){
+					if (c.getId() == Long.parseLong(contacts.get(i))){
 						contactFound = true;
 					}
-					
 				}
 			}
 			if (contactFound == false)
 				ServiceGroup.delContactFromGroup(c.getId(), cg.getGroupName());
 		}
+		
+		// TODO: return false quelque part ?!
+		return true;
 	}
 	
 	public static ContactGroup getGroup(Long id){

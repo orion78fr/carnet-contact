@@ -1,19 +1,27 @@
 package service;
 
 import java.util.List;
+
 import utils.AppContextSingleton;
 import codel.Address;
 import codel.Contact;
 import codel.ContactGroup;
+import codel.Entreprise;
 import codel.PhoneNumber;
 import dao.IDAOContact;
 
 public class ServiceContact {
-	public static void createContact(String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone, List<String> groups){
+	public static void createContact(String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone, List<String> groups, String siret){
 		IDAOContact dao = (IDAOContact) AppContextSingleton.getContext().getBean("DAOC");
 		
-		Contact contact = new Contact();
-		contact.setFirstName(firstName);
+		Contact contact;
+		if (siret == null){
+			contact = new Contact();
+		} else {
+			contact = new Entreprise();
+		}
+		if (firstName != null)
+			contact.setFirstName(firstName);
 		contact.setLastName(lastName);
 		contact.setEmail(email);
 		contact.setAdd(new Address(street, city, zip, country));
@@ -24,8 +32,12 @@ public class ServiceContact {
 		if(!office_phone.equals("")){
 			contact.addProfile(new PhoneNumber("office", office_phone));
 		}
-		if(!home_phone.equals("")){
+		if(home_phone != null && !home_phone.equals("")){
 			contact.addProfile(new PhoneNumber("home", home_phone));
+		}
+		
+		if (contact instanceof Entreprise){
+			((Entreprise) contact).setNumSiret(siret);
 		}
 		
 		dao.addContact(contact);
@@ -37,15 +49,21 @@ public class ServiceContact {
 		}
 		
 	}
-	public static boolean modifyContact(Long id, Integer version, String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone, List<String> groups){
+	public static boolean modifyContact(Long id, Integer version, String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone, List<String> groups, String siret){
 		IDAOContact dao = (IDAOContact) AppContextSingleton.getContext().getBean("DAOC");
 		
-		Contact contact = new Contact();
+		Contact contact;
+		if (siret == null){
+			contact = new Contact();
+		} else {
+			contact = new Entreprise();
+		}
 		
 		contact.setId(id);
 		contact.setVersion(version);
 		
-		contact.setFirstName(firstName);
+		if (siret == null)
+			contact.setFirstName(firstName);
 		contact.setLastName(lastName);
 		contact.setEmail(email);
 		contact.setAdd(new Address(street, city, zip, country));
@@ -58,8 +76,12 @@ public class ServiceContact {
 		if(!office_phone.equals("")){
 			contact.addProfile(new PhoneNumber("office", office_phone));
 		}
-		if(!home_phone.equals("")){
+		if(siret != null && home_phone != null && !home_phone.equals("")){
 			contact.addProfile(new PhoneNumber("home", home_phone));
+		}
+		
+		if (contact instanceof Entreprise){
+			((Entreprise) contact).setNumSiret(siret);
 		}
 
 		if (!dao.modifyContact(contact)){
