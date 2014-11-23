@@ -16,15 +16,16 @@
 			</ui:insert>
 			<b:jumbotron>
 				<h2>Modifier un contact</h2>
+				<h:messages errorStyle="color:red" layout="table"/>
 				<h:form>
 					<h:inputHidden value="#{updateContact.idContact}" id="idContact" />
 					<h:inputHidden value="#{updateContact.version}" id="version" />
 				    <h:panelGrid columns="2" cellpadding="5">
-				    	<h:outputText value="Prénom" rendered="#{empty updateContact.siret}"/>
-				        <b:inputText value="#{updateContact.firstName}" rendered="#{empty updateContact.siret}"/>
-				        <h:outputText value="Nom"/>
-				        <b:inputText value="#{updateContact.lastName}" />
-				        <h:outputText value="e-mail"/>
+				    	<h:outputText value="Prénom*" rendered="#{empty updateContact.siret}" />
+				        <b:inputText value="#{updateContact.firstName}" rendered="#{empty updateContact.siret}" required="true" requiredMessage="Vous devez entrer un prénom"/>
+				        <h:outputText value="Nom*"/>
+				        <b:inputText value="#{updateContact.lastName}" required="true" requiredMessage="Vous devez entrer un nom"/>
+				        <h:outputText value="e-mail*"/>
 				        <b:inputText value="#{updateContact.email}">
 				            <f:facet name="prepend">
 				                <h:outputText value="@" />
@@ -39,7 +40,7 @@
 				        <h:outputText value="Pays"/>
 				        <b:inputText value="#{updateContact.country}" />
 				        <h:outputText value="SIRET*" rendered="#{not empty updateContact.siret}"/>
-				        <b:inputText value="#{updateContact.siret}" rendered="#{not empty updateContact.siret}"/>
+				        <b:inputText value="#{updateContact.siret}" rendered="#{not empty updateContact.siret}" required="true" requiredMessage="Vous devez entrer un SIRET"/>
 				        <h:outputText value="Téléphone portable"/>
 				        <b:inputText value="#{updateContact.mobilePhone}" />
 				        <h:outputText value="Téléphone bureau"/>

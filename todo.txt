@@ -1,6 +1,6 @@
 ### JSP/Servlet:
 - Recherche à finir [Guillaume]
-- Formulaire entreprise avec siret [Après JSF]
+#FAIT - Formulaire entreprise avec siret [Après JSF]
 
 
 ### Hibernate:
@@ -23,7 +23,7 @@
 
 ### JSF
 - Tout [Nous 2]
-- Validation des formulaires/Obligation de remplir certain champs [Olivier]
+#FAIT - Validation des formulaires/Obligation de remplir certain champs [Olivier]
 
 
 ### Divers

@@ -16,10 +16,11 @@
 			</ui:insert>
 			<b:jumbotron>
 				<h2>Ajout d'un groupe</h2>
+				<h:messages errorStyle="color:red" layout="table"/>
 				<h:form>
 				    <h:panelGrid columns="2" cellpadding="5px">
 				    	<h:outputText value="Nom du groupe"/>
-				        <b:inputText value="#{addGroup.groupName}" />
+				        <b:inputText value="#{addGroup.groupName}" required="true" requiredMessage="Vous devez entrer un nom"/>
 				    	<b:commandButton value="Ajouter" action="#{addGroup.addGroup}" />
 				    </h:panelGrid>
 				</h:form>

@@ -16,14 +16,16 @@
 			</ui:insert>
 			<b:jumbotron>
 				<h2>Ajout d'un contact</h2>
+				<h:messages errorStyle="color:red" layout="table"/>
+				<br />
 				<h:form>
 				    <h:panelGrid columns="2" cellpadding="5px">
 				    	<h:outputText value="Prénom*"/>
-				        <b:inputText value="#{addContact.firstName}" />
+				        <b:inputText value="#{addContact.firstName}" required="true" requiredMessage="Vous devez entrer un prénom" />
 				        <h:outputText value="Nom*"/>
-				        <b:inputText value="#{addContact.lastName}" />
+				        <b:inputText value="#{addContact.lastName}" required="true" requiredMessage="Vous devez entrer un nom" />
 				        <h:outputText value="e-mail*"/>
-				        <b:inputText value="#{addContact.email}">
+				        <b:inputText value="#{addContact.email}" required="true" requiredMessage="Vous devez entrer un email">
 				            <f:facet name="prepend">
 				                <h:outputText value="@" />
 				            </f:facet>

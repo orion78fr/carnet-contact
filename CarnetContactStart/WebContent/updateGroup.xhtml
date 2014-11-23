@@ -16,12 +16,13 @@
 			</ui:insert>
 			<b:jumbotron>
 				<h2>Modifier un groupe</h2>
+				<h:messages errorStyle="color:red" layout="table"/>
 				<h:form>
 					<h:inputHidden value="#{updateGroup.idGroup}" id="idContact" />
 					<!-- <h:inputHidden value="#{updateContact.version}" id="version" /> -->
 				    <h:panelGrid columns="2" cellpadding="5">
 				    	<h:outputText value="Nom du groupe"/>
-				        <b:inputText value="#{updateGroup.groupName}" />
+				        <b:inputText value="#{updateGroup.groupName}" required="true" requiredMessage="Vous devez entrer un nom"/>
 					</h:panelGrid>
 			        <h:panelGroup layout="block">
 				        <h:selectManyCheckbox value="#{updateGroup.checkedContacts}" layout="pageDirection">
