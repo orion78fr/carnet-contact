@@ -32,7 +32,12 @@ public class DAOContactGroup extends HibernateDaoSupport implements IDAOContactG
 	}
 	
 	public boolean modifyGroup(ContactGroup cg){
-		this.getHibernateTemplate().update(cg);
+		try {
+			this.getHibernateTemplate().update(cg);
+		} catch (Exception e){
+			// TODO: avoir des erreurs moins globales (unicité & versionning)
+			return false;
+		}
 		return true;
 	}
 	

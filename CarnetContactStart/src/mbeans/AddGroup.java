@@ -2,7 +2,9 @@ package mbeans;
 
 import java.io.Serializable;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 import service.ServiceGroup;
 
@@ -19,7 +21,14 @@ public class AddGroup implements Serializable {
 	}
 	
 	public String addGroup(){
-		ServiceGroup.createGroup(groupName);
-		return "modifyGroups";
+		if (ServiceGroup.getContactGroupByName(groupName) == null){
+			ServiceGroup.createGroup(groupName);
+			return "modifyGroups";
+		} else {
+			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce groupe existe déjà.", null);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			return "addGroup";
+		}
+		
 	}
 }
