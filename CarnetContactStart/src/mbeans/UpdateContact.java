@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 
 import codel.Contact;
 import codel.ContactGroup;
+import codel.Entreprise;
 import codel.PhoneNumber;
 import service.ServiceContact;
 
@@ -28,6 +29,7 @@ public class UpdateContact implements Serializable {
 	private String mobilePhone;
 	private String officePhone;
 	private String homePhone;
+	private String siret;
 	private List<String> groups;
 	private List<String> checkedGroups;
 	private long idContact;
@@ -56,6 +58,11 @@ public class UpdateContact implements Serializable {
                this.setMobilePhone(num.getPhoneNumber());
            }
         }
+		if (c instanceof Entreprise){
+			this.siret = ((Entreprise) c).getNumSiret();
+		} else {
+			this.siret = null;
+		}
 		this.checkedGroups = new ArrayList<String>();
 		for (ContactGroup cg : c.getBooks()){
 			this.checkedGroups.add(cg.getGroupName());
@@ -147,9 +154,15 @@ public class UpdateContact implements Serializable {
 	public void setCheckedGroups(List<String> checkedGroups) {
 		this.checkedGroups = checkedGroups;
 	}
+	public String getSiret() {
+		return siret;
+	}
+	public void setSiret(String siret) {
+		this.siret = siret;
+	}
 
 	public String updateContact(){
-		boolean r = ServiceContact.modifyContact(idContact, version, firstName, lastName, email, street, city, zip, country, mobilePhone, officePhone, homePhone, checkedGroups);
+		boolean r = ServiceContact.modifyContact(idContact, version, firstName, lastName, email, street, city, zip, country, mobilePhone, officePhone, homePhone, checkedGroups, siret);
 		if (!r){
 			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur lors de la mise à jour du contact.", null);
 			FacesContext.getCurrentInstance().addMessage(null, facesMessage);

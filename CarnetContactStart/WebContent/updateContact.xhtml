@@ -20,8 +20,8 @@
 					<h:inputHidden value="#{updateContact.idContact}" id="idContact" />
 					<h:inputHidden value="#{updateContact.version}" id="version" />
 				    <h:panelGrid columns="2" cellpadding="5">
-				    	<h:outputText value="Prénom"/>
-				        <b:inputText value="#{updateContact.firstName}" />
+				    	<h:outputText value="Prénom" rendered="#{empty updateContact.siret}"/>
+				        <b:inputText value="#{updateContact.firstName}" rendered="#{empty updateContact.siret}"/>
 				        <h:outputText value="Nom"/>
 				        <b:inputText value="#{updateContact.lastName}" />
 				        <h:outputText value="e-mail"/>
@@ -38,12 +38,14 @@
 				        <b:inputText value="#{updateContact.zip}" />
 				        <h:outputText value="Pays"/>
 				        <b:inputText value="#{updateContact.country}" />
+				        <h:outputText value="SIRET*" rendered="#{not empty updateContact.siret}"/>
+				        <b:inputText value="#{updateContact.siret}" rendered="#{not empty updateContact.siret}"/>
 				        <h:outputText value="Téléphone portable"/>
 				        <b:inputText value="#{updateContact.mobilePhone}" />
 				        <h:outputText value="Téléphone bureau"/>
 				        <b:inputText value="#{updateContact.officePhone}" />
-				        <h:outputText value="Téléphone maison"/>
-				        <b:inputText value="#{updateContact.homePhone}" />
+				        <h:outputText value="Téléphone maison" rendered="#{empty updateContact.siret}"/>
+				        <b:inputText value="#{updateContact.homePhone}" rendered="#{empty updateContact.siret}"/>
 					</h:panelGrid>
 			        <h:panelGroup layout="block">
 				        <h:selectManyCheckbox value="#{updateContact.checkedGroups}" layout="pageDirection">

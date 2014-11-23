@@ -6,7 +6,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">   
     <h:head>
-        <title>Ajouter un contact</title>
+        <title>Ajouter une entreprise</title>
         <h:outputStylesheet library="css" name="style.css" />
     </h:head>
     <h:body>
@@ -15,11 +15,9 @@
 				<ui:include src="/template/commonHeader.xhtml" />
 			</ui:insert>
 			<b:jumbotron>
-				<h2>Ajout d'un contact</h2>
+				<h2>Ajout d'une entreprise</h2>
 				<h:form>
 				    <h:panelGrid columns="2" cellpadding="5px">
-				    	<h:outputText value="Prénom*"/>
-				        <b:inputText value="#{addContact.firstName}" />
 				        <h:outputText value="Nom*"/>
 				        <b:inputText value="#{addContact.lastName}" />
 				        <h:outputText value="e-mail*"/>
@@ -36,12 +34,12 @@
 				        <b:inputText value="#{addContact.zip}" />
 				        <h:outputText value="Pays"/>
 				        <b:inputText value="#{addContact.country}" />
+				        <h:outputText value="SIRET*"/>
+				        <b:inputText value="#{addContact.siret}" />
 				        <h:outputText value="Téléphone portable"/>
 				        <b:inputText value="#{addContact.mobilePhone}" />
 				        <h:outputText value="Téléphone bureau"/>
 				        <b:inputText value="#{addContact.officePhone}" />
-				        <h:outputText value="Téléphone maison"/>
-				        <b:inputText value="#{addContact.homePhone}" />
 					</h:panelGrid>
 			        <h:panelGroup layout="block">
 				        <h:selectManyCheckbox value="#{addContact.groups}" layout="pageDirection">

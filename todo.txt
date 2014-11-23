@@ -23,7 +23,7 @@
 
 ### JSF
 - Tout [Nous 2]
-- Validation des formulaires [Olivier]
+- Validation des formulaires/Obligation de remplir certain champs [Olivier]
 
 
 ### Divers
@@ -41,3 +41,5 @@
 - internationalisation
 - erreur quand on génerer des contacts par constructeur 2 fois d'affilé
 - unicité des groupes dans le updateGroup
+- catch sur l'update d'un groupe (ajout de contact par ex) et le nom aussi
+- .navbar-inverse { dans le css pour modifier la couleur
