@@ -13,16 +13,15 @@
   		<ui:composition>
 	        <b:navBar brand="CarnetContact" inverse="true" static="true" brandHref="./">
 			    <b:navbarLinks>
-			        <b:navLink value="Accueil" outcome="accueil"></b:navLink>
 			        <b:dropMenu value="Gérer les contacts">
-			            <b:navLink value="Ajouter un contact" outcome="addContact"></b:navLink>
-			            <b:navLink value="Ajouter une entreprise" outcome="addCompany"></b:navLink>
-			            <b:navLink value="Rechercher un contact" href="#"></b:navLink>
-			            <b:navLink value="Générateur de contacts" outcome="contactGenerator"></b:navLink>
+			            <b:navLink value="Ajouter un contact" outcome="addContact"/>
+			            <b:navLink value="Ajouter une entreprise" outcome="addCompany"/>
+			            <b:navLink value="Rechercher un contact" outcome="findContact"/>
+			            <b:navLink value="Générateur de contacts" outcome="contactGenerator"/>
 			        </b:dropMenu>
 			        <b:dropMenu value="Gérer les groupes">
-			            <b:navLink value="Créer un groupe" outcome="addGroup"></b:navLink>
-			            <b:navLink value="Modifier les groupes" outcome="modifyGroups"></b:navLink>
+			            <b:navLink value="Créer un groupe" outcome="addGroup"/>
+			            <b:navLink value="Modifier les groupes" outcome="modifyGroups"/>
 			        </b:dropMenu>
 			        <b:navLink value="Statistiques" href="#"></b:navLink>
 			    </b:navbarLinks>

@@ -13,7 +13,7 @@ import codel.Contact;
 import codel.ContactGroup;
 import service.ServiceGroup;
 
-@ManagedBean(name="updateGroup")
+@ManagedBean
 @ViewScoped
 public class UpdateGroup implements Serializable {
 	private static final long serialVersionUID = 1L;

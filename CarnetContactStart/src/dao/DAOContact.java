@@ -72,42 +72,74 @@ public class DAOContact extends HibernateDaoSupport implements IDAOContact{
 	}
 
 	@Transactional
-	public List<Contact> findContact(String str){
+	public List<Contact> findContact(final String str){
 		HashSet<Long> ids = new HashSet<Long>();
 		ArrayList<Contact> al = new ArrayList<Contact>();
 		List<Contact> tmp;
 		
 		/* Request using Example */
-		Contact c = new Contact();
-		c.setFirstName(str);
-		c.setLastName(str);
-		c.setEmail(str);
-		Example exContact = Example.create(c).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
-		tmp = (List <Contact>)this.getHibernateTemplate().getSessionFactory().getCurrentSession().createCriteria(Contact.class).add(exContact).list();	
+		tmp = (List<Contact>)this.getHibernateTemplate().execute(new HibernateCallback<List<Contact>>() {
+			public List<Contact> doInHibernate(Session session) throws HibernateException,
+					SQLException {
+				ArrayList<Contact> al = new ArrayList<Contact>();
+				
+				/* On est obligé de faire un example par valeur sinon on ne renvoit que lorsque tout les critères matchent */
+				
+				Contact c = new Contact();
+				c.setFirstName(str);
+				Example exContact = Example.create(c).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
+				al.addAll(session.createCriteria(Contact.class).add(exContact).list());
+				
+				c = new Contact();
+				c.setLastName(str);
+				exContact = Example.create(c).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
+				al.addAll(session.createCriteria(Contact.class).add(exContact).list());
+				
+				c = new Contact();
+				c.setEmail(str);
+				exContact = Example.create(c).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
+				al.addAll(session.createCriteria(Contact.class).add(exContact).list());
+				
+				return al;
+			}
+		});
 		for(Contact tmpc : tmp){
 			if(ids.add(tmpc.getId())){
 				al.add(tmpc);
 			}
 		}
+		System.out.println("---------- BY EXAMPLE " + tmp.size());
 		
 		/* Request using HQL */
-		tmp = (List<Contact>) this.getHibernateTemplate().find("from Contact c where ? in elements(c.profiles).phoneNumber", str);	
+		tmp = (List<Contact>) this.getHibernateTemplate().execute(new HibernateCallback<List<Contact>>() {
+					public List<Contact> doInHibernate(Session session) throws HibernateException,
+							SQLException {
+						return session.createQuery("from Contact c where (select count(*) from PhoneNumber p where p.contact = c and lower(p.phoneNumber) like lower(:str))>0").setParameter("str", str).list();
+					}
+				});
 		for(Contact tmpc : tmp){
 			if(ids.add(tmpc.getId())){
 				al.add(tmpc);
 			}
 		}
+		System.out.println("---------- BY HQL " + tmp.size());
 		
 		/* Request using Criterions */
-		tmp = (List<Contact>) this.getHibernateTemplate().getSessionFactory().getCurrentSession().createCriteria(Contact.class).createCriteria("add")
-				.add(Restrictions.or(Restrictions.like("street", str).ignoreCase(),
-						Restrictions.or(Restrictions.like("city", str).ignoreCase(), 
-								Restrictions.or(Restrictions.like("zip", str).ignoreCase(), Restrictions.like("country", str).ignoreCase())))).list();
+		tmp = (List<Contact>) this.getHibernateTemplate().execute(new HibernateCallback<List<Contact>>() {
+			public List<Contact> doInHibernate(Session session) throws HibernateException,
+					SQLException {
+				return session.createCriteria(Contact.class).createCriteria("add")
+					.add(Restrictions.or(Restrictions.like("street", str).ignoreCase(),
+							Restrictions.or(Restrictions.like("city", str).ignoreCase(), 
+									Restrictions.or(Restrictions.like("zip", str).ignoreCase(), Restrictions.like("country", str).ignoreCase())))).list();
+			}
+		});
 		for(Contact tmpc : tmp){
 			if(ids.add(tmpc.getId())){
 				al.add(tmpc);
 			}
 		}
+		System.out.println("---------- BY CRITERIA " + tmp.size());
 		
 		Collections.sort(al);
 		return al;
