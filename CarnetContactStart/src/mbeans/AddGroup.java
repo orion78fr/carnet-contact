@@ -1,13 +1,12 @@
 package mbeans;
 
-
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 
 import service.ServiceGroup;
 
-@ManagedBean(name="addGroup")
+@ManagedBean
 public class AddGroup implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String groupName;

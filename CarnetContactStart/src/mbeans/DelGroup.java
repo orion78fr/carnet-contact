@@ -6,7 +6,7 @@ import javax.faces.bean.ManagedBean;
 
 import service.ServiceGroup;
 
-@ManagedBean(name="delGroup")
+@ManagedBean
 public class DelGroup implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private long id;

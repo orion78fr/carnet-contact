@@ -6,7 +6,7 @@ import javax.faces.bean.ManagedBean;
 
 import service.ServiceContact;
 
-@ManagedBean(name="delContact")
+@ManagedBean
 public class DelContact implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private long id;

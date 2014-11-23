@@ -14,7 +14,7 @@ import codel.ContactGroup;
 import codel.PhoneNumber;
 import service.ServiceContact;
 
-@ManagedBean(name="updateContact")
+@ManagedBean
 @ViewScoped
 public class UpdateContact implements Serializable {
 	private static final long serialVersionUID = 1L;

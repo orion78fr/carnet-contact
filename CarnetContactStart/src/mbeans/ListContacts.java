@@ -11,7 +11,7 @@ import codel.ContactGroup;
 import service.ServiceContact;
 import service.ServiceGroup;
 
-@ManagedBean(name="listContacts")
+@ManagedBean
 public class ListContacts implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private List<Contact> listContacts;

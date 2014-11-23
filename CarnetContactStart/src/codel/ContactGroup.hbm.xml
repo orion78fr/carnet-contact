@@ -11,7 +11,7 @@
      
      <set name="contacts" table="appartenanceGroupe" inverse="true">
         <key column="groupId"/>
-        <many-to-many class="Contact" column="contactId"/>
+        <many-to-many class="Contact" column="contactId" order-by="lastName, firstName"/>
      </set>
   </class>
 </hibernate-mapping>

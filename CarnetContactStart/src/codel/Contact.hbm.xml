@@ -27,9 +27,8 @@
 
 		<set name="books" cascade="save-update" table="appartenanceGroupe">
 			<key column="contactId" />
-			<many-to-many class="ContactGroup" column="groupId" />
+			<many-to-many class="ContactGroup" column="groupId" order-by="groupName"/>
 		</set>
-
 		<subclass name="Entreprise" discriminator-value="E">
 			<property name="numSiret" type="string" />
 		</subclass>

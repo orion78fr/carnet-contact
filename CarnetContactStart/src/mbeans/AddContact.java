@@ -7,7 +7,8 @@ import javax.faces.bean.ManagedBean;
 
 import service.ServiceContact;
 
-@ManagedBean(name="addContact")
+@ManagedBean
+
 public class AddContact implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String firstName;
