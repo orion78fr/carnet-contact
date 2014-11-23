@@ -21,11 +21,19 @@
 				<h:form>
 				    <h:panelGrid columns="2" cellpadding="5px">
 				    	<h:outputText value="Prénom*"/>
-				        <b:inputText value="#{addContact.firstName}" required="true" requiredMessage="Vous devez entrer un prénom" />
+				        <b:inputText value="#{addContact.firstName}" required="true" requiredMessage="Vous devez entrer un prénom."
+				        			 validatorMessage="Les caractères utilisés dans le prénom sont invalides.">
+				        	<f:validateRegex pattern="^[a-zA-Z \-]+$" />
+				        </b:inputText>
 				        <h:outputText value="Nom*"/>
-				        <b:inputText value="#{addContact.lastName}" required="true" requiredMessage="Vous devez entrer un nom" />
+				        <b:inputText value="#{addContact.lastName}" required="true" requiredMessage="Vous devez entrer un nom."
+				        			 validatorMessage="Les caractères utilisés dans le prénom sont invalides.">
+				        	<f:validateRegex pattern="^[a-zA-Z \-]+$" />
+				        </b:inputText>
 				        <h:outputText value="e-mail*"/>
-				        <b:inputText value="#{addContact.email}" required="true" requiredMessage="Vous devez entrer un email">
+				        <b:inputText value="#{addContact.email}" required="true" requiredMessage="Vous devez entrer un email."
+				        			 validatorMessage="Adresse email invalide.">
+				        	<f:validateRegex pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
 				            <f:facet name="prepend">
 				                <h:outputText value="@" />
 				            </f:facet>
@@ -39,11 +47,17 @@
 				        <h:outputText value="Pays"/>
 				        <b:inputText value="#{addContact.country}" />
 				        <h:outputText value="Téléphone portable"/>
-				        <b:inputText value="#{addContact.mobilePhone}" />
+				        <b:inputText value="#{addContact.mobilePhone}" validatorMessage="Le numéro de téléphone mobile est invalide.">
+				        	<f:validateRegex pattern="^[0-9]{2,}$" />
+				        </b:inputText>
 				        <h:outputText value="Téléphone bureau"/>
-				        <b:inputText value="#{addContact.officePhone}" />
+				        <b:inputText value="#{addContact.officePhone}" validatorMessage="Le numéro de téléphone de bureau est invalide.">
+				        	<f:validateRegex pattern="^[0-9]{2,}$" />
+				        </b:inputText>
 				        <h:outputText value="Téléphone maison"/>
-				        <b:inputText value="#{addContact.homePhone}" />
+				        <b:inputText value="#{addContact.homePhone}" validatorMessage="Le numéro de téléphone maison est invalide.">
+				        	<f:validateRegex pattern="^[0-9]{2,}$" />
+				        </b:inputText>
 					</h:panelGrid>
 			        <h:panelGroup layout="block">
 				        <h:selectManyCheckbox value="#{addContact.groups}" layout="pageDirection">
