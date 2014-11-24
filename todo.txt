@@ -1,45 +1,38 @@
-### JSP/Servlet:
-- Recherche à finir [Guillaume]
+### Todo
+- CSS
+#FAIT - CSS: padding tableaux
+- CSS:  Mettre en forme les page détails
+- Pagination [Guillaume]
+- internationalisation [?]
+- Remettre les statistics [Guillaume]
+- Générer .war [Olivier]
+- Aspect (par exemple du log avant une action) [Guillaume]
+- README [Olivier]
+- Faire un requete Paramètrée [Guillaume]
+
+### DONE
+#FAIT - Checker que les numéros de tels sont bien supprimés lors de l'update
+#FAIT - erreur quand on génerer des contacts par constructeur 2 fois d'affilé
+#FAIT - unicité des groupes dans le updateGroup
+#FAIT - catch sur l'update d'un groupe (ajout de contact par ex) et le nom aussi
+#FAIT - Cache sur les requetes 
+#FAIT - Ajouter la possibilité de supprimer un numéro de tel dans le code
+#FAIT - Order BY [Guillaume]
+#FAIT - Passer les generators en mbeans
+#FAIT - Gestion des erreurs (unicité des groupes / versionning) 
+#FAIT - Recherche à finir [Guillaume]
 #FAIT - Formulaire entreprise avec siret [Après JSF]
-
-
-### Hibernate:
 #FAIT - Versionning [Olivier]
 #FAIT - Cache de 2ème niveau [Nous 2]
-?   + Console Hibernate
-- Vérifier les différents types de requetes [Nous 2]
-   + HQL
-   + Simple
-   + Paramètrée
-   + Criteria
-   + Example
+#FAIT - Console Hibernate
+#FAIT - Vérifier les différents types de requetes [Nous 2]
+   OK + HQL
+   OK + Simple
+   OK + Criteria
+   OK + Example
 #FAIT - Unicité des noms de groupes [Olivier]
-
-
-### Spring
-- Aspect (par exemple du log avant une action) [Guillaume]
 #FAIT - Données de tests (via constructeur ou via setter) [Guillaume]
-
-
-### JSF
-- Tout [Nous 2]
+#FAIT - Tout [Nous 2]
 #FAIT - Validation des formulaires/Obligation de remplir certain champs [Olivier]
 
 
-### Divers
-- Login/Password
-- Batch Processing
-- CSS
-- Java DOC [Eclipse]
-- Hibernate Validator (& Hibernate Search)
-- Pagination et Order BY [Guillaume]
-
-##
-#FAIT - Passer les generators en mbeans
-- Gestion des erreurs (unicité des groupes / versionning) 
-- Ajouter Throws Exception jusqu'au main
-- internationalisation
-- erreur quand on génerer des contacts par constructeur 2 fois d'affilé
-- unicité des groupes dans le updateGroup
-- catch sur l'update d'un groupe (ajout de contact par ex) et le nom aussi
-- .navbar-inverse { dans le css pour modifier la couleur

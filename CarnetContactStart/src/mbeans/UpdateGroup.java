@@ -21,7 +21,7 @@ public class UpdateGroup implements Serializable {
 	private List<String> checkedContacts;
 	private List<String> contactsName;
 	private long idGroup;
-	//private int version;
+	private int version;
 	
 	public UpdateGroup(){
 		// TODO: ajouter une vérification sur l'id
@@ -38,7 +38,7 @@ public class UpdateGroup implements Serializable {
 			this.checkedContacts.add(String.valueOf(c.getId()));
 			this.contactsName.add(c.getFirstName());
 		}
-		//this.version = c.getVersion();
+		this.version = cg.getVersion();
 	}
 	
 	public List<String> getContactsName() {
@@ -67,9 +67,15 @@ public class UpdateGroup implements Serializable {
 	public void setIdGroup(long idGroup) {
 		this.idGroup = idGroup;
 	}
+	public int getVersion() {
+		return version;
+	}
+	public void setVersion(int version) {
+		this.version = version;
+	}
 
 	public String updateGroup(){
-		boolean r = ServiceGroup.modifyGroup(this.idGroup, groupName, checkedContacts);
+		boolean r = ServiceGroup.modifyGroup(this.idGroup, this.version, groupName, checkedContacts);
 		if (!r){
 			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur lors de la mise à jour du groupe.", null);
 			FacesContext.getCurrentInstance().addMessage(null, facesMessage);

@@ -10,8 +10,13 @@ import codel.ContactGroup;
 
 @SuppressWarnings("unchecked")
 public class DAOContactGroup extends HibernateDaoSupport implements IDAOContactGroup {
-	public void addContactGroup(ContactGroup cg){
-		this.getHibernateTemplate().persist(cg);
+	public boolean addContactGroup(ContactGroup cg){
+		try {
+			this.getHibernateTemplate().persist(cg);
+		} catch (Exception e){
+			return false;
+		}
+		return true;
 	}
 	
 	@Transactional
@@ -35,7 +40,6 @@ public class DAOContactGroup extends HibernateDaoSupport implements IDAOContactG
 		try {
 			this.getHibernateTemplate().update(cg);
 		} catch (Exception e){
-			// TODO: avoir des erreurs moins globales (unicité & versionning)
 			return false;
 		}
 		return true;

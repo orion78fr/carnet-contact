@@ -20,7 +20,7 @@
 				<br />
 				<h:form>
 					<h:outputText value="Le carnet de contact est vide!" rendered="#{empty listContacts.getListContacts()}" />
-	    			<h:dataTable value="#{listContacts.getListContacts()}" var="contact" rendered="#{not empty listContacts.getListContacts()}" width="100%">
+	    			<h:dataTable rowClasses="myrow" value="#{listContacts.getListContacts()}" var="contact" rendered="#{not empty listContacts.getListContacts()}" width="100%">
 		    			<h:column>
 		    				<f:facet name="header">Nom</f:facet>
 		    				<h:outputText value="#{contact.lastName} #{contact.firstName}" />
@@ -31,18 +31,14 @@
 		    			</h:column>
 		    			<h:column>
 		    				<f:facet name="header">Commandes</f:facet>
-		    				<b:buttonGroup>
-			    				<b:button value="Détails" outcome="showDetails" look="info" size="xs">
-			    					<f:param name="idContact" value="#{contact.id}"/>
-			    				</b:button>
-			    				<b:button value="Modifier" outcome="updateContact" look="info" size="xs">
-			    					<f:param name="idContact" value="#{contact.id}"/>
-			    				</b:button>
-			    				<h:form id="form_#{contact.id}" style="display: inline;">
-			    					<b:commandButton value="X" action="#{delContact.delContact(contact.id)}" look="danger" size="xs" />
-			    				</h:form>
-		    				</b:buttonGroup>
-		    			</h:column>
+		    				<b:button style="margin-right: 5px;" value="Détails" outcome="showDetails" look="info" size="xs">
+		    					<f:param name="idContact" value="#{contact.id}"/>
+		    				</b:button>
+		    				<b:button style="margin-right: 5px;" value="Modifier" outcome="updateContact" look="info" size="xs">
+		    					<f:param name="idContact" value="#{contact.id}"/>
+		    				</b:button>
+		    				<b:commandButton value="X" action="#{delContact.delContact(contact.id)}" look="danger" size="xs" />
+			    		</h:column>
 	    			</h:dataTable>
     			</h:form>
 			</b:jumbotron>

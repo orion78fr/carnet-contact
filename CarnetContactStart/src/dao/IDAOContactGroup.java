@@ -5,7 +5,7 @@ import java.util.List;
 import codel.ContactGroup;
 
 public interface IDAOContactGroup {
-	public void addContactGroup(ContactGroup cg);
+	public boolean addContactGroup(ContactGroup cg);
 	public boolean deleteContactGroup(long id);
 	public boolean modifyGroup(ContactGroup cg);
 	public ContactGroup getGroup(long id);

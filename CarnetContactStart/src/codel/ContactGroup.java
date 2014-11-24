@@ -6,6 +6,7 @@ public class ContactGroup {
 	private long id;
 	private String groupName;
 	private Set<Contact> contacts;
+	private int version;
 	
 	public ContactGroup(String groupName) {
 		super();
@@ -43,6 +44,12 @@ public class ContactGroup {
 	}
 	public void setGroupName(String groupName) {
 		this.groupName = groupName;
+	}
+	public int getVersion() {
+		return version;
+	}
+	public void setVersion(int version) {
+		this.version = version;
 	}
 	
 	public boolean isInGroup(long id){

@@ -21,13 +21,13 @@ public class AddGroup implements Serializable {
 	}
 	
 	public String addGroup(){
-		if (ServiceGroup.getContactGroupByName(groupName) == null){
-			ServiceGroup.createGroup(groupName);
+		boolean r = ServiceGroup.createGroup(groupName);
+		if (r){
 			return "modifyGroups";
 		} else {
 			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce groupe existe déjà.", null);
 			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-			return "addGroup";
+			return null;
 		}
 		
 	}

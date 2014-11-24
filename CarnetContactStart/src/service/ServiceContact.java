@@ -26,13 +26,9 @@ public class ServiceContact {
 		contact.setEmail(email);
 		contact.setAdd(new Address(street, city, zip, country));
 		
-		if(!mobile_phone.equals("")){
-			contact.addProfile(new PhoneNumber("mobile", mobile_phone));
-		}
-		if(!office_phone.equals("")){
-			contact.addProfile(new PhoneNumber("office", office_phone));
-		}
-		if(home_phone != null && !home_phone.equals("")){
+		contact.addProfile(new PhoneNumber("mobile", mobile_phone));
+		contact.addProfile(new PhoneNumber("office", office_phone));
+		if(home_phone != null){
 			contact.addProfile(new PhoneNumber("home", home_phone));
 		}
 		
@@ -52,32 +48,27 @@ public class ServiceContact {
 	public static boolean modifyContact(Long id, Integer version, String firstName, String lastName, String email, String street, String city, String zip, String country, String mobile_phone, String office_phone, String home_phone, List<String> groups, String siret){
 		IDAOContact dao = (IDAOContact) AppContextSingleton.getContext().getBean("DAOC");
 		
-		Contact contact;
-		if (siret == null){
-			contact = new Contact();
-		} else {
-			contact = new Entreprise();
-		}
+		Contact contact = dao.getContact(id);
 		
-		contact.setId(id);
 		contact.setVersion(version);
 		
 		if (siret == null)
 			contact.setFirstName(firstName);
 		contact.setLastName(lastName);
 		contact.setEmail(email);
-		contact.setAdd(new Address(street, city, zip, country));
+		contact.getAdd().setStreet(street);
+		contact.getAdd().setCity(city);
+		contact.getAdd().setCountry(country);
+		contact.getAdd().setZip(zip);
 		
-		contact.getProfiles().clear();
-		
-		if(!mobile_phone.equals("")){
-			contact.addProfile(new PhoneNumber("mobile", mobile_phone));
-		}
-		if(!office_phone.equals("")){
-			contact.addProfile(new PhoneNumber("office", office_phone));
-		}
-		if(siret != null && home_phone != null && !home_phone.equals("")){
-			contact.addProfile(new PhoneNumber("home", home_phone));
+		for (PhoneNumber pn : contact.getProfiles()){
+			if (pn.getPhoneKind().equals("mobile")){
+				pn.setPhoneNumber(mobile_phone);
+			} else if (pn.getPhoneKind().equals("home")){
+				pn.setPhoneNumber(home_phone);
+			} else if (pn.getPhoneKind().equals("office")){
+				pn.setPhoneNumber(office_phone);
+			}
 		}
 		
 		if (contact instanceof Entreprise){

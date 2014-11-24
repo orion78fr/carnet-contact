@@ -7,6 +7,9 @@
      <id name="id" type="long" column="ID_GROUP" >
         <generator class="increment"/>
      </id>
+     
+     <version name="version"/>
+     
      <property name="groupName" type="string" unique="true"/>
      
      <set name="contacts" table="appartenanceGroupe" inverse="true">
