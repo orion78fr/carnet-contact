@@ -18,6 +18,42 @@
 				<h:messages globalOnly="true" infoStyle="color:darkgreen" errorStyle="color:red" layout="table"/>
 				<h2>Statistiques</h2>
 				<br />
+				<table style="width:100%">
+					<tr>
+						<td><h:outputText value="Requêtes"/></td>
+						<td>
+							<ui:repeat var="q" value="#{stats.stats.getQueries()}">
+								<h:outputText value="#{q}"/><br />
+							</ui:repeat>
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Requête la plus longue"/></td>
+						<td>
+							<h:outputText value="#{stats.stats.getQueryExecutionMaxTimeQueryString()}"/><br />
+							<h:outputText value="en #{stats.stats.getQueryExecutionMaxTime()} ms"/>
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Nombre de lock optimistes ratés"/></td>
+						<td>
+							<h:outputText value="#{stats.stats.getOptimisticFailureCount()}"/>
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Nombre de sessions ouvertes"/></td>
+						<td>
+							<h:outputText value="#{stats.stats.getSessionOpenCount()}"/>
+						</td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Cache hit"/></td>
+						<td>
+							<h:outputText value="#{stats.stats.getSecondLevelCacheHitCount()} (#{stats.stats.getSecondLevelCacheHitCount()/(stats.stats.getSecondLevelCacheHitCount()+stats.stats.getSecondLevelCacheMissCount())}%)"/>
+						</td>
+					</tr>
+				</table>
+				<br />
 				<h2>Logs (par aspect)</h2>
 				<br />
 				<ui:repeat value="#{stats.logs}" var="line" width="100%">
