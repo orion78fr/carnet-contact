@@ -17,27 +17,26 @@
 			<b:jumbotron>
 				<h2>Modifier les groupes</h2>
 				<h:messages globalOnly="true" infoStyle="color:darkgreen" errorStyle="color:red" layout="table"/>
-				<h:outputText value="Il n'a aucun groupe!" rendered="#{empty listContacts.getListGroups()}" />
-    			<h:dataTable value="#{listContacts.getListGroups()}" var="cg" rendered="#{not empty listContacts.getListGroups()}" width="100%">
-	    			<h:column>
-	    				<f:facet name="header">Nom du groupe</f:facet>
-	    				<h:outputText value="#{cg.groupName}" />
-	    			</h:column>
-	    			<h:column>
-	    				<f:facet name="header">Commandes</f:facet>
-	    				<b:buttonGroup>
-		    				<b:button value="Détails" outcome="showGroupDetails" look="info" size="xs">
+				<br />
+				<h:form>
+					<h:outputText value="Il n'a aucun groupe!" rendered="#{empty listContacts.getListGroups()}" />
+	    			<h:dataTable rowClasses="myrow" value="#{listContacts.getListGroups()}" var="cg" rendered="#{not empty listContacts.getListGroups()}" width="100%">
+		    			<h:column>
+		    				<f:facet name="header">Nom du groupe</f:facet>
+		    				<h:outputText value="#{cg.groupName}" />
+		    			</h:column>
+		    			<h:column>
+		    				<f:facet name="header">Commandes</f:facet>
+		    				<b:button style="margin-right: 5px;" value="Détails" outcome="showGroupDetails" look="info" size="xs">
 		    					<f:param name="idGroup" value="#{cg.id}"/>
 		    				</b:button>
-		    				<b:button value="Modifier" outcome="updateGroup" look="info" size="xs">
+		    				<b:button style="margin-right: 5px;" value="Modifier" outcome="updateGroup" look="info" size="xs">
 		    					<f:param name="idGroup" value="#{cg.id}"/>
 		    				</b:button>
-		    				<h:form id="form_#{cg.id}" style="display: inline;">
-		    					<b:commandButton value="X" action="#{delGroup.delGroup(cg.id)}" look="danger" size="xs" />
-		    				</h:form>
-	    				</b:buttonGroup>
-	    			</h:column>
-    			</h:dataTable>
+		    				<b:commandButton value="X" action="#{delGroup.delGroup(cg.id)}" look="danger" size="xs" />
+		    			</h:column>
+	    			</h:dataTable>
+	    		</h:form>
 			</b:jumbotron>
 		</b:container>
     </h:body>
