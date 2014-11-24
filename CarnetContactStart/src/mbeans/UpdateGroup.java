@@ -36,7 +36,7 @@ public class UpdateGroup implements Serializable {
 		this.contactsName = new ArrayList<String>();
 		for (Contact c : cg.getContacts()){
 			this.checkedContacts.add(String.valueOf(c.getId()));
-			this.contactsName.add(c.getFirstName());
+			this.contactsName.add(c.getFullName());
 		}
 		this.version = cg.getVersion();
 	}

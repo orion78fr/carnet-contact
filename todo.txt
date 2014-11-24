@@ -1,14 +1,7 @@
 ### Todo
-- CSS
-#FAIT - CSS: padding tableaux
-#FAIT - CSS:  Mettre en forme les page détails
 - Pagination [Guillaume]
-- internationalisation [?]
-#FAIT - Remettre les statistics [Guillaume]
-- Générer .war [Olivier]
-#FAIT - Aspect (par exemple du log avant une action) [Guillaume]
-- README [Olivier]
 - Faire un requete Paramètrée [Guillaume]
+==> Générer .war final [Olivier]
 
 ### DONE
 #FAIT - Checker que les numéros de tels sont bien supprimés lors de l'update
@@ -34,5 +27,10 @@
 #FAIT - Données de tests (via constructeur ou via setter) [Guillaume]
 #FAIT - Tout [Nous 2]
 #FAIT - Validation des formulaires/Obligation de remplir certain champs [Olivier]
-
+#FAIT - CSS
+#FAIT - CSS: padding tableaux
+#FAIT - CSS:  Mettre en forme les page détails
+#FAIT - Aspect (par exemple du log avant une action) [Guillaume]
+#FAIT - Remettre les statistics [Guillaume]
+#FAIT - README [Olivier]
 

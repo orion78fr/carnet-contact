@@ -1,3 +1,7 @@
 .myrow td {
 	padding: 3px;
 }
+
+.statstable tr td {
+	padding: 10px;
+}

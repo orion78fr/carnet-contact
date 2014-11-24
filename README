@@ -1,0 +1,16 @@
+PROJET: Carnet de Contacts
+AUTEURS: Olivier DEVOISIN & Guillaume Turchini
+
+Déploiement:
+- Placer ContactBook.war dans le dossier autodeploy (souvent nommé webapps par défaut) de Tomcat
+
+Installation de la base de donnée:
+- Installer MySQL
+- L'accès root avec aucun password est nécessaire pour fonctionner avec ce .war
+- Créer une base de donnée nommée odv_codel
+
+Utilisation:
+- Lancer un navigateur web et aller sur http://<server>/ContactBook
+
+Attention:
+/!\ La base de donnée est remise à zero à chaque fois que Tomcat est relancé /!\
