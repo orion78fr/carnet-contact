@@ -43,9 +43,9 @@
 				        <h:outputText value="#{updateContact.homePhone}" rendered="#{empty updateContact.siret}"/>
 					</h:panelGrid>
 					<h3>Groupes</h3>
-			        <h:dataTable value="#{updateContact.checkedGroups}" var="g" rendered="#{not empty updateContact.checkedGroups}">
-				        <h:outputText value="#{g}" />
-    				</h:dataTable>
+			        <ui:repeat value="#{updateContact.checkedGroups}" var="gr" rendered="#{not empty updateContact.checkedGroups}" width="100%">
+				        <h:outputText value="#{gr}" /><br />
+    				</ui:repeat>
     				<h:outputText value="Aucun groupe!" rendered="#{empty updateContact.checkedGroups}"/>
 				    <b:button value="Modifier" outcome="updateContact" look="info">
     					<f:param name="idContact" value="#{updateContact.idContact}"/>

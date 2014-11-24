@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">   
+    <h:head>
+        <title>Détails d'un groupe</title>
+        <h:outputStylesheet library="css" name="style.css" />
+    </h:head>
+    <h:body>
+    	<b:container>
+			<ui:insert name="header">
+				<ui:include src="/template/commonHeader.xhtml" />
+			</ui:insert>
+			<b:jumbotron>
+				<h2>Détails d'un groupe</h2>
+				<h:messages errorStyle="color:red" layout="table"/>
+				<h:form>
+					<!-- <h:inputHidden value="#{updateContact.version}" id="version" /> -->
+				    <h:panelGrid columns="2" cellpadding="5">
+				    	<h:outputText value="Nom du groupe"/>
+				        <h:outputText value="#{updateGroup.groupName}"/>
+					</h:panelGrid>
+			        <ui:repeat value="#{updateGroup.contactsName}" var="c" rendered="#{not empty updateGroup.contactsName}">
+       					<h:outputText value="#{c}" /><br />
+   					</ui:repeat>
+   					<h:outputText rendered="#{empty updateGroup.contactsName}" value="Il n'y a aucun contact dans ce groupe!"/>
+				    <b:button value="Modifier" outcome="updateGroup" look="info" size="xs">
+    					<f:param name="idGroup" value="#{updateGroup.idGroup}"/>
+    				</b:button>
+				</h:form>
+			</b:jumbotron>
+		</b:container>
+    </h:body>
+</html>

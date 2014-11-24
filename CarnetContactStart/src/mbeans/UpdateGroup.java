@@ -19,6 +19,7 @@ public class UpdateGroup implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String groupName;
 	private List<String> checkedContacts;
+	private List<String> contactsName;
 	private long idGroup;
 	private int version;
 	
@@ -30,13 +31,24 @@ public class UpdateGroup implements Serializable {
 		ContactGroup cg = ServiceGroup.getGroup(this.idGroup);
 		if (cg == null) return;
 		this.setGroupName(cg.getGroupName());
+		
 		this.checkedContacts = new ArrayList<String>();
+		this.contactsName = new ArrayList<String>();
 		for (Contact c : cg.getContacts()){
 			this.checkedContacts.add(String.valueOf(c.getId()));
+			this.contactsName.add(c.getFirstName());
 		}
 		this.version = cg.getVersion();
 	}
 	
+	public List<String> getContactsName() {
+		return contactsName;
+	}
+
+	public void setContactsName(List<String> contactsName) {
+		this.contactsName = contactsName;
+	}
+
 	public String getGroupName() {
 		return groupName;
 	}
