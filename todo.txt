@@ -1,12 +1,12 @@
 ### Todo
 - CSS
 #FAIT - CSS: padding tableaux
-- CSS:  Mettre en forme les page détails
+#FAIT - CSS:  Mettre en forme les page détails
 - Pagination [Guillaume]
 - internationalisation [?]
-- Remettre les statistics [Guillaume]
+#FAIT - Remettre les statistics [Guillaume]
 - Générer .war [Olivier]
-- Aspect (par exemple du log avant une action) [Guillaume]
+#FAIT - Aspect (par exemple du log avant une action) [Guillaume]
 - README [Olivier]
 - Faire un requete Paramètrée [Guillaume]
 

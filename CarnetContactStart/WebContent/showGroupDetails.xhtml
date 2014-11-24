@@ -19,14 +19,18 @@
 				<h:messages errorStyle="color:red" layout="table"/>
 				<h:form>
 					<!-- <h:inputHidden value="#{updateContact.version}" id="version" /> -->
-				    <h:panelGrid columns="2" cellpadding="5">
-				    	<h:outputText value="Nom du groupe"/>
+				    <h:panelGrid columns="2" width="40%">
+				    	<h:outputText value="Nom du groupe" style="font-weight: bold;"/>
 				        <h:outputText value="#{updateGroup.groupName}"/>
 					</h:panelGrid>
-			        <ui:repeat value="#{updateGroup.contactsName}" var="c" rendered="#{not empty updateGroup.contactsName}">
-       					<h:outputText value="#{c}" /><br />
-   					</ui:repeat>
+					<h3>Contacts</h3>
+					<ul>
+				        <ui:repeat value="#{updateGroup.contactsName}" var="c" rendered="#{not empty updateGroup.contactsName}">
+	       					<li><h:outputText value="#{c}" /></li>
+	   					</ui:repeat>
+   					</ul>
    					<h:outputText rendered="#{empty updateGroup.contactsName}" value="Il n'y a aucun contact dans ce groupe!"/>
+   					<br /><br />
 				    <b:button value="Modifier" outcome="updateGroup" look="info" size="xs">
     					<f:param name="idGroup" value="#{updateGroup.idGroup}"/>
     				</b:button>
