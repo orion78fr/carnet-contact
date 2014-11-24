@@ -8,23 +8,26 @@ import codel.ContactGroup;
 import dao.IDAOContactGroup;
 
 public class ServiceGroup {
-	public static void createGroup(String groupName){
+	public static boolean createGroup(String groupName){
 		IDAOContactGroup dao = (IDAOContactGroup) AppContextSingleton.getContext().getBean("DAOCG");
 		
 		ContactGroup cg = new ContactGroup();
 		cg.setGroupName(groupName);
 		
-		dao.addContactGroup(cg);
+		return dao.addContactGroup(cg);
 	}
 	
-	public static boolean modifyGroup(Long id, String groupName, List<String> contacts){
+	public static boolean modifyGroup(Long id, Integer version, String groupName, List<String> contacts){
 		IDAOContactGroup dao = (IDAOContactGroup) AppContextSingleton.getContext().getBean("DAOCG");
 		
 		ContactGroup cg = dao.getGroup(id);
 		
 		cg.setGroupName(groupName);
+		cg.setVersion(version);
 
-		dao.modifyGroup(cg);
+		if (!dao.modifyGroup(cg)){
+			return false;
+		}
 		
 		if(!contacts.isEmpty()){
 			for (int i=0; i<contacts.size(); i++){

@@ -16,6 +16,7 @@
 			</ui:insert>
 			<b:jumbotron>
 				<h2>Modifier les groupes</h2>
+				<h:messages globalOnly="true" infoStyle="color:darkgreen" errorStyle="color:red" layout="table"/>
 				<h:outputText value="Il n'a aucun groupe!" rendered="#{empty listContacts.getListGroups()}" />
     			<h:dataTable value="#{listContacts.getListGroups()}" var="cg" rendered="#{not empty listContacts.getListGroups()}" width="100%">
 	    			<h:column>
