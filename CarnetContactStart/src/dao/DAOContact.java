@@ -141,18 +141,6 @@ public class DAOContact extends HibernateDaoSupport implements IDAOContact{
 		
 		Collections.sort(al);
 		return al;
-		
-		
-		/*Example exContact = Example.create(c).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
-		Example exAdd = Example.create(c.getAdd()).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
-		Example exProfiles = Example.create(c.getProfiles().iterator().next()).enableLike(MatchMode.ANYWHERE).ignoreCase().excludeZeroes();
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		List<Contact> l = session.createCriteria(Contact.class).add(exContact)
-									/*.createCriteria("add").add(exAdd)*/
-									/*.createCriteria("profiles").add(exProfiles).list();
-		session.getTransaction().commit();
-		return l;*/
 	}
 	
 	public Statistics getStatistics(){
