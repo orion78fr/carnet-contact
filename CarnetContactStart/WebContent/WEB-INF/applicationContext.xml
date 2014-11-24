@@ -19,6 +19,7 @@
 			<set>
 				<ref bean="Donnee_test_1_phone_1" />
 				<ref bean="Donnee_test_1_phone_2" />
+				<ref bean="Donnee_test_1_phone_3" />
 			</set>
 		</property>
 		<property name="books">
@@ -41,6 +42,11 @@
 	<bean id="Donnee_test_1_phone_2" class="codel.PhoneNumber">
 		<property name="phoneKind" value="mobile" />
 		<property name="phoneNumber" value="0666777888" />
+		<property name="contact" ref="Donnee_test_1" />
+	</bean>
+	<bean id="Donnee_test_1_phone_3" class="codel.PhoneNumber">
+		<property name="phoneKind" value="office" />
+		<property name="phoneNumber" value="" />
 		<property name="contact" ref="Donnee_test_1" />
 	</bean>
 	<bean id="Donnee_test_1_group" class="codel.ContactGroup">
@@ -68,6 +74,7 @@
 			<set>
 				<ref bean="Donnee_test_2_phone_1"/>
 				<ref bean="Donnee_test_2_phone_2"/>
+				<ref bean="Donnee_test_2_phone_3"/>
 			</set>
 		</property>
 		<property name="books">
@@ -84,6 +91,11 @@
 	<bean class="codel.PhoneNumber" id="Donnee_test_2_phone_2">
 		<constructor-arg index="0" value="mobile" />
 		<constructor-arg index="1" value="0696969696" />
+		<property name="contact" ref="Donnee_test_2" />
+	</bean>
+	<bean class="codel.PhoneNumber" id="Donnee_test_2_phone_3">
+		<constructor-arg index="0" value="home" />
+		<constructor-arg index="1" value="" />
 		<property name="contact" ref="Donnee_test_2" />
 	</bean>
 	<bean class="codel.ContactGroup" id="Donnee_test_2_group">
@@ -115,6 +127,8 @@
 				<prop key="hibernate.cache.use_second_level_cache">true</prop>
 				<prop key="hibernate.generate_statistics">true</prop>
 				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<!-- <prop key="hibernate.show_sql">true</prop> -->
+				<prop key="hibernate.format_sql">true</prop>
 			</props>
 		</property>
 		<property name="mappingResources">
