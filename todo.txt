@@ -1,7 +1,7 @@
 ### Todo
 - CSS
 #FAIT - CSS: padding tableaux
-- CSS:  Mettre en forme les page détails
+#FAIT - CSS:  Mettre en forme les page détails
 - Pagination [Guillaume]
 - internationalisation [?]
 - Remettre les statistics [Guillaume]

@@ -27,7 +27,7 @@
 			        <h:panelGroup layout="block">
 				        <h:selectManyCheckbox value="#{updateGroup.checkedContacts}" layout="pageDirection">
         					<f:selectItems value="#{listContacts.getListContacts()}" var="contact"
-        							itemValue="#{contact.id}" itemLabel="#{contact.firstName} #{contact.lastName}" />
+        							itemValue="#{contact.id}" itemLabel="#{contact.lastName} #{contact.firstName}" />
     					</h:selectManyCheckbox>
     				</h:panelGroup>
 				    <b:commandButton value="Mettre à jour" action="#{updateGroup.updateGroup}" />

@@ -18,35 +18,32 @@
 				<h2>Détails d'un contact</h2>
 				<h:messages errorStyle="color:red" layout="table"/>
 				<h:form>
-				    <h:panelGrid columns="2" cellpadding="5">
-				    	<h:outputText value="Prénom" rendered="#{empty updateContact.siret}" />
+				    <h:panelGrid columns="2" width="100%">
+				    	<h:outputText value="Prénom" rendered="#{empty updateContact.siret}" style="font-weight: bold;"/>
 				        <h:outputText value="#{updateContact.firstName}" rendered="#{empty updateContact.siret}"/>
-				        <h:outputText value="Nom"/>
+				        <h:outputText value="Nom" style="font-weight: bold;"/>
 				        <h:outputText value="#{updateContact.lastName}"/>
-				        <h:outputText value="E-mail"/>
+				        <h:outputText value="E-mail" style="font-weight: bold;"/>
 				        <h:outputText value="#{updateContact.email}"/>
-				        <h:outputText value="Rue"/>
-				        <h:outputText value="#{updateContact.street}" />
-				        <h:outputText value="Ville"/>
-				        <h:outputText value="#{updateContact.city}" />
-				        <h:outputText value="Code postal"/>
-				        <h:outputText value="#{updateContact.zip}" />
-				        <h:outputText value="Pays"/>
-				        <h:outputText value="#{updateContact.country}" />
-				        <h:outputText value="SIRET*" rendered="#{not empty updateContact.siret}"/>
+				        <h:outputText value="Adresse" style="font-weight: bold;"/>
+				        <h:outputText value="#{updateContact.street}, #{updateContact.zip} #{updateContact.city}, #{updateContact.country} " />
+				        <h:outputText value="SIRET*" rendered="#{not empty updateContact.siret}" style="font-weight: bold;"/>
 				        <h:outputText value="#{updateContact.siret}" rendered="#{not empty updateContact.siret}"/>
-				        <h:outputText value="Téléphone portable"/>
+				        <h:outputText value="Téléphone portable" style="font-weight: bold;"/>
 				        <h:outputText value="#{updateContact.mobilePhone}"/>
-				        <h:outputText value="Téléphone bureau"/>
+				        <h:outputText value="Téléphone bureau" style="font-weight: bold;"/>
 				        <h:outputText value="#{updateContact.officePhone}"/>
-				        <h:outputText value="Téléphone maison" rendered="#{empty updateContact.siret}"/>
+				        <h:outputText value="Téléphone maison" rendered="#{empty updateContact.siret}" style="font-weight: bold;"/>
 				        <h:outputText value="#{updateContact.homePhone}" rendered="#{empty updateContact.siret}"/>
 					</h:panelGrid>
 					<h3>Groupes</h3>
-			        <ui:repeat value="#{updateContact.checkedGroups}" var="gr" rendered="#{not empty updateContact.checkedGroups}" width="100%">
-				        <h:outputText value="#{gr}" /><br />
-    				</ui:repeat>
+					<ul>
+				        <ui:repeat value="#{updateContact.checkedGroups}" var="gr" rendered="#{not empty updateContact.checkedGroups}" width="100%">
+					        <li><h:outputText value="#{gr}" /></li>
+	    				</ui:repeat>
+    				</ul>
     				<h:outputText value="Aucun groupe!" rendered="#{empty updateContact.checkedGroups}"/>
+    				<br /><br />
 				    <b:button value="Modifier" outcome="updateContact" look="info">
     					<f:param name="idContact" value="#{updateContact.idContact}"/>
     				</b:button>
