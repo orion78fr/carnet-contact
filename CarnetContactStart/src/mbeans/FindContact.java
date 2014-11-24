@@ -32,7 +32,17 @@ public class FindContact implements Serializable {
 	public String refresh(){
 		if(recherche != null && !recherche.equals("")){
 			al = ServiceContact.getContactByCriterias(recherche);
+		} else {
+			al = new ArrayList<Contact>();
 		}
 		return "findContact";
+	}
+	
+	public void onLoad(){
+		if(recherche != null && !recherche.equals("")){
+			al = ServiceContact.getContactByCriterias(recherche);
+		} else {
+			al = new ArrayList<Contact>();
+		}
 	}
 }

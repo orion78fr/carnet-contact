@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">   
+    <h:head>
+        <title>Détails d'un contact</title>
+        <h:outputStylesheet library="css" name="style.css" />
+    </h:head>
+    <h:body>
+    	<b:container>
+			<ui:insert name="header">
+				<ui:include src="/template/commonHeader.xhtml" />
+			</ui:insert>
+			<b:jumbotron>
+				<h2>Détails d'un contact</h2>
+				<h:messages errorStyle="color:red" layout="table"/>
+				<h:form>
+				    <h:panelGrid columns="2" cellpadding="5">
+				    	<h:outputText value="Prénom" rendered="#{empty updateContact.siret}" />
+				        <h:outputText value="#{updateContact.firstName}" rendered="#{empty updateContact.siret}"/>
+				        <h:outputText value="Nom"/>
+				        <h:outputText value="#{updateContact.lastName}"/>
+				        <h:outputText value="E-mail"/>
+				        <h:outputText value="#{updateContact.email}"/>
+				        <h:outputText value="Rue"/>
+				        <h:outputText value="#{updateContact.street}" />
+				        <h:outputText value="Ville"/>
+				        <h:outputText value="#{updateContact.city}" />
+				        <h:outputText value="Code postal"/>
+				        <h:outputText value="#{updateContact.zip}" />
+				        <h:outputText value="Pays"/>
+				        <h:outputText value="#{updateContact.country}" />
+				        <h:outputText value="SIRET*" rendered="#{not empty updateContact.siret}"/>
+				        <h:outputText value="#{updateContact.siret}" rendered="#{not empty updateContact.siret}"/>
+				        <h:outputText value="Téléphone portable"/>
+				        <h:outputText value="#{updateContact.mobilePhone}"/>
+				        <h:outputText value="Téléphone bureau"/>
+				        <h:outputText value="#{updateContact.officePhone}"/>
+				        <h:outputText value="Téléphone maison" rendered="#{empty updateContact.siret}"/>
+				        <h:outputText value="#{updateContact.homePhone}" rendered="#{empty updateContact.siret}"/>
+					</h:panelGrid>
+					<h3>Groupes</h3>
+			        <h:dataTable value="#{updateContact.checkedGroups}" var="g" rendered="#{not empty updateContact.checkedGroups}">
+				        <h:outputText value="#{g}" />
+    				</h:dataTable>
+    				<h:outputText value="Aucun groupe!" rendered="#{empty updateContact.checkedGroups}"/>
+				    <b:button value="Modifier" outcome="updateContact" look="info">
+    					<f:param name="idContact" value="#{updateContact.idContact}"/>
+    				</b:button>
+				</h:form>
+			</b:jumbotron>
+		</b:container>
+    </h:body>
+</html>

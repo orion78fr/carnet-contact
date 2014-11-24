@@ -9,7 +9,7 @@
         <title>Recherche</title>
         <h:outputStylesheet library="css" name="style.css" />
     </h:head>
-    <h:body>
+    <h:body onload="#{findContact.onLoad()}">
     	<b:container>
 	        <ui:insert name="header">
 				<ui:include src="/template/commonHeader.xhtml" />
@@ -21,7 +21,7 @@
 				<h:form>
 					<h:panelGrid columns="3" cellpadding="5px">
 				    	<h:outputText value="Texte à rechercher"/>
-				        <b:inputText value="#{findContact.recherche}" required="true"/>
+				        <b:inputText value="#{findContact.recherche}"/>
 				        <b:commandButton value="Rechercher" action="#{findContact.refresh()}" look="danger" size="xs" />
 				    </h:panelGrid>
 					<h:outputText value="Aucun contact trouvé" rendered="#{empty findContact.getList()}" />
@@ -38,7 +38,7 @@
 		    				<f:facet name="header">Commandes</f:facet>
 		    				<b:buttonGroup>
 			    				<b:button value="Détails" outcome="showDetails" look="info" size="xs">
-			    					<f:param name="id" value="#{contact.id}"/>
+			    					<f:param name="idContact" value="#{contact.id}"/>
 			    				</b:button>
 			    				<b:button value="Modifier" outcome="updateContact" look="info" size="xs">
 			    					<f:param name="idContact" value="#{contact.id}"/>
