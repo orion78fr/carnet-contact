@@ -1,6 +1,6 @@
 ### Todo
-- Pagination [Guillaume]
-- Faire un requete Paramètrée [Guillaume]
+#FAIT - Pagination [Guillaume]
+#FAIT - Faire un requete Paramètrée [Guillaume]
 ==> Générer .war final [Olivier]
 
 ### DONE
