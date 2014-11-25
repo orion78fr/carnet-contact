@@ -33,7 +33,9 @@
 		    				<b:button style="margin-right: 5px;" value="Modifier" outcome="updateGroup" look="info" size="xs">
 		    					<f:param name="idGroup" value="#{cg.id}"/>
 		    				</b:button>
-		    				<b:commandButton value="X" action="#{delGroup.delGroup(cg.id)}" look="danger" size="xs" />
+		    				<b:button value="X" outcome="removeGroup" look="danger" size="xs" >
+		    					<f:param name="idGroup" value="#{cg.id}"/>
+		    				</b:button>
 		    			</h:column>
 	    			</h:dataTable>
 	    		</h:form>
