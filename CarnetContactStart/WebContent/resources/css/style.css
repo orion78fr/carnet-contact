@@ -5,3 +5,7 @@
 .statstable tr td {
 	padding: 10px;
 }
+
+.navbar-inverse {
+	position: relative;
+}

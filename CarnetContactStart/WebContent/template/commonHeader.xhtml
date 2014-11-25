@@ -25,6 +25,26 @@
 			        </b:dropMenu>
 			        <b:navLink value="Statistiques" outcome="stats"/>
 			    </b:navbarLinks>
+			    <div style="height:100%; right:0; position:absolute; margin-right: 7px;">
+			    	<div style="margin-top: 7px">
+					    <b:dropButton look="primary" value="Langue">
+					    	<h:form>
+					    		<div style="width:100%; height: 30px; line-height:30px; padding-left: 15px; vertical-align: center;">
+					    			<div style="text-align:left;line-height:normal;vertical-align:middle;display:inline-block;">
+						    			<h:commandLink value="Français" action="#{accueil.setLocale('fr')}"/>
+						    		</div>
+						    	</div>
+						    	<div style="width:100%; height: 0px; border-bottom: 1px solid #E6E6E6">
+						    	</div>
+						    	<div style="width:100%; height: 30px; line-height:30px; padding-left: 15px; vertical-align: center">
+					    			<div style="text-align:left;line-height:normal;vertical-align:middle;display:inline-block;">
+						    			<h:commandLink value="English" action="#{accueil.setLocale('en')}"/>
+						    		</div>
+						    	</div>
+					    	</h:form>
+						</b:dropButton>
+					</div>
+				</div>
 			</b:navBar>
 			<br />
 		</ui:composition>

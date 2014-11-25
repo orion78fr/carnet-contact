@@ -4,51 +4,53 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">   
-    <h:head>
-        <title>Détails d'un contact</title>
-        <h:outputStylesheet library="css" name="style.css" />
-    </h:head>
-    <h:body>
-    	<b:container>
-			<ui:insert name="header">
-				<ui:include src="/template/commonHeader.xhtml" />
-			</ui:insert>
-			<b:jumbotron>
-				<h2>Détails d'un contact</h2>
-				<h:messages errorStyle="color:red" layout="table"/>
-				<h:form>
-				    <h:panelGrid columns="2" width="100%">
-				    	<h:outputText value="Prénom" rendered="#{empty updateContact.siret}" style="font-weight: bold;"/>
-				        <h:outputText value="#{updateContact.firstName}" rendered="#{empty updateContact.siret}"/>
-				        <h:outputText value="Nom" style="font-weight: bold;"/>
-				        <h:outputText value="#{updateContact.lastName}"/>
-				        <h:outputText value="E-mail" style="font-weight: bold;"/>
-				        <h:outputText value="#{updateContact.email}"/>
-				        <h:outputText value="Adresse" style="font-weight: bold;"/>
-				        <h:outputText value="#{updateContact.street}, #{updateContact.zip} #{updateContact.city}, #{updateContact.country} " />
-				        <h:outputText value="SIRET*" rendered="#{not empty updateContact.siret}" style="font-weight: bold;"/>
-				        <h:outputText value="#{updateContact.siret}" rendered="#{not empty updateContact.siret}"/>
-				        <h:outputText value="Téléphone portable" style="font-weight: bold;"/>
-				        <h:outputText value="#{updateContact.mobilePhone}"/>
-				        <h:outputText value="Téléphone bureau" style="font-weight: bold;"/>
-				        <h:outputText value="#{updateContact.officePhone}"/>
-				        <h:outputText value="Téléphone maison" rendered="#{empty updateContact.siret}" style="font-weight: bold;"/>
-				        <h:outputText value="#{updateContact.homePhone}" rendered="#{empty updateContact.siret}"/>
-					</h:panelGrid>
-					<h3>Groupes</h3>
-					<ul>
-				        <ui:repeat value="#{updateContact.checkedGroups}" var="gr" rendered="#{not empty updateContact.checkedGroups}" width="100%">
-					        <li><h:outputText value="#{gr}" /></li>
-	    				</ui:repeat>
-    				</ul>
-    				<h:outputText value="Aucun groupe!" rendered="#{empty updateContact.checkedGroups}"/>
-    				<br /><br />
-				    <b:button value="Modifier" outcome="updateContact" look="info">
-    					<f:param name="idContact" value="#{updateContact.idContact}"/>
-    				</b:button>
-				</h:form>
-			</b:jumbotron>
-		</b:container>
-    </h:body>
+      xmlns:f="http://java.sun.com/jsf/core">
+    <f:view locale="#{accueil.locale}">
+	    <h:head>
+	        <title>Détails d'un contact</title>
+	        <h:outputStylesheet library="css" name="style.css" />
+	    </h:head>
+	    <h:body>
+	    	<b:container>
+				<ui:insert name="header">
+					<ui:include src="/template/commonHeader.xhtml" />
+				</ui:insert>
+				<b:jumbotron>
+					<h2>#{msgs['details']}</h2>
+					<h:messages errorStyle="color:red" layout="table"/>
+					<h:form>
+					    <h:panelGrid columns="2" width="100%">
+					    	<h:outputText value="#{msgs['firstName']}" rendered="#{empty updateContact.siret}" style="font-weight: bold;"/>
+					        <h:outputText value="#{updateContact.firstName}" rendered="#{empty updateContact.siret}"/>
+					        <h:outputText value="#{msgs['name']}" style="font-weight: bold;"/>
+					        <h:outputText value="#{updateContact.lastName}"/>
+					        <h:outputText value="#{msgs['mail']}" style="font-weight: bold;"/>
+					        <h:outputText value="#{updateContact.email}"/>
+					        <h:outputText value="#{msgs['addr']}" style="font-weight: bold;"/>
+					        <h:outputText value="#{updateContact.street}, #{updateContact.zip} #{updateContact.city}, #{updateContact.country} " />
+					        <h:outputText value="#{msgs['siret']}" rendered="#{not empty updateContact.siret}" style="font-weight: bold;"/>
+					        <h:outputText value="#{updateContact.siret}" rendered="#{not empty updateContact.siret}"/>
+					        <h:outputText value="#{msgs['mobile_phone']}" style="font-weight: bold;"/>
+					        <h:outputText value="#{updateContact.mobilePhone}"/>
+					        <h:outputText value="#{msgs['office_phone']}" style="font-weight: bold;"/>
+					        <h:outputText value="#{updateContact.officePhone}"/>
+					        <h:outputText value="#{msgs['home_phone']}" rendered="#{empty updateContact.siret}" style="font-weight: bold;"/>
+					        <h:outputText value="#{updateContact.homePhone}" rendered="#{empty updateContact.siret}"/>
+						</h:panelGrid>
+						<h3>#{msgs['groups']}</h3>
+						<ul>
+					        <ui:repeat value="#{updateContact.checkedGroups}" var="gr" rendered="#{not empty updateContact.checkedGroups}" width="100%">
+						        <li><h:outputText value="#{gr}" /></li>
+		    				</ui:repeat>
+	    				</ul>
+	    				<h:outputText value="Aucun groupe!" rendered="#{empty updateContact.checkedGroups}"/>
+	    				<br /><br />
+					    <b:button value="Modifier" outcome="updateContact" look="info">
+	    					<f:param name="idContact" value="#{updateContact.idContact}"/>
+	    				</b:button>
+					</h:form>
+				</b:jumbotron>
+			</b:container>
+	    </h:body>
+	</f:view>
 </html>
