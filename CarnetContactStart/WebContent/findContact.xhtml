@@ -25,7 +25,7 @@
 				        <b:commandButton value="Rechercher" action="#{findContact.refresh()}" look="danger" size="xs" />
 				    </h:panelGrid>
 					<h:outputText value="Aucun contact trouvé" rendered="#{empty findContact.getList()}" />
-	    			<h:dataTable value="#{findContact.getList()}" var="contact" rendered="#{not empty findContact.getList()}" width="100%">
+	    			<h:dataTable rowClasses="myrow" value="#{findContact.getList()}" var="contact" rendered="#{not empty findContact.getList()}" width="100%">
 		    			<h:column>
 		    				<f:facet name="header">Nom</f:facet>
 		    				<h:outputText value="#{contact.lastName} #{contact.firstName}" />
@@ -36,17 +36,15 @@
 		    			</h:column>
 		    			<h:column>
 		    				<f:facet name="header">Commandes</f:facet>
-		    				<b:buttonGroup>
-			    				<b:button value="Détails" outcome="showDetails" look="info" size="xs">
-			    					<f:param name="idContact" value="#{contact.id}"/>
-			    				</b:button>
-			    				<b:button value="Modifier" outcome="updateContact" look="info" size="xs">
-			    					<f:param name="idContact" value="#{contact.id}"/>
-			    				</b:button>
-			    				<b:button value="X" outcome="removeContact" look="danger" size="xs" >
-			    					<f:param name="idContact" value="#{contact.id}"/>
-			    				</b:button>
-		    				</b:buttonGroup>
+		    				<b:button style="margin-right: 5px;" value="Détails" outcome="showDetails" look="info" size="xs">
+		    					<f:param name="idContact" value="#{contact.id}"/>
+		    				</b:button>
+		    				<b:button style="margin-right: 5px;" value="Modifier" outcome="updateContact" look="info" size="xs">
+		    					<f:param name="idContact" value="#{contact.id}"/>
+		    				</b:button>
+		    				<b:button style="margin-right: 5px;" value="X" outcome="removeContact" look="danger" size="xs" >
+		    					<f:param name="idContact" value="#{contact.id}"/>
+		    				</b:button>
 		    			</h:column>
 	    			</h:dataTable>
     			</h:form>
