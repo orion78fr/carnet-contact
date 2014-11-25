@@ -1,7 +1,6 @@
 package mbeans;
 
 import java.io.Serializable;
-import java.util.Locale;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -12,7 +11,7 @@ import javax.faces.context.FacesContext;
 public class Accueil implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int page = 0;
-	private int pageSize = 25;
+	private int pageSize = 15;
 	private String locale = "en";
 	
 	public String getLocale() {
@@ -21,7 +20,6 @@ public class Accueil implements Serializable {
 
 	public void setLocale(String locale){
 		this.locale = locale;
-		//FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale(locale));
 	}
 
 	public int getPageSize() {

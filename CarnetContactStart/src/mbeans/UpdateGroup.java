@@ -28,6 +28,11 @@ public class UpdateGroup implements Serializable {
 		String idc = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idGroup");
 		if (idc == null) return;
 		this.idGroup = Long.parseLong(idc);
+		
+		updateFields();
+	}
+	
+	private void updateFields(){
 		ContactGroup cg = ServiceGroup.getGroup(this.idGroup);
 		if (cg == null) return;
 		this.setGroupName(cg.getGroupName());
@@ -79,6 +84,8 @@ public class UpdateGroup implements Serializable {
 		if (!r){
 			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur lors de la mise à jour du groupe.", null);
 			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			updateFields();
+			return null;
 		}
 		return "modifyGroups";
 	}

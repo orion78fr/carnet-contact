@@ -10,7 +10,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
 import service.ServiceContact;
-import service.ServiceGroup;
 import utils.AppContextSingleton;
 import codel.Address;
 import codel.Contact;

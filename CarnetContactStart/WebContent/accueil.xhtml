@@ -24,6 +24,7 @@
 					<h:outputText style="margin-right: 5px" value="#{accueil.page + 1} / #{accueil.lastPageNum() + 1}" />
 					<b:commandButton style="margin-right: 5px" value="&gt;" action="#{accueil.nextPage()}" look="info" size="xs" />
 					<b:commandButton style="margin-right: 5px" value="&gt;&gt;" action="#{accueil.lastPage()}" look="info" size="xs" />
+					<h:outputText style="margin-right: 5px" value="(#{accueil.pageSize} contacts par page)" />
 					<br />
 				</h:form>
 				<br />
