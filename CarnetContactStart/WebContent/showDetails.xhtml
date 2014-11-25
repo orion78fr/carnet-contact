@@ -20,15 +20,15 @@
 					<h:messages errorStyle="color:red" layout="table"/>
 					<h:form>
 					    <h:panelGrid columns="2" width="100%">
-					    	<h:outputText value="#{msgs['firstName']}" rendered="#{empty updateContact.siret}" style="font-weight: bold;"/>
+					    	<h:outputText value="#{msgs['firstName']}*" rendered="#{empty updateContact.siret}" style="font-weight: bold;"/>
 					        <h:outputText value="#{updateContact.firstName}" rendered="#{empty updateContact.siret}"/>
-					        <h:outputText value="#{msgs['name']}" style="font-weight: bold;"/>
+					        <h:outputText value="#{msgs['name']}*" style="font-weight: bold;"/>
 					        <h:outputText value="#{updateContact.lastName}"/>
-					        <h:outputText value="#{msgs['mail']}" style="font-weight: bold;"/>
+					        <h:outputText value="#{msgs['mail']}*" style="font-weight: bold;"/>
 					        <h:outputText value="#{updateContact.email}"/>
 					        <h:outputText value="#{msgs['addr']}" style="font-weight: bold;"/>
 					        <h:outputText value="#{updateContact.street}, #{updateContact.zip} #{updateContact.city}, #{updateContact.country} " />
-					        <h:outputText value="#{msgs['siret']}" rendered="#{not empty updateContact.siret}" style="font-weight: bold;"/>
+					        <h:outputText value="#{msgs['siret']}*" rendered="#{not empty updateContact.siret}" style="font-weight: bold;"/>
 					        <h:outputText value="#{updateContact.siret}" rendered="#{not empty updateContact.siret}"/>
 					        <h:outputText value="#{msgs['mobile_phone']}" style="font-weight: bold;"/>
 					        <h:outputText value="#{updateContact.mobilePhone}"/>
