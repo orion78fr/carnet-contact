@@ -43,9 +43,9 @@
 			    				<b:button value="Modifier" outcome="updateContact" look="info" size="xs">
 			    					<f:param name="idContact" value="#{contact.id}"/>
 			    				</b:button>
-			    				<h:form id="form_#{contact.id}" style="display: inline;">
-			    					<b:commandButton value="X" action="#{delContact.delContact(contact.id)}" look="danger" size="xs" />
-			    				</h:form>
+			    				<b:button value="X" outcome="removeContact" look="danger" size="xs" >
+			    					<f:param name="idContact" value="#{contact.id}"/>
+			    				</b:button>
 		    				</b:buttonGroup>
 		    			</h:column>
 	    			</h:dataTable>

@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">   
+    <h:head>
+        <title>Confirmation</title>
+        <h:outputStylesheet library="css" name="style.css" />
+    </h:head>
+    <h:body>
+    	<b:container>
+	        <ui:insert name="header">
+				<ui:include src="/template/commonHeader.xhtml" />
+			</ui:insert>
+			<b:jumbotron>
+				<h:messages globalOnly="true" infoStyle="color:darkgreen" errorStyle="color:red" layout="table"/>
+				<br />
+				<h:form>
+					<h:outputText value="Etes vous sur de vouloir supprimer #{delContact.contact.getFullName()}?"/>
+					<b:commandButton style="margin-left: 5px" value="Oui" action="#{delContact.delContact()}" look="success" size="xs" />
+					<b:button style="margin-left: 5px" value="Non" outcome="accueil" look="danger" size="xs" />
+				</h:form>
+				<br />
+			</b:jumbotron>
+		</b:container>
+    </h:body>
+</html>

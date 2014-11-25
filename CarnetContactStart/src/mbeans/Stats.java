@@ -2,8 +2,8 @@ package mbeans;
 
 import java.util.List;
 
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 
 import org.hibernate.jmx.StatisticsService;
 
@@ -11,7 +11,7 @@ import utils.AppContextSingleton;
 import utils.StatsLogger;
 
 @ManagedBean
-@RequestScoped
+@ApplicationScoped
 public class Stats {
 	private List<String> logs;
 	private StatisticsService stats;

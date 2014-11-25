@@ -18,9 +18,17 @@
 				<h2>Liste des contacts</h2>
 				<h:messages globalOnly="true" infoStyle="color:darkgreen" errorStyle="color:red" layout="table"/>
 				<br />
+				<h:form rendered="#{not empty listContacts.getListContacts()}">
+					<b:commandButton style="margin-right: 5px" value="&lt;&lt;" action="#{accueil.firstPage()}" look="info" size="xs" />
+					<b:commandButton style="margin-right: 5px" value="&lt;" action="#{accueil.prevPage()}" look="info" size="xs" />
+					<h:outputText style="margin-right: 5px" value="#{accueil.page + 1} / #{accueil.lastPageNum() + 1}" />
+					<b:commandButton style="margin-right: 5px" value="&gt;" action="#{accueil.nextPage()}" look="info" size="xs" />
+					<b:commandButton style="margin-right: 5px" value="&gt;&gt;" action="#{accueil.lastPage()}" look="info" size="xs" />
+				</h:form>
+				<br />
 				<h:form>
 					<h:outputText value="Le carnet de contact est vide!" rendered="#{empty listContacts.getListContacts()}" />
-	    			<h:dataTable rowClasses="myrow" value="#{listContacts.getListContacts()}" var="contact" rendered="#{not empty listContacts.getListContacts()}" width="100%">
+	    			<h:dataTable rowClasses="myrow" value="#{listContacts.getPagedListContacts(accueil.pageSize, accueil.page)}" var="contact" rendered="#{not empty listContacts.getListContacts()}" width="100%">
 		    			<h:column>
 		    				<f:facet name="header">Nom</f:facet>
 		    				<h:outputText value="#{contact.lastName} #{contact.firstName}" />
@@ -37,7 +45,9 @@
 		    				<b:button style="margin-right: 5px;" value="Modifier" outcome="updateContact" look="info" size="xs">
 		    					<f:param name="idContact" value="#{contact.id}"/>
 		    				</b:button>
-		    				<b:commandButton value="X" action="#{delContact.delContact(contact.id)}" look="danger" size="xs" />
+		    				<b:button value="X" outcome="removeContact" look="danger" size="xs" >
+		    					<f:param name="idContact" value="#{contact.id}"/>
+		    				</b:button>
 			    		</h:column>
 	    			</h:dataTable>
     			</h:form>
