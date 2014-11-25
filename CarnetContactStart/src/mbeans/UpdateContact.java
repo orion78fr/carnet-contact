@@ -40,6 +40,11 @@ public class UpdateContact implements Serializable {
 		String idc = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idContact");
 		if (idc == null) return;
 		this.idContact = Long.parseLong(idc);
+		
+		updateFields();
+	}
+	
+	private void updateFields(){
 		Contact c = ServiceContact.getContact(idContact);
 		if (c == null) return;
 		this.setFirstName(c.getFirstName());
@@ -164,8 +169,10 @@ public class UpdateContact implements Serializable {
 	public String updateContact(){
 		boolean r = ServiceContact.modifyContact(idContact, version, firstName, lastName, email, street, city, zip, country, mobilePhone, officePhone, homePhone, checkedGroups, siret);
 		if (!r){
-			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur lors de la mise à jour du contact.", null);
+			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur lors de la mise à jour du contact (mise a jour concurrente).", null);
 			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			updateFields();
+			return null;
 		}
 		return "accueil";
 	}
