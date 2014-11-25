@@ -9,6 +9,8 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+import service.ServiceContact;
+import service.ServiceGroup;
 import utils.AppContextSingleton;
 import codel.Address;
 import codel.Contact;
@@ -27,6 +29,24 @@ public class ContactGenerator implements Serializable {
 	private String groupes[] = {"Indie Dyke","Symptom Plumber","Satiated Reaper","Decently Tribute","Blonde Conglomerate","Social Painter","Headache Scenario","Minor Hedgehog","Religious Leash","Armed Pickle","Swift Quartet","Shocking Screw","Flogging Hip","Explosive Gyro","Sixteen Of The Neutron Revenge","Anatomy Of Impotent","Viper Kiwi","Liberal Randy And The Burden","Open Pardon","Coyote Of Blank","Simple Syndicate Of The Confined Minion","Official Trilogy And The Orifice","Ailing Galore","Battered Dweeb And The Step-dad","Regular Mumbles","Swinger Insect","Fogotten Sex","Latin Cool","Pink Kiss","Striker Of The Washer","Uncanny War","Finally Provider","Wanted Torpedo And The Game Kickoff","More Of The Cycle","Balance Of The Compressed Lullaby","Lazy Condition And The Idiotic Cheap","Hand For Bacon","Driving Hyphen And The Enraged Health","Lead Twister","Letting Anything"};
 	
 	private boolean easterEgg = false;
+	
+	public String delAllContacts(){
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ListContacts list
+		    = (ListContacts) facesContext.getApplication()
+		    .getVariableResolver().resolveVariable(facesContext, "listContacts");
+		
+		for(Contact c : list.getListContacts()){
+			ServiceContact.delContact(c.getId());
+		}
+		
+		FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Suppresion de tout les contacts réussi!", null);
+		FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		
+		easterEgg = false;
+		
+		return "contactGenerator";
+	}
 	
 	public String gen50Contacts(){
 		try {

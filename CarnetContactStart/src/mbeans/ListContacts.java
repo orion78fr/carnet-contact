@@ -46,7 +46,6 @@ public class ListContacts implements Serializable {
 		return this.listContacts.subList(numpage * numperpage, end);
 	}
 	
-	// Inutilisé
 	public List<Contact> getListContacts() {
 		initListContacts();
 		

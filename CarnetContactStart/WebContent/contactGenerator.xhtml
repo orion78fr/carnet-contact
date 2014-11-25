@@ -16,12 +16,15 @@
 			</ui:insert>
 			<b:jumbotron>
 				<h2>Générer des contacts</h2>
+				<br />
 				<h:form>
-					<b:commandButton value="Générer 50 contacts aléatoirement" look="info" size="lg" action="#{contactGenerator.gen50Contacts}" />
+					<b:commandButton value="Générer 50 contacts aléatoirement" look="info" action="#{contactGenerator.gen50Contacts}" />
 					<br /><br />
-					<b:commandButton value="Générer un contact avec constructeur" look="info" size="lg" action="#{contactGenerator.genWithConstructor}" />
+					<b:commandButton value="Générer un contact avec constructeur" look="info" action="#{contactGenerator.genWithConstructor}" />
 					<br /><br />
-					<b:commandButton value="Générer un contact avec getter/setter" look="info" size="lg" action="#{contactGenerator.genWithGetterAndSetter}" />
+					<b:commandButton value="Générer un contact avec getter/setter" look="info" action="#{contactGenerator.genWithGetterAndSetter}" />
+					<br /><br />
+					<b:commandButton value="Supprimer les contacts" look="info" action="#{contactGenerator.delAllContacts}" />
 					<br /><br />
 					<h:messages globalOnly="true" infoStyle="color:darkgreen" errorStyle="color:red" layout="table"/>
 				</h:form>
