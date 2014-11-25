@@ -48,7 +48,9 @@ public class DAOContactGroup extends HibernateDaoSupport implements IDAOContactG
 	@Transactional
 	public ContactGroup getGroup(long id){
 		ContactGroup cg = (ContactGroup) this.getHibernateTemplate().get(ContactGroup.class, id);
-		this.getHibernateTemplate().initialize(cg.getContacts());
+		if(cg != null){
+			this.getHibernateTemplate().initialize(cg.getContacts());
+		}
 		return cg;
 	}
 	
@@ -73,14 +75,18 @@ public class DAOContactGroup extends HibernateDaoSupport implements IDAOContactG
 	@Transactional
 	public void addContactToGroup(long cid, String groupName) {
 		ContactGroup cg = (ContactGroup)this.getHibernateTemplate().find("from ContactGroup where groupName=?", groupName).get(0);
-		this.getHibernateTemplate().initialize(cg.getContacts());
-		cg.addContact((Contact)this.getHibernateTemplate().get(Contact.class, cid));
+		if(cg != null){
+			this.getHibernateTemplate().initialize(cg.getContacts());
+			cg.addContact((Contact)this.getHibernateTemplate().get(Contact.class, cid));
+		}
 	}
 	
 	@Transactional
 	public void delContactFromGroup(long cid, String groupName) {
 		ContactGroup cg = (ContactGroup)this.getHibernateTemplate().find("from ContactGroup where groupName=?", groupName).get(0);
-		this.getHibernateTemplate().initialize(cg.getContacts());
-		cg.delContact((Contact)this.getHibernateTemplate().get(Contact.class, cid));
+		if(cg != null){
+			this.getHibernateTemplate().initialize(cg.getContacts());
+			cg.delContact((Contact)this.getHibernateTemplate().get(Contact.class, cid));
+		}
 	}
 }

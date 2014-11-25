@@ -17,10 +17,14 @@
 			<b:jumbotron>
 				<h:messages globalOnly="true" infoStyle="color:darkgreen" errorStyle="color:red" layout="table"/>
 				<br />
-				<h:form>
+				<h:form rendered="#{delContact.contact != null}">
 					<h:outputText value="Etes vous sur de vouloir supprimer #{delContact.contact.getFullName()}?"/>
 					<b:commandButton style="margin-left: 5px" value="Oui" action="#{delContact.delContact()}" look="success" size="xs" />
 					<b:button style="margin-left: 5px" value="Non" outcome="accueil" look="danger" size="xs" />
+				</h:form>
+				<h:form rendered="#{delContact.contact == null}">
+					<h:outputText value="Contact déjà supprimé!"/>
+					<b:button style="margin-left: 5px" value="OK" outcome="accueil" look="primary"/>
 				</h:form>
 				<br />
 			</b:jumbotron>

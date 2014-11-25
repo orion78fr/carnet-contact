@@ -20,7 +20,7 @@
 				<br />
 				<table style="width:100%" class="statstable">
 					<tr>
-						<td><h:outputText value="Requêtes" style="font-weight: bold;"/></td>
+						<td><h:outputText value="Requêtes HQL" style="font-weight: bold;"/></td>
 						<td>
 							<ui:repeat var="q" value="#{stats.stats.getQueries()}">
 								<h:outputText value="#{q}"/><br />
@@ -28,7 +28,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td><h:outputText value="Requête la plus longue" style="font-weight: bold;"/></td>
+						<td><h:outputText value="Requête HQL la plus longue" style="font-weight: bold;"/></td>
 						<td>
 							<h:outputText value="#{stats.stats.getQueryExecutionMaxTimeQueryString()}"/><br />
 							<h:outputText style="margin-left:20px" value="en #{stats.stats.getQueryExecutionMaxTime()} ms"/>

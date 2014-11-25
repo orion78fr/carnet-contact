@@ -52,7 +52,9 @@ public class DAOContact extends HibernateDaoSupport implements IDAOContact{
 	@Transactional
 	public Contact getContact(long id){
 		Contact c = (Contact) this.getHibernateTemplate().get(Contact.class, id);
-		this.getHibernateTemplate().initialize(c.getBooks());
+		if(c != null){
+			this.getHibernateTemplate().initialize(c.getBooks());
+		}
 		return c;
 	}
 
